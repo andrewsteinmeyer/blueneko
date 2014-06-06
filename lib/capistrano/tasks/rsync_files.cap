@@ -1,0 +1,18 @@
+namespace :deploy do
+  desc "rsync project files to server"
+  task :rsync_files do
+    on roles(:app) do |role|
+      if "#{fetch(:rsync_location)}" == "vagrant"
+        run_locally do
+          execute "rsync -av -e 'ssh -p 2222' ./codeigniter/ #{role.user}@#{role.hostname}:#{release_path}/current/codeigniter/;"
+          execute "rsync -av -e 'ssh -p 2222' ./public/ #{role.user}@#{role.hostname}:#{release_path}/current/public/;"
+        end
+      else
+        run_locally do
+          execute "rsync -av ./codeigniter/ #{role.user}@#{role.hostname}:#{release_path}/current/codeigniter/;"
+          execute "rsync -av ./public/ #{role.user}@#{role.hostname}:#{release_path}/current/public/;"
+        end
+      end
+    end
+  end
+end

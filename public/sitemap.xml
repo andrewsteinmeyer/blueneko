@@ -1,0 +1,1207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+		<urlset
+			  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
+					http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
+		<url>
+<loc>http://192.168.1.253/fancyclone/cart/inserteditcart/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/cartadd/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/ajaxupdate/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/ajaxdelete/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/checkcode/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/checkcodesuccess/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/ajaxchangeaddress/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/ajaxsubscribeaddress/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/ajaxdeleteaddress/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/insert_shipping_address/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/cartcheckout/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/subscribecheckout/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cart/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/paymentprocess/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/paymentcredit/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/paymentprocessgift/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/paymentcreditgift/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/paymentcreditsubscribe/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/paymentgiftfree/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/checkout/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cms/page_by_id/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cms/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cms/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cms/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cms/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/cms/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/fancybox/display_fancybox/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/fancybox/cartsubscribe/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/fancybox/language_change/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/fancybox/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/fancybox/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/fancybox/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/fancybox/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/fancybox/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/feed/feeds/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/feed/user/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/feed/store/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/feed/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/feed/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/feed/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/feed/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/feed/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/giftcard/inserteditgiftcard/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/giftcard/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/giftcard/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/giftcard/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/giftcard/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/giftcard/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/landing/ajax_load_more/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/landing/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/landing/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/landing/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/landing/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/landing/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/notify/getlatest/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/notify/display_notifications/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/notify/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/notify/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/notify/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/notify/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/notify/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/order/insert_product_comment/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/order/send_comment_noty_mail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/order/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/order/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/order/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/order/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/order/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/onboarding/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/onboarding_get_products_categories/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/onboarding_get_users_follow/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/display_product_shuffle/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/display_product_detail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/delete_featured_find/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/add_featured_find/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/share_with_someone/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/send_thing_share_mail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/add_have_tag/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/delete_have_tag/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/upload_product_image/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/add_new_thing/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/display_user_thing/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/sales_create/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/editpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/edit_product_detail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/edit_user_product_process/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/sell_it/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/delete_product/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/add_reaction_tag/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/delete_reaction_tag/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/loadlistvalues/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/approve_comment/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/delete_comment/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/send_feature_noty_mail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/send_comment_noty_mail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/product/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/search_shopby/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/search_priceby/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/ajax_load_more_price/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/search_colorby/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/search_priceby_followers/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/search_colorby_followers/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/follow_list/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/unfollow_list/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/search_suggestions/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/searchshop/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/shop/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/shop/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/shop/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/shop/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/shop/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/quicksignup/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/quicksignupupdate/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/send_quick_register_mail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/registeruser/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/resend_confirm_mail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/send_email_confirmation/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/send_confirm_mail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/signup_form/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/login_form/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/login_user/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/login_after_signup/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/confirm_register/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/logout_user/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/forgot_password_form/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/forgot_password_user/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/send_user_password/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/add_fancy_item/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/remove_fancy_item/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_profile/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/add_follow/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/add_follows/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/delete_follow/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_added/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_lists/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_wants/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_owns/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_following/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_followers/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/add_list_when_fancyy/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/add_item_to_lists/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/remove_item_from_lists/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/add_want_tag/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/delete_want_tag/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/create_list/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/search_users/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/seller_signup_form/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/create_brand_form/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/seller_signup/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/find_friends_twitter/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/view_purchase/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/view_order/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/get_invoice/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/change_order_status/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_lists_home/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/display_user_lists_followers/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/follow_list/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/unfollow_list/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/edit_user_lists/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/edit_user_list_details/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/delete_user_list/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/image_crop/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/image_crop_process/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/send_noty_mail/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/send_noty_mails/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/order_review/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/post_order_comment/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/change_received_status/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/checklogin/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/seterrormessage/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/checkprivileges/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/get_rand_str/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user/setpictureproducts/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/update_profile/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/changephoto/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/delete_user_photo/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/delete_user_account/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/password_settings/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/change_user_password/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/preferences_settings/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/update_preferences/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/notifications_settings/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/update_notifications/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+<url>
+<loc>http://192.168.1.253/fancyclone/user_settings/user_purchases/</loc>
+<lastmod>2013/10/04 14:41:35</lastmod>
+<changefreq>weekly</changefreq>
+<priority>1.0 </priority>
+</url>
+</urlset>
