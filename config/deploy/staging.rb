@@ -12,6 +12,7 @@ server 'deploy@127.0.0.1:2222', user: 'deploy', roles: %w{web app db}, primary: 
 
 set :deploy_to, "/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
 
+### CHANGE THIS TO BE FOR PHP
 # dont try and infer something as important as environment from
 # stage name.
 set :rails_env, :production

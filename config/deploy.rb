@@ -3,7 +3,7 @@ set :deploy_user, 'deploy'
 
 # setup repo details
 set :scm, :git
-set :repo_url, 'git@github.com:andrewsteinmeyer/blueneko.git'
+set :repo_url, 'git@github.com:andrewsteinmeyer/<bluenek></bluenek>o.git'
 
 # setup rvm.
 set :rbenv_type, :system
@@ -73,7 +73,7 @@ namespace :deploy do
   # only allow a deploy with passing tests to deployed
   before :deploy, "deploy:run_tests"
   # compile assets locally then rsync
-  after 'deploy:symlink:shared', 'deploy:rsync_files'
+  # after 'deploy:symlink:shared', 'deploy:rsync_files'
   after :finishing, 'deploy:cleanup'
 
 	# remove default nginx configuration as it will tend to conflict

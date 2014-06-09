@@ -5,6 +5,9 @@ namespace :deploy do
       execute :mkdir, "-p #{shared_path}/config"
       full_app_name = fetch(:full_app_name)
 
+      # make codeigniter dir
+      execute :mkdir, "-p #{full_app_name}/codeigniter"
+
       # config files to be uploaded to shared/config, see the
       # definition of smart_template for details of operation.
       # Essentially looks for #{filename}.erb in deploy/#{full_app_name}/
