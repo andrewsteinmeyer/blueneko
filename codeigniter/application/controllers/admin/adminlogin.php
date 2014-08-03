@@ -23,13 +23,18 @@ class Adminlogin extends MY_Controller {
 	 */
 	public function index(){
 		$this->data['heading'] = 'Dashboard';
+		// check if login credentials in cookie already
+		// if so, update time when logged in and settings in check_admin_session
 		if ($this->checkLogin('A') == ''){
 			$this->check_admin_session();
 		}
+		// if check_admin_session does not find admin with cookie
+		// redirect to login so admin can login
 		if ($this->checkLogin('A') == ''){
 			$this->load->view('admin/templates/login.php',$this->data);
+		// otherwise admin is authenticated and logged in, so direct to admin dashboard
 		}else {
-				
+
 			//echo $this->uri->segment(2,0);
 			//if($this->uri->segment(2,0) !=0 ){
 			//$this->check_set_sidebar_session($this->uri->segment(2,0));
@@ -56,14 +61,19 @@ class Adminlogin extends MY_Controller {
 		}else {
 			$name = $this->input->post('admin_name');
 			$pwd = md5($this->input->post('admin_password'));
+			// setup as subadmin initially
 			$mode = SUBADMIN;
+			// if name entered on form is equal to admin_name in fc_admin_settings.php, set mode to admin
 			if ($name == $this->config->item('admin_name')){
 				$mode = ADMIN;
 			}
 			$condition = array('admin_name' => $name, 'admin_password' => $pwd, 'is_verified' => 'Yes', 'status' => 'Active');
+			// the passed in mode is just the table, for SUBADMIN its fc_subadmin, for ADMIN it is fc_admin
+			// query the table for the user that matches the condition and return user info from DB
 			$query = $this->admin_model->get_all_details($mode,$condition);
 			if ($query->num_rows() == 1){
 				$priv = unserialize($query->row()->privileges);
+				// grab priveleges for admin from db, load array, and set on session
 				$admindata = array(
 								'fc_session_admin_id' => $query->row()->id,
 								'fc_session_admin_name' => $query->row()->admin_name,
@@ -79,7 +89,10 @@ class Adminlogin extends MY_Controller {
 	               'last_login_ip' => $this->input->ip_address()
 				);
 				$condition = array('id' => $query->row()->id);
+				// update the ADMIN or SUBADMIN table with the latest login time for the appropriate admin user
 				$this->admin_model->update_details($mode,$newdata,$condition);
+				// if they want to be remembered, set a cookie for a day
+				// this will be checked next time they come to /admin in index() which calls check_admin_settings()
 				if ($this->input->post('remember') != ''){
 					$adminid = $this->encrypt->encode($query->row()->id);
 					$cookie = array(
@@ -88,14 +101,16 @@ class Adminlogin extends MY_Controller {
 					    'expire' => 86400,
 					    'secure' => FALSE
 					);
-						
+
 					$this->input->set_cookie($cookie);
 				}
 				$this->setErrorMessage('success','Login Success');
+				// success, direct to dashboard
 				redirect('admin/dashboard');
 			}else {
 				$this->setErrorMessage('error','Invalid Login Details');
 			}
+			// failed, redirect to admin again with errorMessage set
 			redirect('admin');
 		}
 	}
@@ -192,6 +207,9 @@ class Adminlogin extends MY_Controller {
 		$admin_session = $this->input->cookie('admin_session',FALSE);
 		if ($admin_session != ''){
 			$admin_id = $this->encrypt->decode($admin_session);
+			// does admin_session get set on data or somewhere else?
+			// admin_session should only be an admin id, don't understand yet how session_admin_mode
+			// is being pulled off since admin_id should just be an id as set below in the cookie
 			$mode = $admin_session['session_admin_mode'];
 			$condition = array('id' => $admin_id);
 			$query = $this->admin_model->get_all_details($mode,$condition);
@@ -466,8 +484,8 @@ class Adminlogin extends MY_Controller {
 	 *
 	 */
 	public function change_file_prefix($prev_name='',$common_prefix=''){
-		
-		
+
+
 		if ($common_prefix=='-'){
 			$common_prefix = 'fancyy-';
 		}
@@ -494,7 +512,7 @@ class Adminlogin extends MY_Controller {
 				rename($file,$newFile);
 			}
 		}
-		
+
 		/*
 		 * Change in js files
 		 */

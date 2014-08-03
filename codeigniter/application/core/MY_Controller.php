@@ -69,6 +69,7 @@ class MY_Controller extends CI_Controller {
 		$root_id_arr = array();
 		if ($this->data['all_categories']->num_rows()>0){
 			foreach ($this->data['all_categories']->result() as $all_cat_row){
+				// load up all of the rootID's
 				if (!in_array($all_cat_row->rootID, $root_id_arr)){
 					$root_id_arr[] = $all_cat_row->rootID;
 				}
@@ -249,7 +250,7 @@ class MY_Controller extends CI_Controller {
 			$filePath = APPPATH."language/".$selectedLanguage."/".$selectedLanguage."_lang.php";
 			if($selectedLanguage != '')
 			{
-					
+
 				if(!(is_file($filePath)))
 				{
 
@@ -395,7 +396,7 @@ class MY_Controller extends CI_Controller {
 	 * @param string target_path
 	 */
 	public function imageResizeWithSpace($box_w,$box_h,$userImage,$savepath){
-			
+
 		$thumb_file = $savepath.$userImage;
 
 		list($w, $h, $type, $attr) = getimagesize($thumb_file);
@@ -455,7 +456,7 @@ class MY_Controller extends CI_Controller {
 		}
 		imagedestroy($i);
 		imagejpeg($new, $thumb_file, 99);
-			
+
 	}
 
 }

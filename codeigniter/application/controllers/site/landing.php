@@ -32,7 +32,7 @@ class Landing extends MY_Controller {
 		if ($this->data['loginCheck'] != ''){
 			$this->data['likedProducts'] = $this->product_model->get_all_details(PRODUCT_LIKES,array('user_id'=>$this->checkLogin('U')));
 		}
-			
+
 	}
 
 	/**
@@ -46,14 +46,17 @@ class Landing extends MY_Controller {
 		$cat = $this->input->get('c');
 		$whereCond = $qry_str = '';
 		if ($cat != ''){
+			//grab category from input in url if there is one
 			$catDetails = $this->product_model->get_all_details(CATEGORY,array('seourl'=>$cat));
 			if ($catDetails->num_rows()==1){
 				$catID = $catDetails->row()->id;
 				if ($catID != ''){
+					// append this to query below in order to find products in this category
 					$whereCond = ' and FIND_IN_SET("'.$catID.'",p.category_id)';
 				}
 			}
 		}
+		// set up view of 6 per page and limit on query to db
 		if($this->input->get('pg') != ''){
 			$paginationVal = $this->input->get('pg')*6;
 			$limitPaging = $paginationVal.',6 ';
@@ -68,6 +71,7 @@ class Landing extends MY_Controller {
 		}
 
 
+		//get control management info, selling/affiliates/both, home view of compact/grid, popup on/off
 		$this->data['layoutList'] = $layoutList = $this->product_model->view_controller_details();
 		$totalSellingProducts = $this->product_model->get_total_records(PRODUCT);
 		$totalAffilProducts = $this->product_model->get_total_records(USER_PRODUCTS);

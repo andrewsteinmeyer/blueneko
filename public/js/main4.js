@@ -1365,7 +1365,7 @@ jQuery(function($){
 			calling = false;
 			prefetching = false;
 			ignorePrefecth = false;
-			lastFetchedUrl = null;			
+			lastFetchedUrl = null;
 
 		var keys = {
 			timestamp : 'fancy.'+options.dataKey+'.timestamp.'+loc,
@@ -1385,7 +1385,7 @@ jQuery(function($){
 			if(!data || !latest || !nextURL || (+new Date - timestamp > ttl)){
 				for(var name in keys) $.jStorage.deleteKey(keys[name]);
 				return;
-			}			
+			}
 
 			$url.attr('href', url=nextURL);
 			$str.html(data).attr('ts',latest);
@@ -1440,7 +1440,7 @@ jQuery(function($){
 			lastFetchedUrl = url;
             /*if(typeof url != 'string'){
                 lastFetchedUrl = '';
-                return; 
+                return;
             }*/
 			$.ajax({
 				url : url,
@@ -1516,8 +1516,8 @@ jQuery(function($){
 				$('<style></style>').appendTo($(document.body)).remove();
 			}
 
-			if( options.prefetch && !prefetching && (data=$.jStorage.get(keys.prefetch)) ){		
-				$.jStorage.deleteKey(keys.prefetch);		
+			if( options.prefetch && !prefetching && (data=$.jStorage.get(keys.prefetch)) ){
+				$.jStorage.deleteKey(keys.prefetch);
 				appendThings(data);
 				calling = false;
 				$loader.hide();
@@ -1526,7 +1526,7 @@ jQuery(function($){
 				if(prefetching) {
 					calling = false;
 					setTimeout(onScroll,300);
-					//$loader.hide();					
+					//$loader.hide();
 					return;
 				}
 				$.jStorage.deleteKey(keys.prefetch);
@@ -1917,7 +1917,7 @@ jQuery(function($){
 		.on('click', function(event){
 			if(event.target === this && prev_dialog) {
 				if ($container.hasClass('create_po')==true) {
-					var ans=confirm("You haven't finished PO yet. Do you want to leave without finishing? Are you sure you want to close this popup?") 
+					var ans=confirm("You haven't finished PO yet. Do you want to leave without finishing? Are you sure you want to close this popup?")
 					if(ans ==true) {event.preventDefault();prev_dialog.close();}
 				}
 				else {
@@ -1928,7 +1928,7 @@ jQuery(function($){
 		})
 		.delegate('.ly-close,.btn-close,.btn-cancel', 'click', function(event){
 			if ($container.hasClass('create_po')==true) {
-				var ans=confirm("You haven't finished PO yet. Do you want to leave without finishing? Are you sure you want to close this popup?") 
+				var ans=confirm("You haven't finished PO yet. Do you want to leave without finishing? Are you sure you want to close this popup?")
 				if(ans ==true) {
 					event.preventDefault();
 					if(prev_dialog) prev_dialog.close();
@@ -1957,7 +1957,7 @@ jQuery(function($){
 				$container.data('lastest_popup_name', popup_name);
 				$container.find('.loader').show();
 				return this;
-			},   
+			},
 			open : function(){
 				var $c,h,mt,sc=$win.scrollTop();
 				$('body').addClass('fixed');
@@ -2097,12 +2097,17 @@ jQuery(function($){
 				},
 				tab  : function(event,tab_name){
 					var $this = $(this);
+
+					console.log($this.attr('class') + ' before');
 					$this
 						.attr('class', $this.attr('class').replace(/\bstep\d+(-\w+)?/g,tab_name))
 						.find('input:text').val('').end()
 						.find('select').each(function(){ this.selectedIndex = 0; }).end()
 						.find('form').trigger('reset').end()
 						.find('button:submit').disable(false).end();
+
+						console.log(event + '' + tag_name + 'here');
+						console.log($this.attr('class') + ' after');
 
 					dlg_add.center();
 				}
@@ -2777,7 +2782,7 @@ jQuery(function($){
 				reacts = $btn.closest('.figure-item').find('.figure-detail em').text().match(/\+ (\d+)/);
 				if(reacts) reacts = reacts[1];
 			}
-			
+
 			$this.find('>ul.tab').nextUntil('button.ly-close').hide().end().find('li > a:first').click();
 
 			thing_path = $btn.closest('a').attr('href');
@@ -3208,7 +3213,7 @@ jQuery(function($){
 					.find('#i-want-this').removeAttr('want-rtid').removeClass('wanted').find('b').text(gettext('Want')).end().end()
 					.find('.default .btn-create').hide().end()
 					.find('.user-list > li[data-id]').remove().end();
-				
+
 				$coltext.val('');
 			},
 			close : function(){
@@ -3598,7 +3603,7 @@ jQuery(function($){
 		        dlg_register.username = response.username;
                 dlg_register.email = response.email;
                 dlg_register.fullname = response.fullname;
-                dlg_register.open(); 
+                dlg_register.open();
 			} else if (response.status_code != undefined && response.status_code == 0) {
 			    var msg = response.message;
 			    var error = response.error;
@@ -3746,7 +3751,7 @@ jQuery(function($){
 	function state(){
 		if($slidebox.is(':visible')) return SKIP;
 		if($focused && $focused.is('.figure-product > a[rel].focus')) return GOT_FOCUS;
-		
+
 		$focused = $(':focus');
 		if($focused.is('textarea,input:text,input:password')) return SKIP;
 
@@ -3813,7 +3818,7 @@ $(window).ready(function(){
         if (can_show_signin_overlay == true) {
             $.dialog('signin-overlay').open().close = function() {};
         }
-	
+
 	// new fancy share
 	$('.share-via li').each(function(){
 		$(this).mouseover(function(){
