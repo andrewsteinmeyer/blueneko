@@ -1960,9 +1960,11 @@ jQuery(function($){
 			},
 			open : function(){
 				var $c,h,mt,sc=$win.scrollTop();
+				//why is he adding class 'fixed' to body?
 				$('body').addClass('fixed');
 				if(!container_h) container_h = $container.height();
 				if(prev_dialog) prev_dialog.close(true);
+				debugger;
 				if($win.innerHeight() < $body[0].scrollHeight) {
 					$body.css('overflow-y','scroll');
 				}
@@ -1991,9 +1993,12 @@ jQuery(function($){
 				return this;
 			},
 			close : function(keep_container){
+				//the check for can_close is always true, pointless to check unless something else inherits
+				//from this and overwrites
 				if(!this.showing() || !this.can_close()) return;
                                 $container.find('.loader').hide();
 				$c = $container.eq(keep_container?1:0).end();
+				//why does he set body class to fixed on 'open' and remove on 'close'
 				$('body').removeClass('fixed');
 				$body.css('overflow-y','');
 
@@ -2098,16 +2103,12 @@ jQuery(function($){
 				tab  : function(event,tab_name){
 					var $this = $(this);
 
-					console.log($this.attr('class') + ' before');
 					$this
 						.attr('class', $this.attr('class').replace(/\bstep\d+(-\w+)?/g,tab_name))
 						.find('input:text').val('').end()
 						.find('select').each(function(){ this.selectedIndex = 0; }).end()
 						.find('form').trigger('reset').end()
 						.find('button:submit').disable(false).end();
-
-						console.log(event + '' + tag_name + 'here');
-						console.log($this.attr('class') + ' after');
 
 					dlg_add.center();
 				}
@@ -3582,6 +3583,7 @@ jQuery(function($){
 
 	dlg_signin.$obj
 		.on('open', function(){
+			debugger;
 			$('#signin-email').val('');
 			dlg_signin.$obj.find('.btn-signup').disable();
 		})
@@ -3594,6 +3596,7 @@ jQuery(function($){
 			}
 		})
 		.on('click', '.btn-signup', function(){
+			//this isn't even getting hit in mac chrome?  This is instead being called in validation.js?
 			//location.href = '/signup?email='+encodeURIComponent($('#signin-email').val());
             var that = this;
             $(this).disable(true);

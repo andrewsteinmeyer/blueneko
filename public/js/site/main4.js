@@ -74,7 +74,7 @@ location.args = jQuery.parseString(location.search.substr(1));
 function require_login(next){
 	next = $(location).attr('href');
 	next = next.replace(baseURL,'');
-	
+
 	location.href = baseURL+'login'+(next?'?next='+encodeURIComponent(next):'');
 
 	return false;
@@ -360,7 +360,7 @@ var Fancy = {
 									}
 								}
 							}
-*/							
+*/
 						},
 						complete : function(){
 							$this.removeClass('loading');
@@ -386,7 +386,7 @@ var Fancy = {
 				}
 			}, '.follow-user-link, .follow-link, .button.follow');
     },
-    
+
 
 	/**
 	 * Follow lists buttons
@@ -1377,7 +1377,7 @@ jQuery(function($){
 			calling = false;
 			prefetching = false;
 			ignorePrefecth = false;
-			lastFetchedUrl = null;			
+			lastFetchedUrl = null;
 
 		var keys = {
 			timestamp : 'fancy.'+options.dataKey+'.timestamp.'+loc,
@@ -1397,7 +1397,7 @@ jQuery(function($){
 			if(!data || !latest || !nextURL || (+new Date - timestamp > ttl)){
 				for(var name in keys) $.jStorage.deleteKey(keys[name]);
 				return;
-			}			
+			}
 
 			$url.attr('href', url=nextURL);
 			$str.html(data).attr('ts',latest);
@@ -1451,7 +1451,7 @@ jQuery(function($){
 			lastFetchedUrl = url;
             /*if(typeof url != 'string'){
                 lastFetchedUrl = '';
-                return; 
+                return;
             }*/
 			$.ajax({
 				url : url,
@@ -1498,7 +1498,7 @@ jQuery(function($){
 				$next = $sandbox.find(options.nextSelector);
 //				$rows = $sandbox.find(options.itemSelector).parent().html();
 				$rows = $sandbox.find(options.itemSelector).parent().html();
-				
+
 				$contentBox.append($rows);
 				if ($next.length) {
 					url = $next.attr('href');
@@ -1527,8 +1527,8 @@ jQuery(function($){
 				$('<style></style>').appendTo($(document.body)).remove();
 			}
 
-			if( options.prefetch && !prefetching && (data=$.jStorage.get(keys.prefetch)) ){		
-				$.jStorage.deleteKey(keys.prefetch);		
+			if( options.prefetch && !prefetching && (data=$.jStorage.get(keys.prefetch)) ){
+				$.jStorage.deleteKey(keys.prefetch);
 				appendThings(data);
 				calling = false;
 				$loader.hide();
@@ -1915,7 +1915,7 @@ jQuery(function($){
 		.on('click', function(event){
 			if(event.target === this && prev_dialog) {
 				if ($container.hasClass('create_po')==true) {
-					var ans=confirm("You haven't finished PO yet. Do you want to leave without finishing? Are you sure you want to close this popup?") 
+					var ans=confirm("You haven't finished PO yet. Do you want to leave without finishing? Are you sure you want to close this popup?")
 					if(ans ==true) {event.preventDefault();prev_dialog.close();}
 				}
 				else {
@@ -1926,7 +1926,7 @@ jQuery(function($){
 		})
 		.delegate('.ly-close,.btn-close,.btn-cancel', 'click', function(event){
 			if ($container.hasClass('create_po')==true) {
-				var ans=confirm("You haven't finished PO yet. Do you want to leave without finishing? Are you sure you want to close this popup?") 
+				var ans=confirm("You haven't finished PO yet. Do you want to leave without finishing? Are you sure you want to close this popup?")
 				if(ans ==true) {
 					event.preventDefault();
 					if(prev_dialog) prev_dialog.close();
@@ -1942,7 +1942,12 @@ jQuery(function($){
 		if(event.keyCode == 27 && prev_dialog) prev_dialog.close();
 	});
 
+//define_dialog
+//used to open popup dialog boxes for signup, registering, etc
 	$.dialog = function(popup_name){
+		//container is the #popup_container found above from JQuery
+		//the popup_container is declared in popup_templates.php
+		//which is loaded in header.php
 		var $popup = $container.find('>.'+popup_name);
 		return {
 			name : popup_name,
@@ -1955,7 +1960,7 @@ jQuery(function($){
 				$container.data('lastest_popup_name', popup_name);
 				$container.find('.loader').show();
 				return this;
-			},   
+			},
 			open : function(){
 				var $c,h,mt,sc=$win.scrollTop();
 				$('body').addClass('fixed');
@@ -2149,7 +2154,7 @@ jQuery(function($){
 
 						function check(images, callback){
 							var fn=[], list=[], cur=80, step=30/images.length;
-							
+
 
 							function load(src){
 								var def = $.Deferred(), img = new Image();
@@ -2312,7 +2317,7 @@ jQuery(function($){
 							xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 							xhr.setRequestHeader('X-Filename', filename);
 						//	xhr.send(file);
-						
+
 							var formData = new FormData();
 							formData.append("thefile", file);
 							xhr.send(formData);
@@ -2782,7 +2787,7 @@ jQuery(function($){
 				reacts = $btn.closest('.figure-item').find('.figure-detail em').text().match(/\+ (\d+)/);
 				if(reacts) reacts = reacts[1];
 			}
-			
+
 			$this.find('>ul.tab').nextUntil('button.ly-close').hide().end().find('li > a:first').click();
 
 			thing_path = $btn.closest('a').attr('href');
@@ -2807,7 +2812,7 @@ jQuery(function($){
 				})
 				.find('#share-link-input').val(url).end()
 				.find('.embed').trigger('update').end();
-//			if($this.data('prev') != 'thing-'+tid) 
+//			if($this.data('prev') != 'thing-'+tid)
 				$this.find('.thum>img').attr('src', '/_ui/images/common/blank.gif').attr('src', $btn.data('timage'));
 			$this.data('prev', 'thing-'+tid);
 
@@ -3225,7 +3230,7 @@ jQuery(function($){
 					.find('#i-want-this').removeAttr('want-rtid').removeClass('wanted').find('b').text(gettext('Want')).end().end()
 					.find('.default .btn-create').hide().end()
 					.find('.user-list > li[data-id]').remove().end();
-				
+
 				$coltext.val('');
 			},
 			close : function(){
@@ -3345,9 +3350,9 @@ jQuery(function($){
 
 			if(!params.list_name) return;
 			if(typeof params.category_id != 'undefined' && params.category_id == '0') delete params.category_id;
-			
+
 			params.tid = dlg_list.$obj.attr('tid');
-			
+
 			$.ajax({
 				type : 'post',
 				url  : baseURL+'site/user/create_list',
@@ -3378,7 +3383,7 @@ jQuery(function($){
 					}else{
 						$chk.prop('checked',true).closest('li').addClass('selected');
 					}
-						
+
 					//$chk.prop('checked',true).trigger('change').closest('li').addClass('selected');
 
 					// add collaborators
@@ -3475,21 +3480,21 @@ jQuery(function($){
 			if(tid != null)  checkbox_url += '&tid='+tid;
 			if(rtid != null) checkbox_url += '&rtid='+rtid;
 			if(sl != null)   checkbox_url += '&sl='+sl;
-			
+
 			var no_check_point = false;
 			var img_src = $this.attr('item_img_url');
 			var obj_name = $this.attr('item_name') || $this.parent().find('figcaption').text();
-			
+
 			if (!img_src) {
 	//			img_src = $this.data('image-src') || $this.parent().find('.fig-image img').attr('src').replace('/200/', '/310/');
 				no_check_point=true;
 			}
-			
+
 /*			if(dlg_list.$obj.length && (rtid || dlg_list.$obj.attr('show_when_fancy') == 'true' || sl)) {
 				$this.removeAttr('show_add_to_list');
 				dlg_list.open();
 			}
-*/			
+*/
 			if((dlg_list.$obj.attr('show_when_fancy') == 'true') || sl) {
 				$this.removeAttr('show_add_to_list');
 				$list_popup.find('.list-categories ul').html('Loading...');
@@ -3510,7 +3515,7 @@ jQuery(function($){
 				dlg_list.open();
 				dlg_list.$obj.attr('tid',tid);
 			}
-			
+
 			$list_popup
 //				.find('.list-categories ul').html(loading_txt).end()
 				.find('.fig-caption span').text(obj_name).end()
@@ -3553,7 +3558,7 @@ jQuery(function($){
 			});
 
 			if(!categories_loaded) load_category();
-*/		
+*/
 			var fancyy_url = baseURL+'site/user/add_fancy_item';
 			if($this.hasClass('fancyd')){
 				fancyy_url = baseURL+'site/user/remove_fancy_item';
@@ -3638,6 +3643,7 @@ jQuery(function($){
 jQuery(function($){
 	var dlg_signin = $.dialog('signin-overlay'),
         dlg_register = $.dialog('register');
+  //he throw's force_login as css class to enforce login popups
 	$('#navigation-test .mn-signup, .force_login').click(function(event){
 		event.preventDefault();
 		dlg_signin.open();
@@ -3660,7 +3666,7 @@ jQuery(function($){
 		/*.on('focus', '#signin-email', function(event){
 			var valid = /^[\w\+\-\.]{2,64}@([\w-]+\.)+[a-z]{2,3}$/i.test($.trim(this.value));
 			dlg_signin.$obj.find('.btn-signup').disable( !valid );
-			
+
 			if(valid && event.which == 13){
 				dlg_signin.$obj.find('.btn-signup').click();
 			}
@@ -3669,7 +3675,7 @@ jQuery(function($){
 		.on('blur', '#signin-email', function(event){
 			var valid = /^[\w\+\-\.]{2,64}@([\w-]+\.)+[a-z]{2,3}$/i.test($.trim(this.value));
 			dlg_signin.$obj.find('.btn-signup').disable( !valid );
-			
+
 			if(valid && event.which == 13){
 				dlg_signin.$obj.find('.btn-signup').click();
 			}
@@ -3677,11 +3683,12 @@ jQuery(function($){
 		.on('input', '#signin-email', function(event){
 			var valid = /^[\w\+\-\.]{2,64}@([\w-]+\.)+[a-z]{2,3}$/i.test($.trim(this.value));
 			dlg_signin.$obj.find('.btn-signup').disable( !valid );
-			
+
 			if(valid && event.which == 13){
 				dlg_signin.$obj.find('.btn-signup').click();
 			}
 		})
+		//he was using local file to store email_signup.json object for testing
 /*		.on('click', '.btn-signup', function(){
 			//location.href = '/signup?email='+encodeURIComponent($('#signin-email').val());
 			alert(baseURL);
@@ -3693,7 +3700,7 @@ jQuery(function($){
 		        dlg_register.username = response.username;
                 dlg_register.email = response.email;
                 dlg_register.fullname = response.fullname;
-                dlg_register.open(); 
+                dlg_register.open();
 			} else if (response.status_code != undefined && response.status_code == 0) {
 			    var msg = response.message;
 			    var error = response.error;
@@ -3841,7 +3848,7 @@ jQuery(function($){
 	function state(){
 		if($slidebox.is(':visible')) return SKIP;
 		if($focused && $focused.is('.figure-product > a[rel].focus')) return GOT_FOCUS;
-		
+
 		$focused = $(':focus');
 		if($focused.is('textarea,input:text,input:password')) return SKIP;
 
@@ -3908,7 +3915,7 @@ $(window).ready(function(){
         if (can_show_signin_overlay == true) {
             $.dialog('signin-overlay').open().close = function() {};
         }
-	
+
 	// new fancy share
 	$('.share-via li').each(function(){
 		$(this).mouseover(function(){

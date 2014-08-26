@@ -1,8 +1,8 @@
 <!-- popups -->
 <div id="popup_container"> <img class="loader" src="images/site/loading.gif">
   <div class="popup ly-title reply-popup"> </div>
-  
-<?php 
+
+<?php
 $this->load->view('site/popup/register');
 $this->load->view('site/popup/shipping');
 $this->load->view('site/popup/product');

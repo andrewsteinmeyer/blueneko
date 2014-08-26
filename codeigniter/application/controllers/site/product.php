@@ -33,6 +33,8 @@ class Product extends MY_Controller {
 		}
 	}
 
+	//called from user controller (site/user.php) in function send_quick_register_mail()
+	//user has clicked through the register.js popup and created username and password
 	public function onboarding(){
 		if ($this->checkLogin('U') == ''){
 			redirect(base_url());
@@ -41,7 +43,7 @@ class Product extends MY_Controller {
 			if ($this->data['userDetails']->num_rows() == 1){
 				if ($this->data['mainCategories']->num_rows()>0){
 					foreach ($this->data['mainCategories']->result() as $cat){
-						//						$condition = " where p.category_id like '".$cat->id.",%' OR p.category_id like '%,".$cat->id."' OR p.category_id like '%,".$cat->id.",%' OR p.category_id='".$cat->id."' order by p.created desc";
+						//				$condition = " where p.category_id like '".$cat->id.",%' OR p.category_id like '%,".$cat->id."' OR p.category_id like '%,".$cat->id.",%' OR p.category_id='".$cat->id."' order by p.created desc";
 						$condition = " where FIND_IN_SET('".$cat->id."',p.category_id) and p.quantity>0 and p.status='Publish' and u.group='Seller' and u.status='Active' or p.status='Publish' and p.quantity > 0 and p.user_id=0 and FIND_IN_SET('".$cat->id."',p.category_id) order by p.created desc";
 						$this->data['productDetails'][$cat->cat_name] = $this->product_model->view_product_details($condition);
 					}
@@ -249,7 +251,7 @@ class Product extends MY_Controller {
 												}
 											}
 											if ($img != ''){
-													
+
 												$returnArr['categories'] .='<img alt="'.$userProduct->product_name.'" src="'.base_url().'images/product/'.$img.'">';
 												$plimit++;
 											}
@@ -519,7 +521,7 @@ class Product extends MY_Controller {
 								<title>'.$adminnewstemplateArr['meta_title'].' - Share Things</title>
 								<body>';
 		include('./newsletter/registeration'.$newsid.'.php');
-			
+
 		$message .= '</body>
 								</html>';
 		if($template_values['sender_name']=='' && $template_values['sender_email']==''){
@@ -532,7 +534,7 @@ class Product extends MY_Controller {
 
 		$email_values = array('mail_type'=>'html',
 							'from_mail_id'=>$sender_email,
-							'mail_name'=>$sender_name,		
+							'mail_name'=>$sender_name,
 							'to_mail_id'=>$email,
 							'subject_message'=>$subject,
 							'body_messages'=>$message
@@ -1112,7 +1114,7 @@ echo curl_error($ch) . '<br/>';*/
 						$this->product_model->add_subproduct_insert($dataSubArr);
 					}
 				}
-					
+
 				if($this->lang->line('change_saved') != '')
 				$lg_err_msg = $this->lang->line('change_saved');
 				else
@@ -1540,7 +1542,7 @@ echo curl_error($ch) . '<br/>';*/
 			);
 			$this->product_model->simple_insert(UPLOAD_MAILS,$dataArr);
 			/***---Update in db---***/
-			 	
+
 			/***---Send Mail---***/
 			$newsid='18';
 			$template_values=$this->product_model->get_newsletter_template_details($newsid);
@@ -1694,7 +1696,7 @@ echo curl_error($ch) . '<br/>';*/
 			$this->product_model->update_details(USER_PRODUCTS,array('short_url_id'=>$urlid),array('seller_product_id'=>$row->seller_product_id));
 		}
 		echo 'Short urls for affiliate products added';
-			
+
 	}
 
 	public function qq_update_counts(){

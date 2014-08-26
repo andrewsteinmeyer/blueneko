@@ -38,6 +38,8 @@ class User extends MY_Controller {
 	 *
 	 * Function for quick signup
 	 */
+	// called in validation.js in quickSignup() after user clicks on javascript::quickSignup() in register.js popup
+	// queries database to see if email address is available and passes back registration to register.js popup
 	public function quickSignup(){
 		$email = $this->input->post('email');
 		$returnStr['success'] = '0';
@@ -56,6 +58,8 @@ class User extends MY_Controller {
 					$username = $fullname;
 				}
 				while (!$avail){
+					//think this is so that multiple users could have same name
+					//appending random number on the end
 					$username = $fullname.rand(1111, 999999);
 					$checkAvail = $this->user_model->get_all_details(USERS,array('user_name'=>$username));
 					if ($checkAvail->num_rows()>0){
@@ -66,7 +70,9 @@ class User extends MY_Controller {
 				}
 				if ($avail){
 					$pwd = $this->get_rand_str('6');
+					//update into database
 					$this->user_model->insertUserQuick($fullname,$username,$email,$pwd);
+					//set username on session
 					$this->session->set_userdata('quick_user_name',$username);
 					$returnStr['msg'] = 'Successfully registered';
 					$returnStr['full_name'] = $fullname;
@@ -86,6 +92,10 @@ class User extends MY_Controller {
 	 *
 	 * Function for quick signup update
 	 */
+	//called from validation.js in quickSignup2() when clicked in register.js popup
+	// user picks a username and password and clicks in register.js signup
+	// this gets checked against database
+	// if successful, quickSignup2() redirects to send-confirm-email, which routes to send_quick_register_mail
 	public function quickSignupUpdate(){
 		$returnStr['success'] = '0';
 		$unameArr = $this->config->item('unameArr');
@@ -103,6 +113,7 @@ class User extends MY_Controller {
 			}else {
 				$pwd = $this->input->post('password');
 				$fullname = $this->input->post('fullname');
+				//update in database
 				$this->user_model->updateUserQuick($fullname,$username,$email,$pwd);
 				$this->session->set_userdata('quick_user_name',$username);
 				$returnStr['msg'] = 'Successfully registered';
@@ -112,10 +123,16 @@ class User extends MY_Controller {
 		echo json_encode($returnStr);
 	}
 
+	//called from quickSignup2() in validation.js.  called as send-confirm-email, which routes to this function
+	//send register email to user that is registering
+	//redirect the user to either onboarding or create-brand
+	//depending if user is a brand or not
 	public function send_quick_register_mail(){
+			//if already has fc_session_user_id then redirect to base_url()
 		if ($this->checkLogin('U') != ''){
 			redirect(base_url());
 		}else {
+			//grab the quick_user_name off of the session that we set in quickSignup() above
 			$quick_user_name = $this->session->userdata('quick_user_name');
 			if ($quick_user_name == ''){
 				redirect(base_url());
@@ -125,6 +142,7 @@ class User extends MY_Controller {
 				if ($userDetails->num_rows() == 1){
 					$this->send_confirm_mail($userDetails);
 					$this->login_after_signup($userDetails);
+					//clear out quick_user_name on session
 					$this->session->set_userdata('quick_user_name','');
 					if ($userDetails->row()->is_brand == 'yes'){
 						redirect(base_url().'create-brand');
@@ -201,19 +219,29 @@ class User extends MY_Controller {
 		echo json_encode($returnStr);
 	}
 
+//called above in send_quick_register_mail()
+//sends a confirmation to register to the registrants email from the site
+//saves a random 10 string verify_code to the user in the database
+//uses this random string and the uid to identify the link clicked from the email registrant
 	public function send_confirm_mail($userDetails=''){
 		$uid = $userDetails->row()->id;
 		$email = $userDetails->row()->email;
 		$randStr = $this->get_rand_str('10');
 		$condition = array('id'=>$uid);
 		$dataArr = array('verify_code'=>$randStr);
+		//create a random verify_code string and add it to the database
+		//for the user
 		$this->user_model->update_details(USERS,$dataArr,$condition);
 		$newsid='3';
+		//grab template blob from database fc_newsletters
 		$template_values=$this->user_model->get_newsletter_template_details($newsid);
 
 		$cfmurl = base_url().'site/user/confirm_register/'.$uid."/".$randStr."/confirmation";
 		$subject = 'From: '.$this->config->item('email_title').' - '.$template_values['news_subject'];
 		$adminnewstemplateArr=array('email_title'=> $this->config->item('email_title'),'logo'=> $this->data['logo']);
+
+		//set local variables for $email_title and $logo that are used in the template
+		//the template is pulled from the data blob in fc_newsletters for id 3
 		extract($adminnewstemplateArr);
 		//$ddd =htmlentities($template_values['news_descrip'],null,'UTF-8');
 		$header .="Content-Type: text/plain; charset=ISO-8859-1\r\n";
@@ -334,6 +362,7 @@ class User extends MY_Controller {
 		}
 	}
 
+	//login with user and update timestamp details in database
 	public function login_after_signup($userDetails=''){
 		if ($userDetails->num_rows() == '1'){
 			$userdata = array(
@@ -359,6 +388,9 @@ class User extends MY_Controller {
 		}
 	}
 
+	//grab the uid and verify_code that was set in database
+	//see if uid and verify_code from email match what was set in database
+	//if match, then verify the user and add user email to subscribers_list
 	public function confirm_register(){
 		$uid = $this->uri->segment(4,0);
 		$code = $this->uri->segment(5,0);
@@ -498,7 +530,7 @@ class User extends MY_Controller {
 
 		$message .= '</body>
 			</html>';
-			
+
 
 		if($template_values['sender_name']=='' && $template_values['sender_email']==''){
 			$sender_email=$this->config->item('site_contact_mail');
@@ -589,12 +621,12 @@ class User extends MY_Controller {
 							$card->setImage( 'http://graphics8.nytimes.com/images/2012/02/19/us/19whitney-span/19whitney-span-articleLarge.jpg', 600, 330 );
 	$send_tweets = $this->twconnect->tw_post('https://api.twitter.com/1.1/statuses/update.json',$card->asHTML());
 						    print_r($send_tweets);
-						
+
 					 }
 					 /*************************END*********************/
-					 
+
 					 //die;
-					
+
 					/*
 					 * -------------------------------------------------------
 					 * Creating list automatically when user likes a product
@@ -1581,25 +1613,25 @@ class User extends MY_Controller {
 		}
 		$private_total = $grantTotal - $PrdList->row()->discountAmount;
 		$private_total = $private_total + $PrdList->row()->tax  + $PrdList->row()->shippingcost;
-			
+
 		$message1.='</table></td> </tr><tr><td colspan="3"><table border="0" cellspacing="0" cellpadding="0" style=" margin:10px 0px; width:99.5%;"><tr>
 			<td width="460" valign="top" >';
 		if($PrdList->row()->note !=''){
 			$message1.='<table width="97%" border="0"  cellspacing="0" cellpadding="0"><tr>
                 <td width="87" ><span style="font-size:13px; font-family:Arial, Helvetica, sans-serif; text-align:left; width:100%; font-weight:bold; color:#000000; line-height:38px; float:left;">Note:</span></td>
-               
+
             </tr>
 			<tr>
                 <td width="87"  style="border:1px solid #cecece;"><span style="font-size:13px; font-family:Arial, Helvetica, sans-serif; text-align:left; width:97%; color:#000000; line-height:24px; float:left; margin:10px;">'.stripslashes($PrdList->row()->note).'</span></td>
             </tr></table>';
 		}
-			
+
 		if($PrdList->row()->order_gift == 1){
 			$message1.='<table width="97%" border="0"  cellspacing="0" cellpadding="0"  style="margin-top:10px;"><tr>
                 <td width="87"  style="border:1px solid #cecece;"><span style="font-size:16px; font-weight:bold; font-family:Arial, Helvetica, sans-serif; text-align:center; width:97%; color:#000000; line-height:24px; float:left; margin:10px;">This Order is a gift</span></td>
             </tr></table>';
 		}
-			
+
 		$message1.='</td>
             <td width="174" valign="top"><table width="100%" border="0" cellspacing="0" cellpadding="0" style="border:1px solid #cecece;">
             <tr bgcolor="#f3f3f3">
@@ -1628,17 +1660,17 @@ class User extends MY_Controller {
         </tr>
     </table>
         </div>
-        
-        <!--end of left--> 
-		
-            
+
+        <!--end of left-->
+
+
             <div style="width:27.4%; margin-right:5px; float:right;">
-            
-           
+
+
             </div>
-        
+
         <div style="clear:both"></div>
-        
+
     </div>
     </div></body></html>';
 		return $message1;
@@ -2167,7 +2199,7 @@ class User extends MY_Controller {
 		$returnStr['message'] = '';
 		echo json_encode($returnStr);
 	}
-	
+
 	public function find_friends_twitter(){
 		$returnStr['status_code'] = 1;
 		$returnStr['url'] = base_url().'twtest/invite_friends';

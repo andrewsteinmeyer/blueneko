@@ -1,7 +1,7 @@
 <?php $this->load->view('site/templates/header.php');?>
 <!-- Section_start -->
 
-  
+
 <div id="popup_container" style="display: block; opacity: 1;" class="onboarding">
 <img width="32" height="22" src="images/site/loading.gif" class="loader" style="display: none;">
 
@@ -17,7 +17,7 @@
 		<p><span class="bg"></span>
 		<button class="btns-blue-embo btn-start"><?php if($this->lang->line('onboarding_get_stat') != '') { echo stripslashes($this->lang->line('onboarding_get_stat')); } else echo "Get Started"; ?></button></p>
 	</div>
-    
+
 	<div class="step step1" style="display:none">
 		<p class="tit"><b><?php echo $userDetails->row()->full_name;?>, <?php if($this->lang->line('onboarding_what_love') != '') { echo stripslashes($this->lang->line('onboarding_what_love')); } else echo "tell us what you love"; ?></b><br>
 		<?php if($this->lang->line('onboarding_select_one') != '') { echo stripslashes($this->lang->line('onboarding_select_one')); } else echo "Select at least one category to get started"; ?>.</p>
@@ -25,12 +25,16 @@
 			<div class="intxt">
 			<?php if ($mainCategories->num_rows()>0){?>
 				<ul class="category-list">
-                    <?php 
+                    <?php
                     $left = $top = $count = 0;
                     $width = 340;
                     $height = 136;
+                    //he does some math to get the style dimensions
+                    //depending on the number of main categories
+                    //should use bootstrap grid instead or foundation?
                       foreach ($mainCategories->result() as $row){
                       	if ($row->cat_name != ''){
+                          //uses mod 2 so that there are 2 categories per row
                       		$leftPos = $count%2;
                       		$leftVal = $leftPos*$width;
                       		$topPos = floor($count/2);
@@ -40,7 +44,8 @@
                     <li style="left: <?php echo $leftVal;?>px; width: 340px; top: <?php echo $topVal;?>px; position: absolute;">
                     <a value="<?php echo $row->id;?>" href="#"><b><?php echo $row->cat_name;?></b>
                         <span class="category-thum">
-                        <?php 
+                        <?php
+                        //product details are populated in site/product.php (product controller)
                         if ($productDetails[$row->cat_name]->num_rows()>0){
                         	$imgCount = 0;
 	                        foreach ($productDetails[$row->cat_name]->result() as $product_row){
@@ -62,13 +67,13 @@
         	                }
                         }
                         ?>
-                        
+
 						<em class="back"><?php if($this->lang->line('onboarding_selected') != '') { echo stripslashes($this->lang->line('onboarding_selected')); } else echo "Selected"; ?></em></span>
                     </a></li>
-                   <?php 
+                   <?php
                       	}
                       }
-                   ?> 
+                   ?>
 				</ul>
 			<?php }else {?>
 			<p class="tit"><?php if($this->lang->line('onboarding_no_cate') != '') { echo stripslashes($this->lang->line('onboarding_no_cate')); } else echo "No categories available"; ?></p>
@@ -79,8 +84,8 @@
 			<button disabled="" class="btns-blue-embo btn-next"><?php if($this->lang->line('onboarding_next') != '') { echo stripslashes($this->lang->line('onboarding_next')); } else echo "Next"; ?></button>
 		</div>
 	</div>
-    
-	
+
+
     <div style="display:none" class="step step2">
 		<p class="tit" style="box-shadow: none; border-color: rgb(235, 236, 239);"><b><?php echo LIKE_BUTTON;?> <?php if($this->lang->line('onboarding_thinks_like') != '') { echo stripslashes($this->lang->line('onboarding_thinks_like')); } else echo "the things you like"; ?></b><br>
 		<?php echo LIKE_BUTTON;?> <?php if($this->lang->line('onboarding_person_catalog') != '') { echo stripslashes($this->lang->line('onboarding_person_catalog')); } else echo "a few things to save them to your personal catalog"; ?>.</p>
@@ -102,7 +107,7 @@
 			<button class="btns-blue-embo btn-next"><?php if($this->lang->line('onboarding_next') != '') { echo stripslashes($this->lang->line('onboarding_next')); } else echo "Next"; ?></button>
 		</div>
 	</div>
-    
+
 	<div style="display:none;" class="step step3">
 		<p class="tit"><b><?php if($this->lang->line('onboarding_follow') != '') { echo stripslashes($this->lang->line('onboarding_follow')); } else echo "Follow"; ?> <?php echo $siteTitle;?> <?php if($this->lang->line('onboarding_people') != '') { echo stripslashes($this->lang->line('onboarding_people')); } else echo "people"; ?></b><br>
 		<?php if($this->lang->line('onboarding_discover') != '') { echo stripslashes($this->lang->line('onboarding_discover')); } else echo "Follow a few top contributors to discover great things"; ?>.</p>
@@ -115,20 +120,20 @@
                     <li>
                     <?php if ($mainCategories->num_rows()>0){?>
                         <span><?php if($this->lang->line('onboarding_category') != '') { echo stripslashes($this->lang->line('onboarding_category')); } else echo "Find by category"; ?></span>
-                    </li>    
-                            <?php 
+                    </li>
+                            <?php
                             foreach ($mainCategories->result() as $catRow){
                             	if ($catRow->cat_name != ''){
                             ?>
-                                
+
                             <li><a href="javascript:void(0)" cname="<?php echo url_title($catRow->cat_name,'_',TRUE);?>" class="category"><?php echo $catRow->cat_name;?></a></li>
-                                
-                            <?php 
+
+                            <?php
                             	}
                             }
                             ?>
-                                
-                            
+
+
                        <?php }?>
                     </li>
                 </ul>
@@ -138,8 +143,8 @@
 				<p class="stit"><span><?php if($this->lang->line('onboarding_suggested') != '') { echo stripslashes($this->lang->line('onboarding_suggested')); } else echo "Suggested for you"; ?></span>
 				<button class="btns-blue-embo btn-followall"><?php if($this->lang->line('onboarding_follow_all') != '') { echo stripslashes($this->lang->line('onboarding_follow_all')); } else echo "Follow All"; ?></button></p>
 			</div>
-            
-            
+
+
 
 		</div></div>
 		<div class="btn-area">
@@ -148,7 +153,7 @@
 	-->	</div>
 	</div>
 	<div style="display:none" class="step step4">
-    
+
 		<p class="tit"><b> <?php if($this->lang->line('onboarding_invite_friends') != '') { echo $this->lang->line('onboarding_invite_friends'); } else echo "Invite friends to ";
 		echo  " ".$siteTitle." </b><br>";
 		if($this->lang->line('invite_friends_tag') != '') { echo $this->lang->line('invite_friends_tag'); } else echo "Search services you use to invite friends to"; ?> <?php echo " ".$siteTitle;?>.</p>
@@ -173,7 +178,7 @@
 					<dt><i class="ic-tw"></i> <span><b><?php if($this->lang->line('signup_twitter') != '') { echo stripslashes($this->lang->line('signup_twitter')); } else echo "Twitter"; ?></b></span>
 					<button class="close"><span class="tooltip"><small><b></b><?php if($this->lang->line('onboarding_close') != '') { echo stripslashes($this->lang->line('onboarding_close')); } else echo "Close"; ?></small></span></button>
 <!-- 					<button class="btns-gray-embo"><?php if($this->lang->line('onboarding_find_frds') != '') { echo stripslashes($this->lang->line('onboarding_find_frds')); } else echo "Find friends"; ?></button></dt> -->
- 					<button class="btns-gray-embo twitter"><?php if($this->lang->line('invite_frds') != '') { echo stripslashes($this->lang->line('invite_frds')); } else echo "Invite friends"; ?></button></dt> 
+ 					<button class="btns-gray-embo twitter"><?php if($this->lang->line('invite_frds') != '') { echo stripslashes($this->lang->line('invite_frds')); } else echo "Invite friends"; ?></button></dt>
 					<dd class="follow">
 						<p class="stit"><b><?php if($this->lang->line('onboarding_ur_frdson') != '') { echo stripslashes($this->lang->line('onboarding_ur_frdson')); } else echo "Your friends on"; ?> <?php echo $siteTitle;?></b> . <a href="javascript:void(0)" class="invite twitter"><?php if($this->lang->line('onboarding_invite_frd') != '') { echo stripslashes($this->lang->line('onboarding_invite_frd')); } else echo "Invite Friends"; ?></a><button class="btns-blue-embo btn-followall"><?php if($this->lang->line('onboarding_follow_all') != '') { echo stripslashes($this->lang->line('onboarding_follow_all')); } else echo "Follow All"; ?></button></p>
 						<div class="container"></div>
@@ -230,7 +235,9 @@
 
 </div>
 
+
 <!-- Section_start -->
+<!-- load a bunch of libraries that header.php already loads, redundant -->
 <script src="js/site/<?php echo SITE_COMMON_DEFINE;?>filescatalog.js" type="text/javascript"></script>
 <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="js/site/<?php echo SITE_COMMON_DEFINE;?>filesjquery-ui-1.js" type="text/javascript"></script>
@@ -249,6 +256,8 @@
 	    status:true,
 	    xfbml:true
     });
+    //categories are 'selected' when clicked
+    //next button is enabled to move onto next step
      $('.category-list li a').each(function(){
 		$(this).click(function(){
 			$(this).toggleClass('selected');
@@ -267,14 +276,17 @@
 			return false;
 		});
 	});
-	
+
+  //action when clicking "Getting Started" button
 	$('.popup.onboarding .btn-start').click(function(){
+    //hide the index page that greets you at onboarding
+    //reveal step1
 		$('.popup.onboarding .index').hide();
 		$('.popup.onboarding .step1').show();
 		$('.category-list').find('li:even').css('left','0').end().find('li:odd').css('left','340px').end();
 		$('.category-list li').each(function(){$(this).width(340).css('top',( Math.floor($(this).index()/2)*136)+'px').css('position','absolute');});
 		if ($('.popup.onboarding .step1 .intxt').height()>565) {$('.popup.onboarding .step1 .btn-area').css('box-shadow','0 -2px 0 rgba(235,236,239,0.3)')}
-		
+
 		var click_id = $.cookie.get('ck_secco_clickid');
 		if (click_id != null) {
 			var tag = $("<img/>")
@@ -319,30 +331,30 @@
                     itemSelector:'#onboarding-category-items > ol.stream > li',
                     post_callback: function($items){ $('#onboarding-category-items > ol.stream').trigger('itemloaded')}
                 });
-*/               
+*/
                 var $stream = $('#onboarding-category-items > ol.stream'), $wrapper = $('.intxt.timeline'), latest_id = 'stream-latest-item';
-                
+
                 // show images as each image is loaded
                 $stream.on('itemloaded', function(){
                     var $latest = $stream.find('#'+latest_id), $target, viewMode;
-                    
+
                     $target = $latest.length ? $latest.nextAll('li') : $stream.find('>li');
                     if($target.length) {
                         $latest.removeAttr('id');
                         $target.eq(-1).attr('id', latest_id);
                     }
-                    
+
                     viewMode = $wrapper.hasClass('vertical') ? 'vertical' : 'grid';
 
                     $target.each(function(i,v,a){
                         var $li = $(this), src, img;
-                        
+
                         if(viewMode == 'vertical'){
                             src = $li.find('.figure > img').attr('src');
                         } else {
                             if(src = $li.find('.figure').css('background-image').match(/http:\/\/.+\.(?:jpe?g|png|gif)/i)) src = src[0];
                         }
-                        
+
                         if(src) {
                             img = new Image();
                             img.onload = function(){ $li.find('>.pre').addClass('hide') };
@@ -354,15 +366,15 @@
                 });
                 $stream.trigger('itemloaded');
                 setView('vertical');
-                
+
                 function setView(mode){
                     if($wrapper.hasClass(mode)) return;
                     if(!window.Modernizr || !Modernizr.csstransitions) return switchTo(mode);
 
                     $wrapper.addClass('anim');
-                    
+
                     var $items = $stream.find('>li'), item,
-                        $visibles, visibles = [], prevVisibles, thefirst, 
+                        $visibles, visibles = [], prevVisibles, thefirst,
                         offsetTop = $stream.offset().top,
                         hh = $('#header-new').height(),
                         sc = $(window).scrollTop(),
@@ -386,7 +398,7 @@
                     // get the first animated element
                     for(i=0,c=Math.min(visibles.length,10),thefirst=null; i < c; i++){
                         v = visibles[i];
-                        
+
                         if( !thefirst || (thefirst.offsetLeft > v.offsetLeft) || (thefirst.offsetLeft == v.offsetLeft && thefirst.offsetTop > v.offsetTop) ) {
                             thefirst = v;
                         }
@@ -401,10 +413,10 @@
 
                         if(i == c -1) setTimeout(fadeIn, 300+d/5);
                     }
-                    
+
                     function fadeIn(){
                         var i, c, v, thefirst, COL_COUNT, visibles = [], item;
-                        
+
                         $stream.height($stream.parent().height());
 
                         switchTo(mode);
@@ -422,7 +434,7 @@
                                 item.style.opacity = 0;
                             }
                         }
-                        
+
                         $wrapper.addClass('anim');
 
                         $(visibles).css({opacity:0,visibility:''});
@@ -431,7 +443,7 @@
                         // get the first animated element
                         for(i=0,c=Math.min(visibles.length,COL_COUNT),thefirst=null; i < c; i++){
                             v = visibles[i];
-                            
+
                             if( !thefirst || (thefirst.offsetLeft > v.offsetLeft) || (thefirst.offsetLeft == v.offsetLeft && thefirst.offsetTop > v.offsetTop) ) {
                                 thefirst = v;
                             }
@@ -456,11 +468,11 @@
                             }
                         }
                     };
-                    
+
                     function delayOpacity(element, opacity, interval){
                         setTimeout(function(){ element.style.opacity = opacity }, Math.floor(interval));
                     };
-                    
+
                     function switchTo(mode){
                         $wrapper.removeClass('vertical normal').addClass(mode);
                         if(mode == 'vertical') {
@@ -470,7 +482,7 @@
                         }
                     };
                 };
-                
+
                 var bottoms = [0,0,0];
                 function arrange(force_refresh){
                     var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH, LEFT_MARGIN, TOP_MARGIN;
@@ -494,7 +506,7 @@
 
                     $first = $target.eq(0);
                     $target.eq(-1).addClass('page_marker_');
-                        
+
                     COL_COUNT   = Math.floor($stream.width()/$first.width());
                     ITEM_WIDTH  = parseInt($first.width());
                     TOP_MARGIN  = parseInt($first.css('margin-top'));
@@ -669,16 +681,16 @@
 //        var loc = location.protocol+"//"+location.host;
 		var loc = baseURL;
 		var param = {'location':loc};
-		var popup = window.open(null, '_blank', 'height=400,width=800,left=250,top=100,resizable=yes', true);			
+		var popup = window.open(null, '_blank', 'height=400,width=800,left=250,top=100,resizable=yes', true);
         var $btn = $(this);
 //        $btn.hide().parents('dt').addClass('none').find('.close').show().end().end().parents('.sns-people').find('dd.follow').show();
  //       $btn.parents('dl.sns-people').find('dd.follow .loader').show();
         $.post(
 			baseURL+'site/user/find_friends_twitter',
-			param, 
+			param,
 			function(json){
 				if (json.status_code==1) {
-					popup.location.href = json.url;						
+					popup.location.href = json.url;
 /*					twitterConnected0(popup,json.url,
 						function(json){
 							if(json.status_code==1){
@@ -702,12 +714,12 @@
 */				}
 				else if (json.status_code==0) {
 					alert(json.message);
-				}  
+				}
 			},
 			'json'
 		);
     });
-   
+
     $('.popup.onboarding button.facebook').click(function() {
     	FB.ui({
     	    method: 'apprequests',
@@ -756,14 +768,14 @@
  //       $btn.parents('dl.sns-people').find('dd.follow .loader').show();
 		$.post(
 			baseURL+'site/user/find_friends_gmail',
-			param, 
+			param,
 			function(json){
 				if (json.status_code==1) {
-					popup.location.href = json.url;	
+					popup.location.href = json.url;
 				}
 				else if (json.status_code==0) {
 					alert(json.message);
-				}  
+				}
 			},
 			'json'
 			/*function(xml){
@@ -786,13 +798,13 @@
                                 );
                             }
 							else if($(xml).find("status_code").length>0 && $(xml).find("status_code").text()==0 && $(xml).find("message").length>0){
-								alert($(xml).find("message").text());                                      
+								alert($(xml).find("message").text());
 							}
 							else{
 							}
 						},
 						function(xml){
-							//alert("Please login to Gmail.");  
+							//alert("Please login to Gmail.");
 						})
 				}
 				else if ($(xml).find("status_code").length>0 && $(xml).find("status_code").text()==0) {
@@ -805,7 +817,7 @@
     $('.popup.onboarding .sns-people dd.follow a.invite').click(function() {
         var $followPanel = $(this).parents('dd.follow');
         var $invitePanel = $(this).parents('dl.sns-people').find('dd.invite');
-        
+
         $followPanel.hide();
         $invitePanel.show();
         if($invitePanel.find('div.container').children().length == 0) {
@@ -860,9 +872,9 @@
                     timestamp = page;
                 }
                 else{
-                    timestamp = $container.find('a.more').attr('ts');			
+                    timestamp = $container.find('a.more').attr('ts');
                 }
-                
+
                 var instance = stream.infinitescroll({
                         navSelector: "div.pagination",
                         nextSelector: nextSelector,
@@ -871,12 +883,12 @@
                         timestampSelector: nextSelector,
                         isPaused: true
                     }).data('infinitescroll');
-                
+
                 if (page) {
                     instance.options.timestamp = page;
                 }
                 instance.retrieve();
-                
+
                 return instance;
             });
         },
@@ -970,6 +982,8 @@
         }
     }
     $(window).ready(function(){
+      //if height is greater than 720
+      //think this is for checking if webpage or phone/tablet but not sure yet
 		if ($(window).height()>720) {
 			$('.popup.onboarding').css('margin',($(window).height()-720)/2+'px auto').show();
 		}else{
@@ -977,10 +991,10 @@
 			$('.popup.onboarding .index').css('padding',($(window).height()-529)/2+'px 0');
 			$('.popup.onboarding').css('margin-top','5px').show();
 		}
-        
+
         var param = $.jStorage.get('fancy_add_to_cart', null);
         if (param && param['thing_id']) {
-            location.href = '/things/' + param['thing_id']; 
+            location.href = '/things/' + param['thing_id'];
         } else {
             $.dialog('onboarding').open().close = function() {};
         }
@@ -1001,15 +1015,15 @@
                 setTimeout(initialize_gplus, 50);
                 return;
             }
-            
+
             $("#fancy-gplus-link").live('click', function() {
                 gplus_clicked = true;
                 return false;
             });
-            
+
             if ($('#fancy-gplus-link').length > 0) {
                 link_options.callback = "onLinkCallback_GetFriends";
-                
+
                 gapi.signin.render('fancy-gplus-link', link_options);
             }
         }

@@ -1,64 +1,64 @@
-<?php 
+<?php
 session_start();
 
- $site_join_msg = str_replace("{SITENAME}",$siteTitle,$this->lang->line('signup_join_msg')); 
+ $site_join_msg = str_replace("{SITENAME}",$siteTitle,$this->lang->line('signup_join_msg'));
 ?>
-  
-  
+
+
   <div class="popup sign signup signin-overlay" style="display:none;">
     <div class="popup_wrap update2">
-     <h2>    <?php foreach($layoutfulllist->result() as $layoutListRow){ 
-      
+     <h2>    <?php foreach($layoutfulllist->result() as $layoutListRow){
+
        if($layoutListRow->place == 'signup title'  ){
 	  echo  $layoutListRow->text; ?></h2>
-	<?php 
-			
+	<?php
+
 	  } } ?>
-      
-      
-        <h3 class="stit">    <?php foreach($layoutfulllist->result() as $layoutListRow){ 
-      
+
+
+        <h3 class="stit">    <?php foreach($layoutfulllist->result() as $layoutListRow){
+
        if($layoutListRow->place == 'signup description'){
 	  echo  $layoutListRow->text; ?></h3>
-	<?php 
-			
+	<?php
+
 	  } } ?>
       <div class="sns-login">
         <ul class="sns-major">
-<?php 
+<?php
 if ($this->config->item('facebook_app_id') != '' && $this->config->item('facebook_app_secret') != ''){
-?>       
+?>
           <li>
             <button class="btn-f facebook" onclick="window.location.href='<?php echo base_url().'facebook/user.php'; ?>'"><span class="icon ic-fb"><i></i></span> <b><?php if($this->lang->line('signup_facebook') != '') { echo stripslashes($this->lang->line('signup_facebook')); } else echo "Facebook"; ?></b></button>
           </li>
-<?php 
+<?php
 }
 ?>
 
 
-<?php 
+<?php
 if ($this->config->item('google_client_secret') != '' && $this->config->item('google_client_id') != '' && $this->config->item('google_redirect_url') != '' && $this->config->item('google_developer_key') != '' && is_file('google-login-mats/index.php')){
-?> 	
+?>
           <li>
             <button data-gapiattached="true" class="btn-g google" onclick="window.location.href='<?php echo $authUrl; ?>'" id="fancy-g-signin" next="/"><span class="icon ic-gg"><i></i></span> <b><?php if($this->lang->line('signup_google') != '') { echo stripslashes($this->lang->line('signup_google')); } else echo "Google"; ?></b></button>
           </li>
-          
-          
-     <?php 
+
+
+     <?php
 }
-?>      
-          
-          
-<?php 
+?>
+
+
+<?php
 if ($this->config->item('consumer_key') != '' && $this->config->item('consumer_secret') != ''){
-?> 
+?>
           <li>
             <button class="btn-t twitter"  onclick="window.location.href='<?php echo base_url();?>twtest/redirect'"><span class="icon ic-tw"><i></i></span> <b><?php if($this->lang->line('signup_twitter') != '') { echo stripslashes($this->lang->line('signup_twitter')); } else echo "Twitter"; ?></b></button>
           </li>
-<?php 
+<?php
 }
 $by_creating_accnt = str_replace("{SITENAME}",$siteTitle,$this->lang->line('header_create_acc'));
-?>          
+?>
         </ul>
       </div>
       <fieldset class="frm default">
@@ -71,10 +71,10 @@ $by_creating_accnt = str_replace("{SITENAME}",$siteTitle,$this->lang->line('head
       <p class="anyway"><?php if($this->lang->line('signup_have_Accnt') != '') { echo stripslashes($this->lang->line('signup_have_Accnt')); } else echo "Have an account?"; ?> <a href="login"><?php if($this->lang->line('header_login') != '') { echo stripslashes($this->lang->line('header_login')); } else echo "Login"; ?></a></p>
       </fieldset>
     </div>
-    <a href="#" class="btn-close">X</a> 
-    
+    <a href="#" class="btn-close">X</a>
+
     </div>
-    
+
     <div class="popup sign register signup quickSignup2" style="display:none;">
 	<div class="popup_wrap">
 		<h2><?php if($this->lang->line('header_almost_done') != '') { echo stripslashes($this->lang->line('header_almost_done')); } else echo "Almost Done!"; ?></h2>
@@ -95,5 +95,5 @@ $by_creating_accnt = str_replace("{SITENAME}",$siteTitle,$this->lang->line('head
                 <button class="btns-blue-embo btn-create sign" style="width: 150px;" onclick="javascript:quickSignup2();" from_popup="true" ><?php if($this->lang->line('signup_creat_myacc') != '') { echo stripslashes($this->lang->line('signup_creat_myacc')); } else echo "Create my account"; ?></button>
             </fieldset>
 	</div>
-    
+
 </div>

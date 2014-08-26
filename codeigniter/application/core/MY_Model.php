@@ -152,7 +152,7 @@ class My_Model extends CI_Model {
 		if($json_admin_action_value !=''){
 			$json_admin_action_result = unserialize($json_admin_action_value);
 		}
-			
+
 		foreach ($json_admin_action_result as $valds) {
 			$json_admin_action_result_Arr[] = $valds;
 		}
@@ -163,10 +163,10 @@ class My_Model extends CI_Model {
 
 		$json_admin_action_result_Arr[] = array($AdmEmail,$mode,$table,$data,date('Y-m-d H:i:s'),$_SERVER['REMOTE_ADDR']);
 
-			
+
 		$file = 'fc_admin_action_settings.php';
 		file_put_contents($file, serialize($json_admin_action_result_Arr));
-			
+
 
 		$this->db->where_in($column,$data);
 		if (strtolower($mode) == 'delete'){
@@ -234,7 +234,7 @@ class My_Model extends CI_Model {
 	public function productPerCategory($res,$id){
 
 		$option_exp="";
-			
+
 		echo '<pre>'; $res->num_rows;
 		print_r($res);  die;
 
@@ -245,7 +245,7 @@ class My_Model extends CI_Model {
 		$option_exploded = explode(',',$option_exp);
 		$valid_option =array_filter($option_exploded);
 		$occurences = array_count_values($valid_option);
-			
+
 		if($occurences[$id] == ''){
 			return '0';
 		}else{
@@ -257,7 +257,7 @@ class My_Model extends CI_Model {
 	public function mini_cart_view($userid = '',$mini_cart_lg=array()){
 
 		extract($mini_cart_lg);
-			
+
 		$minCartVal = ''; $GiftMiniValue = ''; $CartMiniValue = ''; $SubscribMiniValue = '';  $minCartValLast = ''; $giftMiniAmt = 0; $cartMiniAmt = 0; $SubcribMiniAmt = 0; $cartMiniQty = 0;
 
 		$giftMiniSet = $this->minicart_model->get_all_details(GIFTCARDS_SETTINGS,array( 'id' => '1'));
@@ -272,11 +272,11 @@ class My_Model extends CI_Model {
 		$this->db->where('a.user_id = '.$userid);
 		$cartMiniVal = $this->db->get();
 
-			
+
 		if($cartMiniVal -> num_rows() > 0 ){
 			$s=0;
 			foreach ($cartMiniVal->result() as $CartRow){
-					
+
 				$newImg = @explode(',',$CartRow->image);
 				$cartMiniAmt = $cartMiniAmt + $CartRow->indtotal;
 
@@ -294,7 +294,7 @@ class My_Model extends CI_Model {
 		if($SubcribeMiniRes -> num_rows() > 0 ){
 			$s=0;
 			foreach ($SubcribeMiniRes->result() as $SubCribRow){
-					
+
 				$SubscribMiniValue.= '<div id="SubcribtMinidivId_'.$s.'"><table><tbody><tr>
         	<th class="info"><a href="fancybox/'.$SubCribRow->fancybox_id.'/'.$SubCribRow->seourl.'"><img src="images/site/blank.gif" style="background-image:url('.FANCYBOXPATH.$SubCribRow->image.')" alt="'.$SubCribRow->name.'"><strong>'.$SubCribRow->name.'</strong></a></th>
             <td class="qty">1</td>
@@ -310,7 +310,7 @@ class My_Model extends CI_Model {
 		if($giftMiniRes -> num_rows() > 0 ){
 			$k=0;
 			foreach ($giftMiniRes->result() as $giftRow){
-					
+
 				$GiftMiniValue.= '<div id="GiftMindivId_'.$k.'"><table><tbody><tr>
         	<th class="info"><a href="gift-cards"><img src="images/site/blank.gif" style="background-image:url('.GIFTPATH.$giftMiniSet->row()->image.')" alt="'.$giftMiniSet->row()->title.'"><strong>'.$giftMiniSet->row()->title.'</strong><br>'.$giftRow->recipient_name.'</a></th>
             <td class="qty">1</td>
@@ -411,6 +411,7 @@ class My_Model extends CI_Model {
 		//Prevent mail for pleasureriver
 		$server_ip = $this->input->ip_address();
 		$mail_id = '';
+		//don't send email if running on with his root /kaviraj
 		if ($demoserverChk){
 			if (isset($eamil_vaues['mail_id'])){
 				$mail_id = $eamil_vaues['mail_id'];
@@ -453,7 +454,7 @@ class My_Model extends CI_Model {
 			}else {
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-					
+
 				// Additional headers
 				$headers .= 'To: '.$eamil_vaues['to_mail_id']. "\r\n";
 				$headers .= 'From: '.$eamil_vaues['mail_name'].' <'.$eamil_vaues['from_mail_id'].'>' . "\r\n";
@@ -461,7 +462,7 @@ class My_Model extends CI_Model {
 				{
 					$headers .= 'Cc: '.$eamil_vaues['cc_mail_id']. "\r\n";
 				}
-					
+
 				// Mail it
 				mail($eamil_vaues['to_mail_id'], trim(stripslashes($eamil_vaues['subject_message'])), trim(stripslashes($eamil_vaues['body_messages'])), $headers);
 				return 1;
@@ -485,7 +486,7 @@ class My_Model extends CI_Model {
 			if (!$this->email->send()) {
 				$headers  = 'MIME-Version: 1.0' . "\r\n";
 				$headers .= 'Content-type: text/html; charset=iso-8859-1' . "\r\n";
-					
+
 				// Additional headers
 				$headers .= 'To: '.$eamil_vaues['to_mail_id']. "\r\n";
 				$headers .= 'From: '.$eamil_vaues['mail_name'].' <'.$eamil_vaues['from_mail_id'].'>' . "\r\n";
@@ -493,7 +494,7 @@ class My_Model extends CI_Model {
 				{
 					$headers .= 'Cc: '.$eamil_vaues['cc_mail_id']. "\r\n";
 				}
-					
+
 				// Mail it
 				mail($eamil_vaues['to_mail_id'], trim(stripslashes($eamil_vaues['subject_message'])), trim(stripslashes($eamil_vaues['body_messages'])), $headers);
 				return 1;
@@ -503,7 +504,7 @@ class My_Model extends CI_Model {
 				// Show success notification or other things here
 				//echo 'Success to send email';
 
-					
+
 
 
 				return 1;
@@ -513,6 +514,7 @@ class My_Model extends CI_Model {
 		}
 	}
 	//get newsletter template
+	//returns as associative array
 	public function get_newsletter_template_details($apiId='')
 	{
 		$twitterQuery = "select * from ".NEWSLETTER." where id=".$apiId. " AND status='Active'";

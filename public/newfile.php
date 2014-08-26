@@ -1,6 +1,7 @@
 <?php
 include_once('databaseValues.php');
-$conn = @mysql_pconnect($hostName,$dbUserName,$dbPassword) or die("Database Connection Failed<br>". mysql_error());
+//$conn = @mysql_pconnect($hostName,$dbUserName,$dbPassword) or die("Database Connection Failed<br>". mysql_error());
+$conn = @mysql_pconnect($hostName,$dbUserName,$dbPassword) or die("Database Connection Failed<br>". mysql_error() . " hostname:" . $hostName . " dbUserName: " . $dbUserName . " dbPassword: " . $dbPassword);
 
 mysql_select_db($databaseName, $conn) or die('DB not selected'); 
 
