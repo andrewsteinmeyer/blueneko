@@ -305,6 +305,7 @@ class MY_Controller extends CI_Controller {
 
 		/***Mini cart Lg****/
 
+		//mini cart view used in navigation bar in header.php
 		$this->data['MiniCartViewSet'] = $this->minicart_model->mini_cart_view($this->data['common_user_id'],$mini_cart_lg);
 
 	}

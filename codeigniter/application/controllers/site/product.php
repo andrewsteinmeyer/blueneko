@@ -42,6 +42,7 @@ class Product extends MY_Controller {
 			$this->data['userDetails'] = $this->product_model->get_all_details(USERS,array('id'=>$this->checkLogin('U')));
 			if ($this->data['userDetails']->num_rows() == 1){
 				if ($this->data['mainCategories']->num_rows()>0){
+					//load products for each of the main categories and add to productDetails[$category]
 					foreach ($this->data['mainCategories']->result() as $cat){
 						//				$condition = " where p.category_id like '".$cat->id.",%' OR p.category_id like '%,".$cat->id."' OR p.category_id like '%,".$cat->id.",%' OR p.category_id='".$cat->id."' order by p.created desc";
 						$condition = " where FIND_IN_SET('".$cat->id."',p.category_id) and p.quantity>0 and p.status='Publish' and u.group='Seller' and u.status='Active' or p.status='Publish' and p.quantity > 0 and p.user_id=0 and FIND_IN_SET('".$cat->id."',p.category_id) order by p.created desc";
@@ -55,6 +56,7 @@ class Product extends MY_Controller {
 		}
 	}
 
+	//called in step1 in the onboarding view at site/user/onboarding
 	public function onboarding_get_products_categories(){
 		$returnCnt = '<div id="onboarding-category-items"><ol class="stream vertical">';
 		$left = $top = $count = 0;
@@ -65,6 +67,10 @@ class Product extends MY_Controller {
 			foreach ($catID as $cat){
 				//				$condition = " where p.category_id like '".$cat.",%' AND p.status = 'Publish' OR p.category_id like '%,".$cat."' AND p.status = 'Publish' OR p.category_id like '%,".$cat.",%' AND p.status = 'Publish' OR p.category_id='".$cat."' AND p.status = 'Publish'";
 				$condition = " where FIND_IN_SET('".$cat."',p.category_id) and p.quantity>0 and p.status='Publish' and u.group='Seller' and u.status='Active' or p.status='Publish' and p.quantity > 0 and p.user_id=0 and FIND_IN_SET('".$cat."',p.category_id) order by p.created desc";
+				//query products from the categories that the user selected
+				//the selected categories are referenced by the category id numbers, ie.  '32' for Pets
+				//return the html to load product images for those categories if there are any
+				//via ajax back to site/user/onboarding
 				$productDetails = $this->product_model->view_product_details($condition);
 				if ($productDetails->num_rows()>0){
 					foreach ($productDetails->result() as $productRow){
@@ -102,6 +108,7 @@ class Product extends MY_Controller {
 													<img height="200" data-height="640" data-width="640" src="'.base_url().'images/product/'.$img.'"/>
 												</span>
 											</a>
+											<!-- the button fancy triggers jquery in onboarding $(button.fancy) -->
 											<a tid="'.$productRow->seller_product_id.'" class="button fancy noedit" href="#"><span><i></i></span>'.LIKE_BUTTON.'</a>
 										</div>
 									</li>
@@ -118,7 +125,10 @@ class Product extends MY_Controller {
 		echo $returnCnt;
 	}
 
+	//called in step2 in the onboarding view at site/user/onboarding
+	//in order to populate html.suggested and html.categories for step3
 	public function onboarding_get_users_follow(){
+		//selected categories that the signup user clicked
 		$catID = explode(',', $this->input->get('categories'));
 		$productArr = array();
 		$userArr = array();
@@ -131,13 +141,19 @@ class Product extends MY_Controller {
 		if (count($catID)>0){
 			foreach ($catID as $cat){
 				//				$condition = " where p.category_id like '".$cat.",%' AND p.status = 'Publish' OR p.category_id like '%,".$cat."' AND p.status = 'Publish' OR p.category_id like '%,".$cat.",%' AND p.status = 'Publish' OR p.category_id='".$cat."' AND p.status = 'Publish'";
+				//filter for products in the category that are being sold, have a quantity greater than 0, and are active and being published.
 				$condition = " where FIND_IN_SET('".$cat."',p.category_id) and p.quantity>0 and p.status='Publish' and u.group='Seller' and u.status='Active' or p.status='Publish' and p.quantity > 0 and p.user_id=0 and FIND_IN_SET('".$cat."',p.category_id)";
 				$productDetails = $this->product_model->view_product_details($condition);
 				if ($productDetails->num_rows()>0){
+					//iterate over products in the categories that the user selected
+					//populate an array of products and an array of sellers for those products
 					foreach ($productDetails->result() as $productRow){
 						if (!in_array($productRow->id, $productArr)){
 							array_push($productArr, $productRow->id);
 							if ($productRow->user_id != ''){
+								//count the products that the seller is listing in the category picked by signup user
+								//if the seller is listing products, add them to the seller array
+								//keep a count for the total number of product matches from the seller
 								if (!in_array($productRow->user_id, $userArr)){
 									array_push($userArr, $productRow->user_id);
 									$userCountArr[$productRow->user_id] = 1;
@@ -150,13 +166,17 @@ class Product extends MY_Controller {
 				}
 			}
 		}
+		//sort by sellers that had the most matches of products
+		//based upon categories chosen by signup user
 		arsort($userCountArr);
 		$limitCount = 0;
 		foreach ($userCountArr as $user_id => $products){
 			if ($user_id!=''){
+				//are they a verified and active seller?
 				$condition = array('id'=>$user_id,'is_verified'=>'Yes','status'=>'Active');
 				$userDetails = $this->product_model->get_all_details(USERS,$condition);
 				if ($userDetails->num_rows()==1){
+					//what products are they publishing?
 					$condition = array('user_id'=>$user_id,'status'=>'Publish');
 					$userProductDetails = $this->product_model->get_all_details(PRODUCT,$condition);
 					if ($limitCount<10){
@@ -164,6 +184,8 @@ class Product extends MY_Controller {
 						if ($userImg == ''){
 							$userImg = 'user-thumb1.png';
 						}
+						//show their information, follower count, product count, and "follow" button
+						//clicking on "follow" button triggers jquery for follow-user-link
 						$returnArr['suggested'] .= '
 							<li><span class="vcard"><img src="'.base_url().'images/users/'.$userImg.'"></span>
 							<b>'.$userDetails->row()->full_name.'</b><br>
@@ -172,6 +194,7 @@ class Product extends MY_Controller {
 							<a uid="'.$user_id.'" class="follow-user-link" href="javascript:void(0)">Follow</a>
 							<span class="category-thum">';
 						$plimit = 0;
+						//add up to 3 pictures of products from this user
 						if ($userProductDetails->num_rows()>0){
 							foreach ($userProductDetails->result() as $userProduct){
 								if ($plimit>3){break;}
@@ -205,7 +228,7 @@ class Product extends MY_Controller {
 
 		/***********************************************************/
 
-		/****************Get Top Users For All Categories**********/
+		/****************Get Top Users (Sellers really) For All Categories**********/
 		$returnArr['categories'] = '';
 		if ($this->data['mainCategories']->num_rows()>0){
 			foreach ($this->data['mainCategories']->result() as $catRow){
@@ -217,11 +240,14 @@ class Product extends MY_Controller {
 					<ul class="suggest-list">';
 					$userCountArr = $this->product_model->get_top_users_in_category($catRow->id);
 					$limitCount = 0;
+					//limits to 10 users (sellers)
 					foreach ($userCountArr as $user_id => $products){
 						if ($user_id!=''){
+							//are they verified and active?
 							$condition = array('id'=>$user_id,'is_verified'=>'Yes','status'=>'Active');
 							$userDetails = $this->product_model->get_all_details(USERS,$condition);
 							if ($userDetails->num_rows()==1){
+								//are they publishing?
 								$condition = array('user_id'=>$user_id,'status'=>'Publish');
 								$userProductDetails = $this->product_model->get_all_details(PRODUCT,$condition);
 								if ($limitCount<10){
@@ -229,6 +255,7 @@ class Product extends MY_Controller {
 									if ($userImg == ''){
 										$userImg = 'user-thumb1.png';
 									}
+									//make a span for the user including picture, name, followers, things, and images of 3 products
 									$returnArr['categories'] .= '
 											<li><span class="vcard"><img src="'.base_url().'images/users/'.$userImg.'"></span>
 											<b>'.$userDetails->row()->full_name.'</b><br>
@@ -237,6 +264,7 @@ class Product extends MY_Controller {
 											<a uid="'.$user_id.'" class="follow-user-link" href="javascript:void(0)">Follow</a>
 											<span class="category-thum">';
 									$plimit = 0;
+									//grab up to 3 product pictures to display
 									if ($userProductDetails->num_rows()>0){
 										foreach ($userProductDetails->result() as $userProduct){
 											if ($plimit>3){break;}
@@ -1179,24 +1207,32 @@ echo curl_error($ch) . '<br/>';*/
 		}
 	}
 
+	//called in views/site/user/onboarding
+	//after user clicks on the button fancy for a product that the "Like"
 	public function add_reaction_tag(){
 		$returnStr['status_code'] = 0;
+		//check user login
 		if ($this->checkLogin('U') == ''){
 			if($this->lang->line('u_must_login') != '')
 			$returnStr['message'] = $this->lang->line('u_must_login');
 			else
 			$returnStr['message'] = 'You must login';
 		}else {
+			//grab the id of the product that was liked
 			$tid = $this->input->post('thing_id');
 			$checkProductLike = $this->user_model->get_all_details(PRODUCT_LIKES,array('product_id'=>$tid,'user_id'=>$this->checkLogin('U')));
+			//if user has not liked before, query the product details for the product
 			if ($checkProductLike->num_rows() == 0){
 				$productDetails = $this->user_model->get_all_details(PRODUCT,array('seller_product_id'=>$tid));
+				//if no product details are found, then query the user's products table for the product_id
 				if ($productDetails->num_rows() == 0){
 					$productDetails = $this->user_model->get_all_details(USER_PRODUCTS,array('seller_product_id'=>$tid));
 					$productTable = USER_PRODUCTS;
 				}else {
 					$productTable = PRODUCT;
 				}
+				//if we have now found the product that was liked
+				//then update the information into the fc_product_likes table
 				if ($productDetails->num_rows()==1){
 					$likes = $productDetails->row()->likes;
 					$dataArr = array('product_id'=>$tid,'user_id'=>$this->checkLogin('U'),'ip'=>$this->input->ip_address());
@@ -1207,13 +1243,16 @@ echo curl_error($ch) . '<br/>';*/
 						'user_id'		=>	$this->checkLogin('U'),
 						'activity_ip'	=>	$this->input->ip_address()
 					);
+					//update the user activity
 					$this->user_model->simple_insert(USER_ACTIVITY,$actArr);
 					$likes++;
 					$dataArr = array('likes'=>$likes);
 					$condition = array('seller_product_id'=>$tid);
+					//update the likes for the product in the product table
 					$this->user_model->update_details($productTable,$dataArr,$condition);
 					$totalUserLikes = $this->data['userDetails']->row()->likes;
 					$totalUserLikes++;
+					//update the total like count for this user
 					$this->user_model->update_details(USERS,array('likes'=>$totalUserLikes),array('id'=>$this->checkLogin('U')));
 					/*
 					 * -------------------------------------------------------
@@ -1236,6 +1275,7 @@ echo curl_error($ch) . '<br/>';*/
 					 }
 					 */
 					$returnStr['status_code'] = 1;
+				//otherwise we did not find the product
 				}else {
 					if($this->lang->line('prod_not_avail') != '')
 					$returnStr['message'] = $this->lang->line('prod_not_avail');

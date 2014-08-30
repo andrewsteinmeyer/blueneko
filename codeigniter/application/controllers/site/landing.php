@@ -10,6 +10,7 @@
 class Landing extends MY_Controller {
 	function __construct(){
 		parent::__construct();
+
 		$this->load->helper(array('cookie','date','form','email'));
 		$this->load->library(array('encrypt','form_validation'));
 		$this->load->model('product_model');
@@ -26,6 +27,9 @@ class Landing extends MY_Controller {
 		}
 		$this->data['mainColorLists'] = $_SESSION['sColorLists'];
 
+		// if logged in
+		// then grab the products that the user has liked
+		// from the fc_liked_products table
 		$this->data['loginCheck'] = $this->checkLogin('U');
 		//		echo $this->session->userdata('fc_session_user_id');die;
 		$this->data['likedProducts'] = array();
@@ -45,8 +49,9 @@ class Landing extends MY_Controller {
 
 		$cat = $this->input->get('c');
 		$whereCond = $qry_str = '';
+		//grab category from input in url if there is one
+		//the dropdown list with "Everything" passes the category as "c" in url
 		if ($cat != ''){
-			//grab category from input in url if there is one
 			$catDetails = $this->product_model->get_all_details(CATEGORY,array('seourl'=>$cat));
 			if ($catDetails->num_rows()==1){
 				$catID = $catDetails->row()->id;
@@ -70,12 +75,22 @@ class Landing extends MY_Controller {
 			$qry_str = '?pg='.$newPage;
 		}
 
+		//set up pagination link and append query string that created above
+		//newPage is the next page number
+		$paginationDisplay  = '<a title="'.$newPage.'" class="btn-more" href="'.base_url().$qry_str.'" style="display: none;">See More Products</a>';
+		$this->data['paginationDisplay'] = $paginationDisplay;
 
 		//get control management info, selling/affiliates/both, home view of compact/grid, popup on/off
+		//this is retrieved from fc_control table
 		$this->data['layoutList'] = $layoutList = $this->product_model->view_controller_details();
+
+		//all products that are selling
 		$totalSellingProducts = $this->product_model->get_total_records(PRODUCT);
+		//just products that this user is selling??
 		$totalAffilProducts = $this->product_model->get_total_records(USER_PRODUCTS);
+		//the sum of the two groups
 		$this->data['totalProducts'] = $totalAffilProducts->row()->total+$totalSellingProducts->row()->total;
+		//product_control setting in fc_control table
 		if($layoutList->row()->product_control == 'affiliates'){
 			$sellingProductDetails = array();
 		}else {
@@ -86,10 +101,9 @@ class Landing extends MY_Controller {
 		}else {
 			$affiliateProductDetails = $this->product_model->view_notsell_product_details(" where p.status='Publish' and u.status='Active' ".$whereCond." or p.status='Publish' and p.user_id=0 ".$whereCond." order by p.created desc limit ".$limitPaging);
 		}
-		$this->data['productDetails'] = $this->product_model->get_sorted_array($sellingProductDetails,$affiliateProductDetails,'created','desc');
 
-		$paginationDisplay  = '<a title="'.$newPage.'" class="btn-more" href="'.base_url().$qry_str.'" style="display: none;">See More Products</a>';
-		$this->data['paginationDisplay'] = $paginationDisplay;
+		//populate $productDetails for landing.php page
+		$this->data['productDetails'] = $this->product_model->get_sorted_array($sellingProductDetails,$affiliateProductDetails,'created','desc');
 
 		$this->load->view('site/landing/landing',$this->data);
 	}

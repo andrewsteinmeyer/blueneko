@@ -2046,7 +2046,7 @@ jQuery(function($){
 		}
 	);
 
-	// {{{ dialog for uploading files to add to Fancy
+	// dialog for uploading files to add to Fancy
 	(function(){
 		var dlg_drop=$.dialog('drop-to-upload'), dlg_add=$.dialog('add-fancy'), $_drag_objs=$();
 

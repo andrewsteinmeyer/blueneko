@@ -182,6 +182,7 @@ if($loginCheck != ''){
             </li>
              <li class="gnb"><a class="mn-stores" href="stores"><?php if($this->lang->line('stores') != '') { echo stripslashes($this->lang->line('stores')); } else echo "Stores";?></a></li>
             <?php if ($loginCheck != ''){?>
+            <!-- show Add button if logged in, otherwise show Sign up button -->
             <li class="gnb"><a href="add" class="mn-add"><?php if($this->lang->line('header_add') != '') { echo stripslashes($this->lang->line('header_add')); } else echo "Add"; ?></a></li>
             <?php }?>
             <?php
@@ -227,6 +228,7 @@ if($loginCheck != ''){
           </ul>
         </div>
         <div class="right">
+<!-- if not logged in, Sign in button, otherwise notification button -->
 <?php if ($loginCheck == ''){?>
   <ul class="gnb-wrap">
 	<li class="gnb"><a href="login" class="mn-signin"><?php if($this->lang->line('signup_sign_in') != '') { echo stripslashes($this->lang->line('signup_sign_in')); } else echo "Sign in"; ?></a></li>
@@ -252,6 +254,7 @@ if($loginCheck != ''){
     </li>
 
 </ul>
+<!-- if logged in show notifications and MiniCartView -->
 <?php }else{ ?>
 <div id="MiniCartViewDisp" style="float:left;">
 <ul class="gnb-wrap">
@@ -281,8 +284,10 @@ if($loginCheck != ''){
 		</div>
 	</li>
 </ul>
+<!-- display MiniCartView -->
 <?php echo $MiniCartViewSet; ?>
 </div>
+<!-- display User dropdown -->
  <?php } ?>
 
           <?php if ($loginCheck != ''){

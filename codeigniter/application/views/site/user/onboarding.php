@@ -15,9 +15,11 @@
 		<p><b><?php if($this->lang->line('onboarding_welcome') != '') { echo stripslashes($this->lang->line('onboarding_welcome')); } else echo "Welcome"; ?>, <?php echo $userDetails->row()->full_name;?>.</b>
 		<?php if($this->lang->line('onboarding_get_started') != '') { echo stripslashes($this->lang->line('onboarding_get_started')); } else echo "Get started with "; ?> <?php echo $siteTitle;?> <?php if($this->lang->line('onboarding_few_seco') != '') { echo stripslashes($this->lang->line('onboarding_few_seco')); } else echo "within a few seconds"; ?>.</p>
 		<p><span class="bg"></span>
+    <!-- click the btn-start to fire off jquery -->
 		<button class="btns-blue-embo btn-start"><?php if($this->lang->line('onboarding_get_stat') != '') { echo stripslashes($this->lang->line('onboarding_get_stat')); } else echo "Get Started"; ?></button></p>
 	</div>
 
+  <!-- step1 user picks what categories they like -->
 	<div class="step step1" style="display:none">
 		<p class="tit"><b><?php echo $userDetails->row()->full_name;?>, <?php if($this->lang->line('onboarding_what_love') != '') { echo stripslashes($this->lang->line('onboarding_what_love')); } else echo "tell us what you love"; ?></b><br>
 		<?php if($this->lang->line('onboarding_select_one') != '') { echo stripslashes($this->lang->line('onboarding_select_one')); } else echo "Select at least one category to get started"; ?>.</p>
@@ -40,6 +42,9 @@
                       		$topPos = floor($count/2);
                       		$topVal = $topPos*$height;
                       		$count++;
+                          //log numbers to console
+                          //$data = 'leftPos: ' . $leftPos . ',leftVal: ' . $leftVal . ', topPos:' . $topPos . ', topVal:' . $topVal . ', count: ' . $count;
+                          //echo("<script>console.log('PHP: ".$data."');</script>");
                       ?>
                     <li style="left: <?php echo $leftVal;?>px; width: 340px; top: <?php echo $topVal;?>px; position: absolute;">
                     <a value="<?php echo $row->id;?>" href="#"><b><?php echo $row->cat_name;?></b>
@@ -85,7 +90,7 @@
 		</div>
 	</div>
 
-
+    <!-- step2 user can "like" products in the categories they chose in step1 -->
     <div style="display:none" class="step step2">
 		<p class="tit" style="box-shadow: none; border-color: rgb(235, 236, 239);"><b><?php echo LIKE_BUTTON;?> <?php if($this->lang->line('onboarding_thinks_like') != '') { echo stripslashes($this->lang->line('onboarding_thinks_like')); } else echo "the things you like"; ?></b><br>
 		<?php echo LIKE_BUTTON;?> <?php if($this->lang->line('onboarding_person_catalog') != '') { echo stripslashes($this->lang->line('onboarding_person_catalog')); } else echo "a few things to save them to your personal catalog"; ?>.</p>
@@ -108,35 +113,35 @@
 		</div>
 	</div>
 
+  <!-- step3 recommended sellers are loaded based on selected categories and user can choose to follow them -->
 	<div style="display:none;" class="step step3">
 		<p class="tit"><b><?php if($this->lang->line('onboarding_follow') != '') { echo stripslashes($this->lang->line('onboarding_follow')); } else echo "Follow"; ?> <?php echo $siteTitle;?> <?php if($this->lang->line('onboarding_people') != '') { echo stripslashes($this->lang->line('onboarding_people')); } else echo "people"; ?></b><br>
 		<?php if($this->lang->line('onboarding_discover') != '') { echo stripslashes($this->lang->line('onboarding_discover')); } else echo "Follow a few top contributors to discover great things"; ?>.</p>
 		<div class="txt">
 			<div class="follow-cate">
 				<ul>
-                    <li>
-                        <a cname="suggested" class="selected category" href="javascript:void(0)"><?php if($this->lang->line('onboarding_suggested') != '') { echo stripslashes($this->lang->line('onboarding_suggested')); } else echo "Suggested for you"; ?></a>
-                    </li>
-                    <li>
-                    <?php if ($mainCategories->num_rows()>0){?>
-                        <span><?php if($this->lang->line('onboarding_category') != '') { echo stripslashes($this->lang->line('onboarding_category')); } else echo "Find by category"; ?></span>
-                    </li>
-                            <?php
-                            foreach ($mainCategories->result() as $catRow){
-                            	if ($catRow->cat_name != ''){
-                            ?>
-
-                            <li><a href="javascript:void(0)" cname="<?php echo url_title($catRow->cat_name,'_',TRUE);?>" class="category"><?php echo $catRow->cat_name;?></a></li>
-
-                            <?php
-                            	}
-                            }
-                            ?>
-
-
-                       <?php }?>
-                    </li>
-                </ul>
+            <li>
+              <!-- load link "Suggestions for you" -->
+              <a cname="suggested" class="selected category" href="javascript:void(0)"><?php if($this->lang->line('onboarding_suggested') != '') { echo stripslashes($this->lang->line('onboarding_suggested')); } else echo "Suggested for you"; ?></a>
+            </li>
+            <li>
+              <!-- load categories so user can select from list -->
+              <?php if ($mainCategories->num_rows()>0){?>
+                <span><?php if($this->lang->line('onboarding_category') != '') { echo stripslashes($this->lang->line('onboarding_category')); } else echo "Find by category"; ?></span>
+                </li>
+                <?php
+                  foreach ($mainCategories->result() as $catRow){
+                    if ($catRow->cat_name != ''){
+                      ?>
+                      <li><a href="javascript:void(0)" cname="<?php echo url_title($catRow->cat_name,'_',TRUE);?>" class="category"><?php echo $catRow->cat_name;?></a></li>
+                      <?php
+                    }
+                  }
+                ?>
+                <?php
+              }?>
+            </li>
+        </ul>
 			</div>
 			<div class="scroll">
 			<div class="intxt suggested">
@@ -152,6 +157,7 @@
 <!--	 		<button class="btns-blue-embo btn-close"><?php if($this->lang->line('onboarding_finish') != '') { echo stripslashes($this->lang->line('onboarding_finish')); } else echo "Finish"; ?></button>
 	-->	</div>
 	</div>
+  <!-- step4 invite friends through facebook, twitter, and gmail -->
 	<div style="display:none" class="step step4">
 
 		<p class="tit"><b> <?php if($this->lang->line('onboarding_invite_friends') != '') { echo $this->lang->line('onboarding_invite_friends'); } else echo "Invite friends to ";
@@ -159,6 +165,7 @@
 		if($this->lang->line('invite_friends_tag') != '') { echo $this->lang->line('invite_friends_tag'); } else echo "Search services you use to invite friends to"; ?> <?php echo " ".$siteTitle;?>.</p>
 		<div class="txt"><div class="scroll">
 			<div class="intxt">
+        <!-- Facebook invite friends -->
 				<dl class="sns-people">
 					<dt><i class="ic-fb"></i> <span><b><?php if($this->lang->line('signup_facebook') != '') { echo stripslashes($this->lang->line('signup_facebook')); } else echo "Facebook"; ?></b></span>
 					<button class="close"><span class="tooltip"><small><b></b><?php if($this->lang->line('onboarding_close') != '') { echo stripslashes($this->lang->line('onboarding_close')); } else echo "Close"; ?></small></span></button>
@@ -174,6 +181,7 @@
                         <div class="loader" style="display: none;"></div>
 					</dd>
 				</dl>
+        <!-- Twitter invite friends -->
 				<dl class="sns-people">
 					<dt><i class="ic-tw"></i> <span><b><?php if($this->lang->line('signup_twitter') != '') { echo stripslashes($this->lang->line('signup_twitter')); } else echo "Twitter"; ?></b></span>
 					<button class="close"><span class="tooltip"><small><b></b><?php if($this->lang->line('onboarding_close') != '') { echo stripslashes($this->lang->line('onboarding_close')); } else echo "Close"; ?></small></span></button>
@@ -205,6 +213,7 @@
                         <div class="loader" style="display: none;"></div>
 					</dd>
 				</dl>
+          <!-- Gmail invite friends -->
  --> 				<dl class="sns-people">
 					<dt><b><i class="ic-gm"></i> <span><b><?php if($this->lang->line('onboarding_gmail') != '') { echo stripslashes($this->lang->line('onboarding_gmail')); } else echo "Gmail"; ?></b></span></b>
 					<button class="close"><span class="tooltip"><small><b></b><?php if($this->lang->line('onboarding_close') != '') { echo stripslashes($this->lang->line('onboarding_close')); } else echo "Close"; ?></small></span></button>
@@ -225,6 +234,7 @@
 						<?php echo " ".$siteTitle;?>.</p>
 			</div>
 		</div></div>
+    <!-- Finish button calls jquery on btn-close to redirect to main page -->
 		<div class="btn-area">
 			<button class="btns-blue-embo btn-close"><?php if($this->lang->line('onboarding_finish') != '') { echo stripslashes($this->lang->line('onboarding_finish')); } else echo "Finish"; ?></button>
 		</div>
@@ -237,7 +247,7 @@
 
 
 <!-- Section_start -->
-<!-- load a bunch of libraries that header.php already loads, redundant -->
+<!-- load a bunch of libraries that header.php already loads, redundant and sloppy-->
 <script src="js/site/<?php echo SITE_COMMON_DEFINE;?>filescatalog.js" type="text/javascript"></script>
 <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
 <script src="js/site/<?php echo SITE_COMMON_DEFINE;?>filesjquery-ui-1.js" type="text/javascript"></script>
@@ -277,6 +287,7 @@
 		});
 	});
 
+  //clicked on the index div to get things rolling
   //action when clicking "Getting Started" button
 	$('.popup.onboarding .btn-start').click(function(){
     //hide the index page that greets you at onboarding
@@ -285,8 +296,10 @@
 		$('.popup.onboarding .step1').show();
 		$('.category-list').find('li:even').css('left','0').end().find('li:odd').css('left','340px').end();
 		$('.category-list li').each(function(){$(this).width(340).css('top',( Math.floor($(this).index()/2)*136)+'px').css('position','absolute');});
+    //add shadow if intxt div is above 565
 		if ($('.popup.onboarding .step1 .intxt').height()>565) {$('.popup.onboarding .step1 .btn-area').css('box-shadow','0 -2px 0 rgba(235,236,239,0.3)')}
 
+    //some type of tracking cookie
 		var click_id = $.cookie.get('ck_secco_clickid');
 		if (click_id != null) {
 			var tag = $("<img/>")
@@ -306,12 +319,20 @@
 		}
 	});
 
+  //btn-next is attached to "Next" button that goes through steps when clicked
 	$('.onboarding .step .btn-next').click(function(){
+    //hide the current step, which is the parent of the button
 		$(this).parents('.step').hide();
+    //parent of the button is the div class with step as part of the class
+    //check which step we are on and then show the next step
 		if ($(this).parents('.step').hasClass('step1')==true) {var nextStep = '.popup.onboarding .step2';}
 		if ($(this).parents('.step').hasClass('step2')==true) {var nextStep = '.popup.onboarding .step3';}
 		if ($(this).parents('.step').hasClass('step3')==true) {var nextStep = '.popup.onboarding .step4';}
 		$(nextStep).show();
+
+    //step1:
+    //collect the selected product categories
+    //query for these categories with ajax and load the products into the stream
 		if ($(this).parents('.step').hasClass('step1')==true) {
             var selectedCategories = new Array();
             $('.category-list li a').each(function(){
@@ -319,12 +340,16 @@
                     selectedCategories.push($(this).attr('value'));
                 }
             });
+
             $.ajax({
+              //calls onboarding_get_products_categories in controller/site/product
+              //load the categories into the timeline for step2
                 url: baseURL+"site/product/onboarding_get_products_categories",
                 data: { categories: selectedCategories.join() },
                 cache: false
             }).done(function( html ) {
 //                alert(html);
+                //load products for step2 based upon categories chosen in step1
                 $('.popup.onboarding .step2 .intxt.timeline').html(html);
                 $('.popup.onboarding .step2 .loading').hide();
 /*                $.infiniteshow({
@@ -336,14 +361,20 @@
 
                 // show images as each image is loaded
                 $stream.on('itemloaded', function(){
+                    //find latest list element that has an id of 'stream-latest-item'
                     var $latest = $stream.find('#'+latest_id), $target, viewMode;
 
+                    //removes the 'stream-latest-item' id from the current latest
+                    //puts it on the last item in the list
                     $target = $latest.length ? $latest.nextAll('li') : $stream.find('>li');
                     if($target.length) {
                         $latest.removeAttr('id');
                         $target.eq(-1).attr('id', latest_id);
                     }
 
+                    //vertical is already returned on class via ajax returned from the product controller
+                    //in onboarding_get_products_categories() line 61
+                    //not sure if this is ever grid
                     viewMode = $wrapper.hasClass('vertical') ? 'vertical' : 'grid';
 
                     $target.each(function(i,v,a){
@@ -355,8 +386,14 @@
                             if(src = $li.find('.figure').css('background-image').match(/http:\/\/.+\.(?:jpe?g|png|gif)/i)) src = src[0];
                         }
 
+                        //doing something here with the image for the product
+                        //need to research this more
                         if(src) {
+                            //image class from tiny_mce plugin ajaxfilemanager
                             img = new Image();
+                            //add class 'hide' to pre span
+                            //hide is already on the class that is returned via ajax
+                            //from product controller in onboarding_get_products_categories() line 103
                             img.onload = function(){ $li.find('>.pre').addClass('hide') };
                             img.src = src;
                         }
@@ -368,7 +405,13 @@
                 setView('vertical');
 
                 function setView(mode){
+                    //set to vertical above when called in line 387
+                    //class is already vertical from code returned via ajax call to onboarding_get_products_categories()
+                    //automatically returns here wtf, is the code below ever used?
+                    //he defines setView in other .php files also, maybe this was copied in and he didnt' realize it just returns
+                    //could possibly be calling a method when we don't need to check this at all
                     if($wrapper.hasClass(mode)) return;
+
                     if(!window.Modernizr || !Modernizr.csstransitions) return switchTo(mode);
 
                     $wrapper.addClass('anim');
@@ -536,6 +579,10 @@
                 };
             });
         }
+    //step2:
+    //query the selected categories with ajax to the product controller
+    //find sellers to follow based upon the categories the user selected
+    //return the html.suggested and populate
 		if ($(this).parents('.step').hasClass('step2')==true) {
             var selectedCategories = new Array();
             $('.category-list li a').each(function(){
@@ -549,12 +596,19 @@
                 cache: false,
                 dataType: 'json'
             }).done(function( html ) {
+                //load the suggested sellers to follow based upon categories user selected
                 $('.popup.onboarding .step3 .intxt.suggested').append(html.suggested);
+                //load the list of categories
+                //selected category in the list will show sellers for that category
+                //the signup user can shoose to follow each seller or follow all
                 $('.popup.onboarding .step3 .scroll').append(html.categories);
             });
 		}
 		if ($(nextStep).find('.intxt').height()>$(nextStep).find('scroll').height()) {$(nextStep).find('.btn-area').css('box-shadow','0 -2px 0px 0px rgba(0,0,0,0.07);').css('border-color','#cdcecf');}
 	});
+    //step3:
+    //add 'selected' to class of clicked category
+    //remove 'selected' from all other categories
     $('.onboarding .step3 .category').click(function() {
         $('.onboarding .step3 .category').each(function() {
             $(this).removeClass("selected");
@@ -564,6 +618,9 @@
         $('.step3 .intxt').hide();
         $('.step3 .intxt.'+cname).show();
     });
+    //step3:
+    //click to follow or unfollow sellers that interest you
+    //uses ajax call to hit delete_follow and add_follow in the user controllers/site/user.php
     $('.onboarding .step3').delegate('a.follow-user-link', 'click', function() {
         var uid = $(this).attr('uid');
         var param = {};
@@ -587,9 +644,14 @@
                 }, "json");
         }
     });
+    //step3:
+    //click to follow or unfollow ALL users that are selling products
     $('.onboarding .step3').delegate('button.btn-followall', 'click', function() {
         var user_ids = new Array();
+        //find all of the follow buttons that were populated from site/product/onboarding_get_users_follow earlier in step2
         var $followBtns = $(this).closest('div.intxt').find('ul.suggest-list a.follow-user-link');
+        //iterate over the follow buttons
+        //add those to an array and post to /site/user/add_follows, passing in the list of users to follow
         $followBtns.each(function(){
             user_ids.push($(this).attr('uid'));
         });
@@ -598,6 +660,7 @@
         $.post(baseURL+"site/user/add_follows",param,
                 function(json){
                     if (json.status_code==1) {
+                      //add the following class to all of the users after ajax call successful
                         $followBtns.each(function(){
                             $(this).text(gettext('Following'));
                             $(this).addClass('following');
@@ -605,18 +668,26 @@
                     }
                 }, "json");
     });
+  //setting css based on where scrollbar is currently
+  //scroll class is put on each of the 4 steps above
 	$('.popup .scroll').scroll(function(){
 		if ($(this).scrollTop()>$(this).find('.intxt').height()-$(this).height()-1) {$(this).parents('.step').find('.btn-area').css('box-shadow','none').css('border-color','#ebecef');
 		}else{$(this).parents('.step').find('.btn-area').css('box-shadow','0 -2px 0 rgba(0,0,0,0.07)').css('border-color','#cdcecf');;}
 		if ($(this).scrollTop()==0) { $(this).parents('.step').find('.tit').css('box-shadow','none').css('border-color','#ebecef');
 		}else{$(this).parents('.step').find('.tit').css('box-shadow','0 2px 0px 0px rgba(0,0,0,0.07)').css('border-color','#cdcecf');}
 	});
+  //step4:
+  //after clicking on finish, redirect to the main url page
 	$('.popup.onboarding .step4 .btn-close').click(function(){
 	    location.href = baseURL;
 	});
 /*	$('.popup.onboarding .step3 .btn-close').click(function(){
 	    location.href = baseURL;
 	});
+    //step2: toggle on like
+    //triggered when user clicks the like button on product images
+    //products are populated based upon the categories that the user selected in step1
+    //increments like count on the product and the total like counts for the user
 */	$('.popup.onboarding').delegate('.button.fancy', 'click', function(event){
 		var $this = $(this);
 		var tid  = $this.attr('tid') || null;
@@ -633,6 +704,7 @@
                 success : function(json){
                     $this.removeClass('loading');
 
+                    //if request was successful then proceed
                     if(json.status_code != 1) return;
 
                     $this
@@ -647,6 +719,9 @@
             });
         }
 	});
+    //step2: toggle off like
+    //triggered when user clicks the "Like'd" button to undo the "Like"
+    //decrements the like count on the product and the total likes for the user
     $('.popup.onboarding').delegate('.button.fancyd', 'click', function(event){
 		var $this = $(this);
 		var tid  = $this.attr('tid') || null;
@@ -672,11 +747,17 @@
 			});
         }
 	});
+    //step4:
+    //when clicks on close button
+    //hide the close button, remove 'none' from the dt container, and show the "invite friends" button
+    //hide the dd "follow" and dd "invite"
     $('.popup.onboarding .sns-people').each(function(){
 		$(this).find('dt .close').click(function(){
 			$(this).hide().parents('dt').removeClass('none').find('.btns-gray-embo').show().end().end().parents('.sns-people').find('dd').hide();
 		});
 	});
+    //step4: invite users from social media
+    //jquery when user clicks on "Invite Friends" button for Twitter
     $('.popup.onboarding button.twitter').click(function() {
 //        var loc = location.protocol+"//"+location.host;
 		var loc = baseURL;
@@ -719,7 +800,8 @@
 			'json'
 		);
     });
-
+    //step4: invite users from social media
+    //jquery when user clicks on "Invite Friends" button for Facebook
     $('.popup.onboarding button.facebook').click(function() {
     	FB.ui({
     	    method: 'apprequests',
@@ -759,6 +841,8 @@
             }
         }, {scope:'offline_access,email,publish_stream,publish_actions'});
 */    });
+    //step4: invite users from social media
+    //jquery when user clicks on "Invite Friends" button for Gmail
     $('.popup.onboarding button.gmail').click(function() {
         var loc = location.protocol+'//'+location.host;
        var param = {'location':loc};
@@ -814,10 +898,13 @@
 			'xml'*/
 		);
     });
+    //step4:
+    //need to research more
     $('.popup.onboarding .sns-people dd.follow a.invite').click(function() {
         var $followPanel = $(this).parents('dd.follow');
         var $invitePanel = $(this).parents('dl.sns-people').find('dd.invite');
 
+        //close follow panel and open invite panel
         $followPanel.hide();
         $invitePanel.show();
         if($invitePanel.find('div.container').children().length == 0) {
@@ -981,16 +1068,18 @@
             }, "json");
         }
     }
+    //load on window ready when browser loads page
     $(window).ready(function(){
       //if height is greater than 720
       //think this is for checking if webpage or phone/tablet but not sure yet
-		if ($(window).height()>720) {
-			$('.popup.onboarding').css('margin',($(window).height()-720)/2+'px auto').show();
-		}else{
-			$('.popup.onboarding .txt').height($(window).height()-165);
-			$('.popup.onboarding .index').css('padding',($(window).height()-529)/2+'px 0');
-			$('.popup.onboarding').css('margin-top','5px').show();
-		}
+      //adjust the onboarding popup based upon window size
+    		if ($(window).height()>720) {
+    			$('.popup.onboarding').css('margin',($(window).height()-720)/2+'px auto').show();
+    		}else{
+    			$('.popup.onboarding .txt').height($(window).height()-165);
+    			$('.popup.onboarding .index').css('padding',($(window).height()-529)/2+'px 0');
+    			$('.popup.onboarding').css('margin-top','5px').show();
+    		}
 
         var param = $.jStorage.get('fancy_add_to_cart', null);
         if (param && param['thing_id']) {
@@ -1029,6 +1118,9 @@
         }
         initialize_gplus();
 	});
+
+  //resizing here and in $(window).ready function above
+  //this seems redundant and unnecessary?
 	$(window).resize(function(){
 		if ($(window).height()>720) {
 			$('.popup.onboarding').css('margin',($(window).height()-720)/2+'px auto').show();

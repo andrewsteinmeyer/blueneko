@@ -1,7 +1,10 @@
 jQuery(function($) {
 	var code = null;
 	var $btns = $('.viewer li'), $stream = $('ol.stream'), $container=$('.container'), $wrapper = $('.wrapper-content'), first_id = 'stream-first-item_', latest_id = 'stream-latest-item_';
-	
+
+	//called in landing.php line 125
+	//toggles this category in list as "active"
+	//updates dropdown button with current category
 	$('.sorting .category a').click(function(){
 		var $this = $(this), url = $this.data('category'), text = $this.text();
 		if(url) loadPage(url,true);
@@ -10,7 +13,7 @@ jQuery(function($) {
 		$this.addClass('active');
 		$('.sorting .category').hide();
 	});
-	
+
 
 	$.infiniteshow({itemSelector:'#content .stream > li'});
 
@@ -27,14 +30,14 @@ jQuery(function($) {
 			maxDelay = 0,
 			begin    = Date.now();
 		$('#infscr-loading').show();
-		
-		
-		
+
+
+
 		function arrange(force_refresh){
 			var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH;
 
 			var ts = new Date().getTime();
-			
+
 			$marker = $stream.find('li.page_marker_');
 
 			if(force_refresh || !$marker.length) {
@@ -50,14 +53,14 @@ jQuery(function($) {
 			$first = $target.eq(0);
 			$target.eq(-1).addClass('page_marker_');
 			$marker.removeClass('page_marker_');
-				
+
 			//ITEM_WIDTH  = parseInt($first.width());
 			//COL_COUNT   = Math.floor($stream.width()/ITEM_WIDTH);
 			ITEM_WIDTH = 230;
 			COL_COUNT = 4;
-			
+
 			for(i=0,c=$target.length; i < c; i++){
-				min = Math.min.apply(Math, bottoms);			
+				min = Math.min.apply(Math, bottoms);
 
 				for(x=0; x < COL_COUNT; x++) if(bottoms[x] == min) break;
 
@@ -81,16 +84,16 @@ jQuery(function($) {
 				$li.css({top:bottoms[x], left:x*ITEM_WIDTH})
 				bottoms[x] = bottoms[x] + nh + 20;
 			}
-			
-			$stream.height(Math.max.apply(Math, bottoms));	
-			
+
+			$stream.height(Math.max.apply(Math, bottoms));
+
 		};
 		function setView(mode, force){
 			if(!force && $container.hasClass(mode)) return;
 			var $items = $stream.find('>li');
 
 			if($items.length>100){
-				$items.filter(":eq(100)").nextAll().detach();			
+				$items.filter(":eq(100)").nextAll().detach();
 			}
 
 			if(!window.Modernizr || !Modernizr.csstransitions ){
@@ -98,30 +101,30 @@ jQuery(function($) {
 				$wrapper.trigger('before-fadeout');
 				$stream.removeClass('loading');
 				$wrapper.trigger('before-fadein');
-				switchTo(mode);	
+				switchTo(mode);
 
 				if(mode=='normal'){
 					$items.each(function(i,v,a){
 						var $li = $(this);
 						var $grid_img = $li.find(".figure.grid");
-						
+
 						if($li.height()>400){
-							$grid_img.css("background-image", "url("+$grid_img.attr("data-ori-url")+")");					
+							$grid_img.css("background-image", "url("+$grid_img.attr("data-ori-url")+")");
 						}else{
 							$grid_img.css("background-image", "url("+$grid_img.attr("data-310-url")+")");
 						}
 					});
 				}
-				
+
 				$stream.find('>li').css('opacity',1);
 				$wrapper.trigger('after-fadein');
 				return;
-			} 
+			}
 
 			$wrapper.trigger('before-fadeout').addClass('anim');
 			$stream.addClass('loading');
 			var item,
-			    $visibles, visibles = [], prevVisibles, thefirst, 
+			    $visibles, visibles = [], prevVisibles, thefirst,
 			    offsetTop = $stream.offset().top,
 			    hh = $('#header-new').height(),
 			    sc = $(window).scrollTop(),
@@ -146,7 +149,7 @@ jQuery(function($) {
 			// get the first animated element
 			for(i=0,c=Math.min(visibles.length,10),thefirst=null; i < c; i++){
 				v = visibles[i];
-				
+
 				if( !thefirst || (thefirst.offsetLeft > v.offsetLeft) || (thefirst.offsetLeft == v.offsetLeft && thefirst.offsetTop > v.offsetTop) ) {
 					thefirst = v;
 				}
@@ -174,19 +177,19 @@ jQuery(function($) {
 				}
 
 				var i, c, v, thefirst, COL_COUNT, visibles = [], item;
-				
+
 				if($items.length !== $stream.get(0).childNodes.length || $items.get(0).parentNode !== $stream.get(0)) $items = $stream.find('>li');
 				$stream.height($stream.parent().height());
-				
+
 				switchTo(mode);
 
 				if(mode=='normal'){
 					$items.each(function(i,v,a){
 						var $li = $(this);
 						var $grid_img = $li.find(".figure.grid");
-						
+
 						if($li.height()>400){
-							$grid_img.css("background-image", "url("+$grid_img.attr("data-ori-url")+")");					
+							$grid_img.css("background-image", "url("+$grid_img.attr("data-ori-url")+")");
 						}else{
 							$grid_img.css("background-image", "url("+$grid_img.attr("data-310-url")+")");
 						}
@@ -209,7 +212,7 @@ jQuery(function($) {
 						item.style.opacity = 0;
 					}
 				}
-				
+
 				$wrapper.addClass('anim');
 
 				$(visibles).css({opacity:0,visibility:''});
@@ -218,7 +221,7 @@ jQuery(function($) {
 				// get the first animated element
 				for(i=0,c=Math.min(visibles.length,COL_COUNT),thefirst=null; i < c; i++){
 					v = visibles[i];
-					
+
 					if( !thefirst || (thefirst.offsetLeft > v.offsetLeft) || (thefirst.offsetLeft == v.offsetLeft && thefirst.offsetTop > v.offsetTop) ) {
 						thefirst = v;
 					}
@@ -246,12 +249,12 @@ jQuery(function($) {
 			$stream.find('>li').css('opacity',1);
 				$wrapper.trigger('after-fadein');
 			};
-			
+
 			function delayOpacity(element, opacity, interval){
 				setTimeout(function(){ element.style.opacity = opacity }, Math.floor(interval));
 			};
 
-			
+
 			function switchTo(mode){
 				var currentMode = $container.hasClass('vertical')?'vertical':($container.hasClass('classic')?'classic':'normal')
 				$container.removeClass('vertical normal classic').addClass(mode);
@@ -267,8 +270,8 @@ jQuery(function($) {
 			};
 
 		};
-		
-		
+
+
 /*		if(useCSS3){
 			$stream.addClass('use-css3').removeClass('fadein');
 
@@ -294,7 +297,7 @@ jQuery(function($) {
 			url  : url,
 			dataType : 'html',
 			success  : function(html){
-				
+
 				var $html = $($.trim(html)),
 				    $more = $('.pagination > a'),
 				    $new_more = $html.find('.pagination > a');
@@ -313,22 +316,22 @@ jQuery(function($) {
 					}
 
 					$stream.addClass('fadein').html( $html.find('#content > ol.stream').html() );
-/*					
+/*
 					if(useCSS3){
 						$win.scrollTop(scTop);
 						scTop = $win.scrollTop();
 						stTop = $stream.offset().top;
-						
+
 						firstTop = -1;
 						$stream.find('>li').each(function(i,v){
 							if(!inViewport(v)) return;
 							if(firstTop < 0) firstTop = v.offsetTop;
-							
+
 							var delay = Math.round(Math.sqrt(Math.pow(v.offsetTop - firstTop, 2)+Math.pow(v.offsetLeft, 2)));
-							
+
 							v.className += ' anim';
 							setTimeout(function(){ v.className += ' fadein'; }, delay+10);
-							
+
 							if(delay > maxDelay) maxDelay = delay;
 						});
 
@@ -405,5 +408,5 @@ jQuery(function($) {
 	if(window.history && history.pushState){
 		history.pushState({url:location.href}, document.title, location.href);
 	}
-	
+
 });

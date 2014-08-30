@@ -13,6 +13,7 @@
 <!--[if lt IE 9]>
 <script src="js/site/html5shiv/dist/html5shiv.js"></script>
 <![endif]-->
+<!-- many of the same scripts also loaded in onboarding.php later, seems redundant -->
 <script src="js/site/<?php echo SITE_COMMON_DEFINE ?>filescatalog.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/site/jquery-1.9.0.min.js"></script>
 <script src="js/site/jquery-1.7.1.min.js" type="text/javascript"></script>
@@ -33,17 +34,17 @@ function open_win(){
 /*
  * Language Settings
  */
-<?php if ($this->lang->line('shipping_add_ship')!=''){?> 
+<?php if ($this->lang->line('shipping_add_ship')!=''){?>
 var lg_add_ship_addr = '<?php echo $this->lang->line('shipping_add_ship');?>';
 <?php }else {?>
 var lg_add_ship_addr = 'Add Shipping Address';
 <?php }?>
-<?php if ($this->lang->line('header_new_ship')!=''){?> 
+<?php if ($this->lang->line('header_new_ship')!=''){?>
 var lg_new_ship_addr = '<?php echo $this->lang->line('header_new_ship');?>';
 <?php }else {?>
 var lg_new_ship_addr = 'New Shipping Address';
 <?php }?>
-<?php if ($this->lang->line('header_ships_wide')!=''){?> 
+<?php if ($this->lang->line('header_ships_wide')!=''){?>
 var lg_ships_wide = '<?php echo $this->lang->line('header_ships_wide');?>';
 <?php }else {?>
 var lg_ships_wide = 'We ships worldwide with global delivery services.';

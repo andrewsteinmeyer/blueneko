@@ -126,6 +126,7 @@ class Twconnect extends TwitterOAuth {
 
 		// echo 'Get temporary credentials.';
 		$request_token = $this->getRequestToken(site_url($site_callback_path));
+		//local variable token is set but not used in this function - Andrew
 		$token = $request_token['oauth_token'];
 		$ci =& get_instance();
 

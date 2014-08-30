@@ -29,23 +29,24 @@ class Product_model extends My_Model
 
 	public function view_product($condition=''){
 		return $this->db->get_where(PRODUCT,$condition);
-			
+
 	}
 
 	public function view_affliated($condition=''){
 		return $this->db->get_where(USER_PRODUCTS,$condition);
-			
+
 	}
 
 
 	public function view_product_details($condition = ''){
+		//view all products and sellers of those products
 		$select_qry = "select p.*,u.full_name,u.user_name,sh.short_url,u.email as selleremail,u.id as sellerid,u.thumbnail,u.feature_product from ".PRODUCT." p
-		LEFT JOIN ".USERS." u on (u.id=p.user_id) 
+		LEFT JOIN ".USERS." u on (u.id=p.user_id)
 		LEFT JOIN ".SHORTURL." sh on (sh.id=p.short_url_id)
 		".$condition;
 		$productList = $this->ExecuteQuery($select_qry);
 		return $productList;
-			
+
 	}
 
 	public function view_follow_list($id=''){
@@ -53,7 +54,7 @@ class Product_model extends My_Model
 		$getfollow = $this->db->query("SELECT ".LISTS_DETAILS.".*, ".USERS.".`user_name` as pname FROM ".LISTS_DETAILS." JOIN ".USERS." ON ".USERS.".`id` = ".LISTS_DETAILS.".`user_id` WHERE  FIND_IN_SET($id,".LISTS_DETAILS.".followers)");
 
 		return $getfollow;
-			
+
 	}
 
 
@@ -64,7 +65,7 @@ class Product_model extends My_Model
 		LEFT JOIN ".CATEGORY." c on (c.id=p.category_id) where p.id=".$condition." and p.status='Active'";
 		$productList = $this->ExecuteQuery($select_qry);
 		return $productList;
-			
+
 	}
 
 	public function product_feedback_view($seller_id){
@@ -158,12 +159,12 @@ class Product_model extends My_Model
 
 	public function view_notsell_product_details($condition = ''){
 		$select_qry = "select p.*,sh.short_url,u.full_name,u.user_name,u.thumbnail,u.feature_product from ".USER_PRODUCTS." p
-		LEFT JOIN ".USERS." u on u.id=p.user_id 
+		LEFT JOIN ".USERS." u on u.id=p.user_id
 		LEFT JOIN ".SHORTURL." sh on sh.id=p.short_url_id
 		".$condition;
 		$productList = $this->ExecuteQuery($select_qry);
 		return $productList;
-			
+
 	}
 
 	public function view_atrribute_details(){
@@ -208,12 +209,12 @@ class Product_model extends My_Model
 			$SubList = $this->ExecuteQuery($sel_qry);
 
 			foreach ($SubList->result() as $SubCatRow){
-					
+
 				$catView .= $this->view_category_list($SubCatRow,'2');
-					
+
 				$sel_qry1 = "select * from ".CATEGORY." where rootID='".$SubCatRow->id."'  ";
 				$SubList1 = $this->ExecuteQuery($sel_qry1);
-					
+
 				foreach ($SubList1->result() as $SubCatRow1){
 					$catView .= $this->view_category_list($SubCatRow1,'3');
 
@@ -227,7 +228,7 @@ class Product_model extends My_Model
 				}
 			}
 		}
-			
+
 		return $catView;
 	}
 
@@ -251,12 +252,12 @@ class Product_model extends My_Model
 			$SubList = $this->ExecuteQuery($sel_qry);
 
 			foreach ($SubList->result() as $SubCatRow){
-					
+
 				$catView .= $this->get_category_list($SubCatRow,'2',$catListArr);
-					
+
 				$sel_qry1 = "select * from ".CATEGORY." where rootID='".$SubCatRow->id."' and status='Active' ";
 				$SubList1 = $this->ExecuteQuery($sel_qry1);
-					
+
 				foreach ($SubList1->result() as $SubCatRow1){
 					$catView .= $this->get_category_list($SubCatRow1,'3',$catListArr);
 
@@ -289,6 +290,8 @@ class Product_model extends My_Model
 		return $this->db->get(CATEGORY);
 	}
 
+	//return user seller list sorted by number of products
+	//ordered by how many products they are selling in the category
 	public function get_top_users_in_category($cat=''){
 		$productArr = array();
 		$userArr = array();
@@ -316,7 +319,7 @@ class Product_model extends My_Model
 
 	public function get_recent_like_users($pid='',$limit='10',$sort='desc'){
 		$Query = 'select pl.*, p.product_name, p.likes, u.full_name, u.user_name,u.thumbnail from '.PRODUCT_LIKES.' pl
-					JOIN '.PRODUCT.' p on p.seller_product_id=pl.product_id 
+					JOIN '.PRODUCT.' p on p.seller_product_id=pl.product_id
 					JOIN '.USERS.' u on u.id=pl.user_id and u.status="Active"
 					where pl.product_id="'.$pid.'" order by pl.id '.$sort.' limit '.$limit;
 		return $this->ExecuteQuery($Query);
@@ -328,7 +331,7 @@ class Product_model extends My_Model
 			$condition = ' and pl.product_id != "'.$pid.'" ';
 		}
 		$Query = 'select pl.*,u.user_name,u.full_name,u.thumbnail,p.product_name,p.id as PID,p.created,p.sale_price,p.image from '.PRODUCT_LIKES.' pl
-					JOIN '.USERS.' u on u.id=pl.user_id 
+					JOIN '.USERS.' u on u.id=pl.user_id
 					JOIN '.PRODUCT.' p on p.seller_product_id=pl.product_id
 					JOIN '.USERS.' u1 on u1.id=p.user_id and u1.group="Seller" and u1.status="Active"
 					where pl.user_id = "'.$uid.'" '.$condition.' order by pl.id '.$sort.' limit '.$limit;
@@ -354,7 +357,7 @@ class Product_model extends My_Model
 
 	public function searchShopyByCategory($whereCond) {
 		$sel = 'select p.* from '.PRODUCT.' p
-		 		LEFT JOIN '.USERS.' u on u.id=p.user_id 
+		 		LEFT JOIN '.USERS.' u on u.id=p.user_id
 		 		'.$whereCond.' ';
 		return $this->ExecuteQuery($sel);
 	}
@@ -442,12 +445,12 @@ class Product_model extends My_Model
 
 	public function view_product_comments_details($condition = ''){
 		$select_qry = "select p.product_name,c.product_id,u.full_name,u.user_name,u.thumbnail,c.comments ,u.email,c.id,c.status,c.user_id as CUID
-		from ".PRODUCT_COMMENTS." c 
-		LEFT JOIN ".USERS." u on u.id=c.user_id 
+		from ".PRODUCT_COMMENTS." c
+		LEFT JOIN ".USERS." u on u.id=c.user_id
 		LEFT JOIN ".PRODUCT." p on p.seller_product_id=c.product_id ".$condition;
 		$productComment = $this->ExecuteQuery($select_qry);
 		return $productComment;
-			
+
 	}
 	public function Update_Product_Comment_Count($product_id){
 

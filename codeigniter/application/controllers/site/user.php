@@ -27,8 +27,12 @@ class User extends MY_Controller {
 		}
 		$this->data['mainColorLists'] = $_SESSION['sColorLists'];
 
+		// if logged in
+		// then grab the products that the user has liked
+		// from the fc_liked_products table
 		$this->data['loginCheck'] = $this->checkLogin('U');
 		$this->data['likedProducts'] = array();
+
 		if ($this->data['loginCheck'] != ''){
 			$this->data['likedProducts'] = $this->user_model->get_all_details(PRODUCT_LIKES,array('user_id'=>$this->checkLogin('U')));
 		}
@@ -275,6 +279,7 @@ class User extends MY_Controller {
 							$email_send_to_common = $this->product_model->common_email_send($email_values);
 	}
 
+	//routes to this when /signup path is hit in browser
 	public function signup_form(){
 		if ($this->checkLogin('U') != ''){
 			redirect(base_url());
@@ -744,19 +749,29 @@ class User extends MY_Controller {
 		}
 	}
 
+	//called from view/site/user/onboarding in step3
+	//update following list and following count for user
+	//update followers list and follower count for seller
 	public function add_follow(){
 		$returnStr['status_code'] = 0;
 		if ($this->checkLogin('U') != ''){
+			//the user_id is the id of the seller that we clicked on to follow in onboarding step3
 			$follow_id = $this->input->post('user_id');
+			//check this user to see if we are currently following the seller that was clicked
+			//increment following count and add seller to this user's followingList if not there already
 			$followingListArr = explode(',', $this->data['userDetails']->row()->following);
+			//if we are not following already
 			if (!in_array($follow_id, $followingListArr)){
 				$followingListArr[] = $follow_id;
 				$newFollowingList = implode(',', $followingListArr);
+				//data['userDetails'] is loaded in MY_Controller
 				$followingCount = $this->data['userDetails']->row()->following_count;
 				$followingCount++;
 				$dataArr = array('following'=>$newFollowingList,'following_count'=>$followingCount);
+				//grab fc_session_user_id
 				$condition = array('id'=>$this->checkLogin('U'));
 				$this->user_model->update_details(USERS,$dataArr,$condition);
+				//update seller follower list and increment follower count
 				$followUserDetails = $this->user_model->get_all_details(USERS,array('id'=>$follow_id));
 				if ($followUserDetails->num_rows() == 1){
 					$followersListArr = explode(',', $followUserDetails->row()->followers);
@@ -770,6 +785,7 @@ class User extends MY_Controller {
 						$this->user_model->update_details(USERS,$dataArr,$condition);
 					}
 				}
+				//create activity and add to user_activity
 				$actArr = array(
 					'activity_name'	=>	'follow',
 					'activity_id'	=>	$follow_id,
@@ -777,6 +793,8 @@ class User extends MY_Controller {
 					'activity_ip'	=>	$this->input->ip_address()
 				);
 				$this->user_model->simple_insert(USER_ACTIVITY,$actArr);
+
+				//create activity and add to notifications
 				$datestring = "%Y-%m-%d %h:%i:%s";
 				$time = time();
 				$createdTime = mdate($datestring,$time);
@@ -788,8 +806,10 @@ class User extends MY_Controller {
 					'created'		=>	$createdTime
 				);
 				$this->user_model->simple_insert(NOTIFICATIONS,$actArr);
+				//notify seller that they have a new follower via email
 				$this->send_noty_mail($followUserDetails->result_array());
 				$returnStr['status_code'] = 1;
+			//else we are already following this seller
 			}else {
 				$returnStr['status_code'] = 1;
 			}
@@ -855,6 +875,9 @@ class User extends MY_Controller {
 		echo json_encode($returnStr);
 	}
 
+	//called from view/site/user/onboarding in step3
+	//update following list and following count for user
+	//update followers list and follower count for seller
 	public function delete_follow(){
 		$returnStr['status_code'] = 0;
 		if ($this->checkLogin('U') != ''){

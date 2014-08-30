@@ -1,0 +1,1310 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"onboarding_get",
+				"onboarding_get_products_categories"
+			],
+			[
+				"it",
+				"its	BDD it synchronous"
+			],
+			[
+				"if",
+				"ife	if … else"
+			],
+			[
+				"max",
+				"max-width"
+			],
+			[
+				"stub",
+				"stub_entry_with_date"
+			],
+			[
+				"rsy",
+				"rsync_location"
+			],
+			[
+				"sidekiq",
+				"sidekiq_init"
+			],
+			[
+				"smtp",
+				"smtp_settings"
+			],
+			[
+				"MAIL",
+				"MAILCHIMP_LIST_ID"
+			],
+			[
+				"mod",
+				"mod	module .. end"
+			],
+			[
+				"cordova",
+				"cordova_cmd"
+			],
+			[
+				"to",
+				"angular.toJson"
+			],
+			[
+				"form",
+				"form	<form>"
+			],
+			[
+				"controller",
+				"angular: controller"
+			],
+			[
+				"config",
+				"config	AngularJS"
+			],
+			[
+				"conf",
+				"config	AngularJS"
+			],
+			[
+				"confi",
+				"config	AngularJS"
+			],
+			[
+				"module",
+				"angular.module"
+			]
+		]
+	},
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				":w",
+				":w - Save"
+			],
+			[
+				":s",
+				":w - Save"
+			],
+			[
+				"debug",
+				"Xdebug: Start Debugging (Launch Browser)"
+			],
+			[
+				"debu",
+				"Xdebug: Stop Debugging"
+			],
+			[
+				"xde",
+				"Xdebug: Start Debugging"
+			],
+			[
+				"prettif",
+				"HTMLPrettify"
+			],
+			[
+				":x",
+				"Set Syntax: XSL"
+			],
+			[
+				"pretti",
+				"HTMLPrettify"
+			],
+			[
+				"pretty",
+				"HTMLPrettify"
+			],
+			[
+				"prett",
+				"HTMLPrettify"
+			],
+			[
+				"packre",
+				"Package Control: Remove Package"
+			],
+			[
+				":save al",
+				"File: Save All"
+			],
+			[
+				":save",
+				"File: Save All"
+			],
+			[
+				"w",
+				"Word Wrap: Toggle"
+			],
+			[
+				":sava",
+				"File: Save All"
+			],
+			[
+				":save all",
+				"File: Save All"
+			],
+			[
+				":sav",
+				"File: Save All"
+			],
+			[
+				"package re",
+				"Package Control: Remove Package"
+			],
+			[
+				"save all",
+				"File: Save All"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"package con",
+				"Package Control: Remove Package"
+			],
+			[
+				":all",
+				"File: Save All"
+			],
+			[
+				"packin",
+				"Package Control: Install Package"
+			],
+			[
+				":savel",
+				"File: Save All"
+			],
+			[
+				"fet",
+				"Fetch: Manage"
+			],
+			[
+				":saval",
+				"File: Save All"
+			],
+			[
+				":sa",
+				"File: Save All"
+			],
+			[
+				"package rem",
+				"Package Control: Remove Package"
+			],
+			[
+				"packagerem",
+				"Package Control: Remove Package"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
+			[
+				"packar",
+				"Package Control: Remove Package"
+			],
+			[
+				"package in",
+				"Package Control: Install Package"
+			],
+			[
+				"package",
+				"Package Control: Remove Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Remove Package"
+			],
+			[
+				"save a",
+				"File: Save All"
+			],
+			[
+				"installp",
+				"Package Control: Install Package"
+			],
+			[
+				":savea",
+				"File: Save All"
+			],
+			[
+				":saveal",
+				"File: Save All"
+			],
+			[
+				"saveal",
+				"File: Save All"
+			],
+			[
+				"",
+				":$ - EOF"
+			],
+			[
+				"saval",
+				"File: Save All"
+			],
+			[
+				"save",
+				"File: Save All"
+			],
+			[
+				"savall",
+				"File: Save All"
+			],
+			[
+				":savl",
+				"File: Save All"
+			],
+			[
+				":saal",
+				"File: Save All"
+			],
+			[
+				"saal",
+				"File: Save All"
+			],
+			[
+				"gstat",
+				"Git: Status"
+			],
+			[
+				"git status",
+				"Git: Status"
+			],
+			[
+				"saveall",
+				"File: Save All"
+			],
+			[
+				"save al",
+				"File: Save All"
+			],
+			[
+				"remove pa",
+				"Package Control: Remove Package"
+			],
+			[
+				"remove p",
+				"Package Control: Remove Package"
+			],
+			[
+				"package m",
+				"Package Control: Remove Package"
+			],
+			[
+				":install",
+				"Package Control: Install Package"
+			],
+			[
+				"fetch file",
+				"Fetch: File"
+			],
+			[
+				"fetch man",
+				"Fetch: Manage"
+			],
+			[
+				"fetch fil",
+				"Fetch: File"
+			],
+			[
+				"fetch ",
+				"Fetch: File"
+			],
+			[
+				"fetch",
+				"Fetch: Manage"
+			],
+			[
+				":9",
+				"Snippet: bs3-col-9"
+			],
+			[
+				"fetch ma",
+				"Fetch: Manage"
+			],
+			[
+				":close all",
+				"File: Close All"
+			],
+			[
+				"close all",
+				"File: Close All"
+			],
+			[
+				":34",
+				"Snippet: bs3-col-4"
+			],
+			[
+				":sall",
+				"File: Save All"
+			],
+			[
+				"rails",
+				"Set Syntax: Ruby on Rails"
+			],
+			[
+				"file close",
+				"File: Close All"
+			],
+			[
+				":$",
+				":$ - EOF"
+			],
+			[
+				"snippet:Angular",
+				"Snippet: Angular.js"
+			],
+			[
+				"open",
+				"File: Open In Browser - Testing Server"
+			],
+			[
+				"linterto",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"linter",
+				"SublimeLinter: Toggle Linter"
+			],
+			[
+				"syntax ham",
+				"Set Syntax: Ruby Haml"
+			],
+			[
+				"ham",
+				"SublimeLinter: Choose Mark Style"
+			],
+			[
+				"fetc",
+				"Fetch: Manage"
+			],
+			[
+				"sidebar",
+				"View: Toggle Open Files in Side Bar"
+			]
+		],
+		"width": 530.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/config/routes.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/models/product_model.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/site/product.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/site/user.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/landing_category.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/onboarding.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/core/MY_Controller.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/landing/landing.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/templates/header.php",
+		"/Users/andrewsteinmeyernew/Library/Application Support/Sublime Text 3/Packages/CodeFormatter/CodeFormatter.sublime-settings",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/admin/product.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/core/Controller.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/config/constants.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/core/MY_Model.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/editor-config.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/sticky.full.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/jquery.mSimpleSlidebox.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/libraries/Javascript.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/libraries/twconnect.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/twtest.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/fancyy-filescatalog.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/config/twitter.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/templates/theme_settings.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/models/user_model.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/popup/upload.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/templates/script_files.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/libraries/Session.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/css/site/fancyy-clone-style.css",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/css/site/fancyy-filestimeline-slideshow.css",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/css/site/fancyy-filespopup.css",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/fancy.sublime-project",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/signup.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/site/user_settings.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/display_user_sidebar.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/sitemap.xml",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/product/edit_seller_product_images.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/admin/productattribute.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/admin/pricing.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/admin/order.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/site/notify.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/php.ini",
+		"/Users/andrewsteinmeyernew/Library/Application Support/Sublime Text 3/Packages/User/Xdebug.sublime-settings",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/templates/popup_templates.php",
+		"/Users/andrewsteinmeyernew/Library/Application Support/Sublime Text 3/Packages/Xdebug Client/Xdebug.sublime-settings",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/helpers/path_helper.php",
+		"/Users/andrewsteinmeyernew/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/tinymce/jscripts/tiny_mce/plugins/ajaxfilemanager/debug.html",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/tinymce/jscripts/tiny_mce/plugins/xhtmlxtras/del.htm",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/libraries/Xmlrpc.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/PHPDebug.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/admin/sitemapcreate.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/google-login-mats/src/contrib/Google_OrkutService.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/models/landing_model.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/helpers/download_helper.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/css/site/fancyy-filesphoto.css",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/facebook.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/admin/templates/header.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/validation.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/_db/fancyyclone_v2_ins.sql",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/tinymce/jscripts/tiny_mce/plugins/visualchars/editor_plugin.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/treeview.jquery.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/tinymce/jscripts/tiny_mce/plugins/preview/preview.html",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/tinymce/jscripts/tiny_mce/plugins/preview/example.html",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/google-login-mats/src/contrib/Google_SiteVerificationService.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/fancyy-address_helper.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/sitemap/inc/classes/FilesystemHandler.class.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/tinymce/jscripts/tiny_mce/themes/advanced/editor_template.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/code-highlighter/shAutoloader.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/tinymce/jscripts/tiny_mce/themes/advanced/langs/en_dlg.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/check-all.jquery.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/simple_html_dom.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/Installation guide.txt",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/index.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/ajax_load_more.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/models/admin_model.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/config/deploy/production.rb",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/css/ie/ie7.css",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/core/CodeIgniter.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/popup/register.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/newsletter/registeration1.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/newsletter/registeration3.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/facebook/user.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/sitemap/inc/Ontology.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/core/Output.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/admin/sitemapgeneration/sitemap_generation.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/admin/sitemapgeneration/sitemapdetailsview.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/admin/subadmin/view_subadmin.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/admin/attribute/view_attribute.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/config/config.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/config/database.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/databaseValues.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/display_user_owns.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/user_orders_list.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/edit_user_list.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/product/edit_user_product.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/database/drivers/sqlite/sqlite_utility.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/site/landing.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/settings_sidebar.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/admin/adminsettings/smtp_settings.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/admin/seller/view_seller.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/product/edit_seller_product_attribute.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/admin/sitemapgeneration/sitemapgenerates.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/product/edit_seller_product_seo.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/profile_things.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/product/edit_seller_product.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/libraries/Sitemap.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/newfile.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/css/reset.css",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/admin/users.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/user_list_home.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/google-login-mats/src/service/Google_Model.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/errors/error_php.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/.htaccess",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/.buildpath",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/user_credits.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/crop_image.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/user/change_notifications.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/jquery.confirm.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/main4.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/controllers/admin/subadmin.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/css/image_crop/demo_files/main.css",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/public/js/site/main4.js",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/popup/gift_recommend.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/.htaccess",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/system/core/Router.php",
+		"/Users/andrewsteinmeyernew/dev/php_projects/blueneko/codeigniter/application/views/site/templates/footer_menu.php",
+		"/etc/my.conf",
+		"/usr/local/opt/mysql/my.cnf"
+	],
+	"find":
+	{
+		"height": 23.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"loginCheck",
+			"productDetails",
+			"loadPage",
+			"$loginCheck",
+			"invite_friends",
+			"btns-gray-embo",
+			"loginCheck",
+			"baseUrl",
+			"btn-close",
+			"<a",
+			"sns-people",
+			"popup",
+			"stream",
+			"fancyd",
+			"button.g",
+			"step4",
+			"setView",
+			"scroll",
+			"userDetails",
+			"follow-user-",
+			"setView",
+			"Image",
+			"setView",
+			"stream-latest",
+			"stream-late",
+			"loader",
+			"btn-start",
+			"debugger",
+			"productDetails",
+			"$.dialog",
+			"onboarding",
+			"board",
+			"onboad",
+			"$.dialog",
+			"overlay",
+			"singin-over",
+			"onboard",
+			"popup_cont",
+			"onboarding",
+			"signup",
+			"/signup",
+			"signup",
+			"sitesignup",
+			"register_user",
+			"api_id",
+			"default",
+			"$.dialog",
+			"dialog_sig",
+			"demoserver",
+			"updateUserQuck",
+			"url",
+			"overlay",
+			"$.dialog",
+			"btn-signup",
+			"signup_",
+			"$.dial",
+			"dialog",
+			"dlg_sign",
+			"$.dia",
+			"dialog",
+			"default",
+			".btn",
+			"dialog",
+			"fancy",
+			"$.dialog",
+			"database",
+			"check_lo",
+			"update_de",
+			"form",
+			"get_rand_st",
+			"get_rand",
+			"email_json",
+			"$.dialog",
+			"quickSign",
+			"ajax",
+			"google",
+			"ajax",
+			"email",
+			"$.dialog",
+			"popup_wrap",
+			"signin-over",
+			"dialog",
+			"open_thing",
+			"$.dialog",
+			"signin-over",
+			"$.dial",
+			"dialog",
+			"signin-overla",
+			"signin-over",
+			".dialog",
+			"signin-overlay",
+			"popup-si",
+			"popup-sign",
+			"signup-pop",
+			"signin-overl",
+			"popup_container",
+			".dial",
+			"dialog",
+			"popup",
+			"footer",
+			"setError",
+			"setErrorM",
+			"sErr",
+			"sErrMsg",
+			"sErr",
+			"flashdata",
+			"setError",
+			"Err",
+			"flashdata",
+			"flash_data",
+			"category",
+			"LIST-DE",
+			"lg_item",
+			"CMS",
+			"base_url",
+			"mainCa",
+			"mainCategories",
+			"ui-",
+			"ui-fancy",
+			"ui-",
+			"noConfl",
+			"ui-dialog",
+			"ui-helper",
+			"dialog",
+			"distanc",
+			"dialog",
+			"$dialog",
+			"$.dialog"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"%>",
+			"Your",
+			"config"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"incremental_find":
+	{
+		"height": 34.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 376.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.git-commit":
+	{
+		"height": 100.0
+	},
+	"output.xdebug":
+	{
+		"height": 0.0
+	},
+	"replace":
+	{
+		"height": 42.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"controllerprodu",
+				"codeigniter/application/controllers/site/product.php"
+			],
+			[
+				"mycont",
+				"codeigniter/application/core/MY_Controller.php"
+			],
+			[
+				"mycontro",
+				"codeigniter/application/core/MY_Controller.php"
+			],
+			[
+				"mycon",
+				"codeigniter/application/core/MY_Controller.php"
+			],
+			[
+				"jssitelan",
+				"public/js/site/landing_category.js"
+			],
+			[
+				"header",
+				"codeigniter/application/views/site/templates/header.php"
+			],
+			[
+				"landinglanding",
+				"codeigniter/application/views/site/landing/landing.php"
+			],
+			[
+				"twconne",
+				"codeigniter/application/libraries/twconnect.php"
+			],
+			[
+				"twtest",
+				"codeigniter/application/controllers/twtest.php"
+			],
+			[
+				"twconn",
+				"codeigniter/application/libraries/twconnect.php"
+			],
+			[
+				"twcon",
+				"codeigniter/application/libraries/twconnect.php"
+			],
+			[
+				"usermod",
+				"codeigniter/application/models/user_model.php"
+			],
+			[
+				"scriptfil",
+				"codeigniter/application/views/site/templates/script_files.php"
+			],
+			[
+				"fancy",
+				"public/js/site/fancyy-filescatalog.js"
+			],
+			[
+				"siteusersignup",
+				"codeigniter/application/views/site/user/signup.php"
+			],
+			[
+				"mymod",
+				"codeigniter/application/core/MY_Model.php"
+			],
+			[
+				"mymo",
+				"codeigniter/application/core/MY_Model.php"
+			],
+			[
+				"usermo",
+				"codeigniter/application/models/user_model.php"
+			],
+			[
+				"mycontr",
+				"codeigniter/application/core/MY_Controller.php"
+			],
+			[
+				"routes",
+				"codeigniter/application/config/routes.php"
+			],
+			[
+				"siteuser",
+				"codeigniter/application/controllers/site/user.php"
+			],
+			[
+				"controllerpro",
+				"codeigniter/application/controllers/site/product.php"
+			],
+			[
+				"controlpro",
+				"codeigniter/application/controllers/admin/product.php"
+			],
+			[
+				"onboarding",
+				"codeigniter/application/views/site/user/onboarding.php"
+			],
+			[
+				"controllerproduc",
+				"codeigniter/application/controllers/admin/product.php"
+			],
+			[
+				"onboard",
+				"codeigniter/application/views/site/user/onboarding.php"
+			],
+			[
+				"product",
+				"codeigniter/application/models/product_model.php"
+			],
+			[
+				"php",
+				"public/php.ini"
+			],
+			[
+				"php.",
+				"public/php.ini"
+			],
+			[
+				"contrositeland",
+				"codeigniter/application/controllers/site/landing.php"
+			],
+			[
+				"productmode",
+				"codeigniter/application/models/product_model.php"
+			],
+			[
+				"landinglan",
+				"codeigniter/application/views/site/landing/landing.php"
+			],
+			[
+				"pop",
+				"codeigniter/application/views/site/templates/popup_templates.php"
+			],
+			[
+				"scriptfile",
+				"codeigniter/application/views/site/templates/script_files.php"
+			],
+			[
+				"siteland",
+				"codeigniter/application/views/site/landing/landing.php"
+			],
+			[
+				"sitelanding",
+				"codeigniter/application/controllers/site/landing.php"
+			],
+			[
+				"siteproduct",
+				"codeigniter/application/controllers/site/product.php"
+			],
+			[
+				"fancyfilespop",
+				"public/css/site/fancyy-filespopup.css"
+			],
+			[
+				"fan",
+				"public/css/site/fancyy-clone-style.css"
+			],
+			[
+				"header.php",
+				"codeigniter/application/views/site/templates/header.php"
+			],
+			[
+				"fancyclones",
+				"public/css/site/fancyy-clone-style.css"
+			],
+			[
+				"proudctmo",
+				"codeigniter/application/models/product_model.php"
+			],
+			[
+				"productmod",
+				"codeigniter/application/models/product_model.php"
+			],
+			[
+				"contrproduct",
+				"codeigniter/application/controllers/site/product.php"
+			],
+			[
+				"cicontro",
+				"codeigniter/application/core/MY_Controller.php"
+			],
+			[
+				"user.php",
+				"codeigniter/application/controllers/site/user.php"
+			],
+			[
+				"validation",
+				"public/js/validation.js"
+			],
+			[
+				"onboar",
+				"codeigniter/application/views/site/user/onboarding.php"
+			],
+			[
+				"viewsitesign",
+				"codeigniter/application/views/site/user/signup.php"
+			],
+			[
+				"siteuseronboar",
+				"codeigniter/application/views/site/user/onboarding.php"
+			],
+			[
+				"registration3",
+				"public/newsletter/registeration3.php"
+			],
+			[
+				"regist3",
+				"public/newsletter/registeration3.php"
+			],
+			[
+				"viewssiteusersign",
+				"codeigniter/application/views/site/user/signup.php"
+			],
+			[
+				"usermode",
+				"codeigniter/application/models/user_model.php"
+			],
+			[
+				"_db",
+				"public/_db/fancyyclone_v2_ins.sql"
+			],
+			[
+				"newfile",
+				"public/newfile.php"
+			],
+			[
+				"registration3.",
+				"public/newsletter/registeration3.php"
+			],
+			[
+				"newfil",
+				"public/newfile.php"
+			],
+			[
+				".h",
+				"public/.htaccess"
+			],
+			[
+				"consta",
+				"codeigniter/application/config/constants.php"
+			],
+			[
+				"config",
+				"codeigniter/application/config/config.php"
+			],
+			[
+				"controuser",
+				"codeigniter/application/controllers/site/user.php"
+			],
+			[
+				"conrouser",
+				"codeigniter/application/controllers/site/user.php"
+			],
+			[
+				"controlersiteuser",
+				"codeigniter/application/controllers/site/user.php"
+			],
+			[
+				"main",
+				"public/js/main4.js"
+			],
+			[
+				"sitemain4",
+				"public/js/site/main4.js"
+			],
+			[
+				"script",
+				"codeigniter/application/views/site/templates/script_files.php"
+			],
+			[
+				"main4",
+				"public/js/main4.js"
+			],
+			[
+				"vali",
+				"public/js/validation.js"
+			],
+			[
+				"hea",
+				"codeigniter/application/views/site/templates/header.php"
+			],
+			[
+				"popupr",
+				"codeigniter/application/views/site/popup/register.php"
+			],
+			[
+				"mainjs",
+				"public/js/main4.js"
+			],
+			[
+				"index.ph",
+				"public/index.php"
+			],
+			[
+				"data",
+				"public/databaseValues.php"
+			],
+			[
+				"database",
+				"codeigniter/application/config/database.php"
+			],
+			[
+				"index",
+				"public/index.php"
+			],
+			[
+				"loader",
+				"codeigniter/system/core/Loader.php"
+			],
+			[
+				"dtabase",
+				"codeigniter/application/config/database.php"
+			],
+			[
+				"session",
+				"codeigniter/system/libraries/Session.php"
+			],
+			[
+				"sess",
+				"codeigniter/system/libraries/Session.php"
+			],
+			[
+				"user.m",
+				"codeigniter/application/models/user_model.php"
+			],
+			[
+				"valid",
+				"public/js/validation.js"
+			],
+			[
+				"contrsiteuser",
+				"codeigniter/application/controllers/site/user.php"
+			],
+			[
+				"validat",
+				"public/js/validation.js"
+			],
+			[
+				"footermenu",
+				"codeigniter/application/views/site/templates/footer_menu.php"
+			],
+			[
+				"popupre",
+				"codeigniter/application/views/site/popup/register.php"
+			],
+			[
+				"themesetting",
+				"codeigniter/application/views/site/templates/theme_settings.php"
+			],
+			[
+				"develop",
+				"public/css/developer.css"
+			],
+			[
+				"land",
+				"codeigniter/application/views/site/landing/landing.php"
+			],
+			[
+				"sessoin",
+				"codeigniter/system/libraries/Session.php"
+			],
+			[
+				"mymodel",
+				"codeigniter/application/core/MY_Model.php"
+			],
+			[
+				"pricingmod",
+				"codeigniter/application/models/pricing_model.php"
+			],
+			[
+				"rouets",
+				"codeigniter/application/config/routes.php"
+			],
+			[
+				"ses",
+				"codeigniter/system/libraries/Session.php"
+			],
+			[
+				"session.",
+				"codeigniter/system/libraries/Session.php"
+			],
+			[
+				"timeline.css",
+				"public/css/site/fancyy-timeline.css"
+			],
+			[
+				"sitepopupuplo",
+				"codeigniter/application/views/site/popup/upload.php"
+			],
+			[
+				"templatespop",
+				"codeigniter/application/views/site/templates/popup_templates.php"
+			],
+			[
+				"modelpro",
+				"codeigniter/application/models/product_model.php"
+			],
+			[
+				"en_lang",
+				"codeigniter/application/language/en/en_lang.php"
+			],
+			[
+				"dbfan",
+				"public/_db/fancyyclone_v2_ins.sql"
+			],
+			[
+				"const",
+				"codeigniter/application/config/constants.php"
+			],
+			[
+				"landingca",
+				"public/js/site/landing_category.js"
+			],
+			[
+				"sitebookmar",
+				"codeigniter/application/controllers/site/bookmarklet.php"
+			],
+			[
+				"route",
+				"codeigniter/application/config/routes.php"
+			],
+			[
+				"clonest",
+				"public/css/site/fancyy-clone-style.css"
+			],
+			[
+				"main.css",
+				"public/css/image_crop/demo_files/main.css"
+			],
+			[
+				"css",
+				"codeigniter/application/views/site/templates/css_files.php"
+			],
+			[
+				"contlanding",
+				"codeigniter/application/controllers/site/landing.php"
+			],
+			[
+				"landing",
+				"codeigniter/application/views/site/landing/landing.php"
+			],
+			[
+				"head",
+				"codeigniter/application/views/site/templates/header.php"
+			],
+			[
+				"cssfile",
+				"codeigniter/application/views/site/templates/css_files.php"
+			],
+			[
+				"cicontroler",
+				"codeigniter/application/core/MY_Controller.php"
+			],
+			[
+				"filestimelincs",
+				"public/css/site/fancyy-filestimeline-slideshow.css"
+			],
+			[
+				"cssfiles",
+				"codeigniter/application/views/site/templates/css_files.php"
+			],
+			[
+				"slideshowjs",
+				"public/js/site/fancyy-filestimeline_slideshow.js"
+			],
+			[
+				"fancy-filespop",
+				"public/css/site/fancyy-filespopup.css"
+			],
+			[
+				"templatescss",
+				"codeigniter/application/views/site/templates/css_files.php"
+			],
+			[
+				"templatesthemese",
+				"codeigniter/application/views/site/templates/theme_settings.php"
+			],
+			[
+				"editorconfi",
+				"public/js/site/editor-config.js"
+			],
+			[
+				"scriptfiles",
+				"codeigniter/application/views/site/templates/script_files.php"
+			],
+			[
+				"landing_ca",
+				"public/js/site/landing_category.js"
+			],
+			[
+				"templscriptfile",
+				"codeigniter/application/views/site/templates/script_files.php"
+			],
+			[
+				"landing.php",
+				"codeigniter/application/views/site/landing/landing.php"
+			],
+			[
+				"popupte",
+				"codeigniter/application/views/site/templates/popup_templates.php"
+			],
+			[
+				"up",
+				"codeigniter/application/views/site/popup/upload.php"
+			],
+			[
+				"header.",
+				"codeigniter/application/views/admin/templates/header.php"
+			],
+			[
+				"routes.js",
+				"node_modules/mongoose/examples/express/connection-sharing/routes.js"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"selected_items":
+		[
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": false,
+	"side_bar_width": 156.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
