@@ -179,6 +179,7 @@
 				<!-- stream loads the pictures of the products -->
 				<ol class="stream">
 				<?php
+				//stream pictures in blocks of 3
 				for ($i=0;$i<count($productArr);$i=$i+3){
 					if (isset($productArr[$i]->id)){
 						$imgArr = explode(',', $productArr[$i]->image);
@@ -192,7 +193,7 @@
 						$fancyClass = 'fancy';
 						$fancyText = LIKE_BUTTON;
 						//iterate over $likedProducts for this user
-						//loaded in landing controller and user controller from fc_product_likes table
+						//loaded in landing controller line 37 from fc_product_likes table
 						//change class from fancy to fancy'd and like to liked if user has already liked it
 						if (count($likedProducts)>0 && $likedProducts->num_rows()>0){
 							foreach ($likedProducts->result() as $likeProRow){
@@ -209,6 +210,7 @@
 							$prodLink = "things/".$productArr[$i]->id."/".url_title($productArr[$i]->product_name,'-');
 						}
 						?>
+					<!-- load the first image in the group of 3 -->
 					<li class="big clear"
 						tid="<?php echo $productArr[$i]->seller_product_id;?>"
 						tuserid="<?php echo $productArr[$i]->user_id;?>">
@@ -250,26 +252,26 @@
 									class="figcaption"><?php echo $productArr[$i]->product_name;?>
 								</span>
 							</a>
-								<em class="figure-detail">
-									<?php if (!isset($productArr[$i]->web_link)){?>
-										<span class="price"><?php echo $currencySymbol;?> <?php echo $productArr[$i]->sale_price;?>
-											<small><?php echo $currencyType;?> </small>
-										</span>
-									<?php }?>
-										<span
-											class="username">
-											<em style="padding-left: 0;">
-												<i>
-													<?php if($this->lang->line('user_by') != '') { echo stripslashes($this->lang->line('user_by')); } else echo "by"; ?>
-												</i>
-												<a class="<?php echo $force_login;?>"
-													href="<?php if ($productArr[$i]->user_id != '0'){echo base_url().'user/'.$productArr[$i]->user_name;}else {echo base_url().'user/administrator';}?>">
-																<?php if ($productArr[$i]->user_id != '0'){echo $productArr[$i]->full_name;}else {echo 'administrator';}?>
-												</a> +
-												<?php echo $productArr[$i]->likes;?>
-											</em>
-										</span>
-								</em>
+							<em class="figure-detail">
+								<?php if (!isset($productArr[$i]->web_link)){?>
+									<span class="price"><?php echo $currencySymbol;?> <?php echo $productArr[$i]->sale_price;?>
+										<small><?php echo $currencyType;?> </small>
+									</span>
+								<?php }?>
+								<span
+									class="username">
+									<em style="padding-left: 0;">
+										<i>
+											<?php if($this->lang->line('user_by') != '') { echo stripslashes($this->lang->line('user_by')); } else echo "by"; ?>
+										</i>
+										<a class="<?php echo $force_login;?>"
+											href="<?php if ($productArr[$i]->user_id != '0'){echo base_url().'user/'.$productArr[$i]->user_name;}else {echo base_url().'user/administrator';}?>">
+														<?php if ($productArr[$i]->user_id != '0'){echo $productArr[$i]->full_name;}else {echo 'administrator';}?>
+										</a> +
+										<?php echo $productArr[$i]->likes;?>
+									</em>
+								</span>
+							</em>
 							<ul class="function">
 								<li class="list"><a href="#">Add to List</a></li>
 								<li class="cmt"><a href="#">Comment</a></li>
@@ -290,12 +292,18 @@
 							<a href="#" item_img_url="images/product/<?php echo $img;?>"
 								tid="<?php echo $productArr[$i]->seller_product_id;?>"
 								class="button <?php echo $fancyClass;?>"
-								<?php if ($loginCheck==''){?> require_login="true" <?php }?>><span><i></i>
-							</span> <?php echo $fancyText;?> </a>
+								<?php if ($loginCheck==''){?> require_login="true" <?php }?>>
+								<span>
+									<i></i>
+								</span>
+								<?php echo $fancyText;?>
+							</a>
 						</div>
 					</li>
 					<?php
 					}
+					//if a second product exists in the list
+					//then setup image, buttons, etc
 					if (isset($productArr[$i+1]->id)){
 						$imgArr = explode(',', $productArr[$i+1]->image);
 						$img = 'dummyProductImage.jpg';
@@ -307,6 +315,10 @@
 						}
 						$fancyClass = 'fancy';
 						$fancyText = LIKE_BUTTON;
+						//iterate over $likedProducts for this user for second time
+						//this is redundant, already did this for first product
+						//loaded in landing controller lin 37 from fc_product_likes table
+						//change class from fancy to fancy'd and like to liked if user has already liked it
 						if (count($likedProducts)>0 && $likedProducts->num_rows()>0){
 							foreach ($likedProducts->result() as $likeProRow){
 								if ($likeProRow->product_id == $productArr[$i+1]->seller_product_id){
@@ -321,6 +333,7 @@
 							$prodLink = "things/".$productArr[$i+1]->id."/".url_title($productArr[$i+1]->product_name,'-');
 						}
 						?>
+					<!-- load the second image in the group of 3 -->
 					<li class="mid clear"
 						tid="<?php echo $productArr[$i+1]->seller_product_id;?>"
 						tuserid="<?php echo $productArr[$i+1]->user_id;?>">
@@ -328,27 +341,59 @@
 							<!-- span class="pre"></span -->
 							<a
 								href="<?php if ($productArr[$i+1]->user_id != '0'){echo 'user/'.$productArr[$i+1]->user_name;}else {echo base_url().'user/administrator';}?>"
-								class="vcard <?php echo $force_login;?>"> <?php if ($productArr[$i+1]->thumbnail == ''){?>
-								<img src="images/users/user-thumb1.png"> <?php }else {?> <img
-								src="images/users/<?php echo $productArr[$i+1]->thumbnail;?>"> <?php }?>
-							</a> <a href="<?php echo $prodLink;?>"
-								class="figure-img <?php echo $force_login;?>"> <span
-								class="figure grid" style="background-size: cover"
-								data-ori-url="images/product/<?php echo $img;?>"
-								data-310-url="images/product/<?php echo $img;?>"><em
-									class="back"></em> </span> <span class="figure classic"> <em
-									class="back"></em> <img src="images/product/<?php echo $img;?>"
-									data-width="310" data-height="310"> </span> <span
-								class="figure vertical"> <em class="back"></em> <img
-									src="images/product/<?php echo $img;?>" data-width="310"
-									data-height="310"> </span> <span class="figcaption"><?php echo $productArr[$i+1]->product_name;?>
-							</span> </a> <em class="figure-detail"> <?php if (!isset($productArr[$i+1]->web_link)){?>
-								<span class="price"><?php echo $currencySymbol;?> <?php echo $productArr[$i+1]->sale_price;?>
-									<small><?php echo $currencyType;?> </small> </span> <?php }?> <span
-								class="username"><em style="padding-left: 0;"><i> <?php if($this->lang->line('user_by') != '') { echo stripslashes($this->lang->line('user_by')); } else echo "by"; ?>
-									</i><a class="<?php echo $force_login;?>"
-										href="<?php if ($productArr[$i+1]->user_id != '0'){echo base_url().'user/'.$productArr[$i+1]->user_name;}else {echo base_url().'user/administrator';}?>"><?php if ($productArr[$i+1]->user_id != '0'){echo $productArr[$i+1]->full_name;}else {echo 'administrator';}?>
-									</a> + <?php echo $productArr[$i+1]->likes;?> </em> </span> </em>
+								class="vcard <?php echo $force_login;?>">
+									<?php if ($productArr[$i+1]->thumbnail == ''){?>
+										<img src="images/users/user-thumb1.png">
+									<?php }else {?>
+										<img src="images/users/<?php echo $productArr[$i+1]->thumbnail;?>">
+									<?php }?>
+							</a>
+							<a href="<?php echo $prodLink;?>"
+								class="figure-img <?php echo $force_login;?>">
+								<span
+									class="figure grid" style="background-size: cover"
+									data-ori-url="images/product/<?php echo $img;?>"
+									data-310-url="images/product/<?php echo $img;?>">
+									<em class="back"></em>
+								</span>
+								<span
+									class="figure classic">
+									<em class="back"></em>
+									<img src="images/product/<?php echo $img;?>"
+										data-width="310"
+										data-height="310">
+									</span>
+								<span
+									class="figure vertical">
+									<em class="back"></em>
+									<img src="images/product/<?php echo $img;?>"
+										data-width="310"
+										data-height="310">
+								</span>
+								<span
+									class="figcaption"><?php echo $productArr[$i+1]->product_name;?>
+								</span>
+							</a>
+							<em class="figure-detail">
+								<?php if (!isset($productArr[$i+1]->web_link)){?>
+									<span class="price"><?php echo $currencySymbol;?> <?php echo $productArr[$i+1]->sale_price;?>
+										<small><?php echo $currencyType;?> </small>
+									</span>
+								<?php }?>
+								<span
+									class="username">
+									<em style="padding-left: 0;">
+										<i>
+											<?php if($this->lang->line('user_by') != '') { echo stripslashes($this->lang->line('user_by')); } else echo "by"; ?>
+										</i>
+										<a class="<?php echo $force_login;?>"
+											href="<?php if ($productArr[$i+1]->user_id != '0'){echo base_url().'user/'.$productArr[$i+1]->user_name;}else {echo base_url().'user/administrator';}?>">
+														<?php if ($productArr[$i+1]->user_id != '0'){echo $productArr[$i+1]->full_name;}else {echo 'administrator';}?>
+										</a> +
+										<?php echo $productArr[$i+1]->likes;?>
+									</em>
+								</span>
+							</em>
 							<ul class="function">
 								<li class="list"><a href="#">Add to List</a></li>
 								<li class="cmt"><a href="#">Comment</a></li>
@@ -367,12 +412,18 @@
 							<a href="#" item_img_url="images/product/<?php echo $img;?>"
 								tid="<?php echo $productArr[$i+1]->seller_product_id;?>"
 								class="button <?php  echo $fancyClass;?>"
-								<?php if ($loginCheck==''){?> require_login="true" <?php }?>><span><i></i>
-							</span> <?php echo $fancyText;?> </a>
+								<?php if ($loginCheck==''){?> require_login="true" <?php }?>>
+								<span>
+									<i></i>
+								</span>
+								<?php echo $fancyText;?>
+							</a>
 						</div>
 					</li>
 					<?php
 					}
+					//if a third product exists in the list
+					//then setup image, buttons, etc
 					if (isset($productArr[$i+2]->id)){
 						$imgArr = explode(',', $productArr[$i+2]->image);
 						$img = 'dummyProductImage.jpg';
@@ -384,6 +435,10 @@
 						}
 						$fancyClass = 'fancy';
 						$fancyText = LIKE_BUTTON;
+						//iterate over $likedProducts for this user again for third time
+						//this is redundant, already did this for first and second product above
+						//loaded in landing controller lin 37 from fc_product_likes table
+						//change class from fancy to fancy'd and like to liked if user has already liked it
 						if (count($likedProducts)>0 && $likedProducts->num_rows()>0){
 							foreach ($likedProducts->result() as $likeProRow){
 								if ($likeProRow->product_id == $productArr[$i+2]->seller_product_id){
@@ -397,29 +452,59 @@
 							$prodLink = "things/".$productArr[$i+2]->id."/".url_title($productArr[$i+2]->product_name,'-');
 						}
 						?>
+					<!-- load the third image in the group of 3 -->
 					<li class="mid "
 						tid="<?php echo $productArr[$i+2]->seller_product_id;?>"
 						tuserid="<?php echo $productArr[$i+2]->user_id;?>">
 						<div class="figure-item">
 							<!-- span class="pre"></span -->
 							<a href="<?php echo $prodLink;?>"
-								class="figure-img <?php echo $force_login;?>"> <span
-								class="figure grid" style="background-size: cover"
-								data-ori-url="images/product/<?php echo $img;?>"
-								data-310-url="images/product/<?php echo $img;?>"><em
-									class="back"></em> </span> <span class="figure classic"> <em
-									class="back"></em> <img src="images/product/<?php echo $img;?>"
-									data-width="310" data-height="310"> </span> <span
-								class="figure vertical"> <em class="back"></em> <img
-									src="images/product/<?php echo $img;?>" data-width="310"
-									data-height="310"> </span> <span class="figcaption"><?php echo $productArr[$i+2]->product_name;?>
-							</span> </a> <em class="figure-detail"> <?php if (!isset($productArr[$i+2]->web_link)){?>
-								<span class="price"><?php echo $currencySymbol;?> <?php echo $productArr[$i+2]->sale_price;?>
-									<small><?php echo $currencyType;?> </small> </span> <?php }?> <span
-								class="username"><em style="padding-left: 0;"><i> <?php if($this->lang->line('user_by') != '') { echo stripslashes($this->lang->line('user_by')); } else echo "by"; ?>
-									</i><a class="<?php echo $force_login;?>"
-										href="<?php if ($productArr[$i+2]->user_id != '0'){echo base_url().'user/'.$productArr[$i+2]->user_name;}else {echo base_url().'user/administrator';}?>"><?php if ($productArr[$i+2]->user_id != '0'){echo $productArr[$i+2]->full_name;}else {echo 'administrator';}?>
-									</a> + <?php echo $productArr[$i+2]->likes;?> </em> </span> </em>
+								class="figure-img <?php echo $force_login;?>">
+								<span
+									class="figure grid"
+									style="background-size: cover"
+									data-ori-url="images/product/<?php echo $img;?>"
+									data-310-url="images/product/<?php echo $img;?>">
+									<em class="back"></em>
+								</span>
+								<span
+									class="figure classic">
+									<em class="back"></em>
+									<img src="images/product/<?php echo $img;?>"
+										data-width="310"
+										data-height="310">
+								</span>
+								<span
+									class="figure vertical">
+									<em class="back"></em>
+									<img src="images/product/<?php echo $img;?>"
+										data-width="310"
+										data-height="310">
+								</span>
+								<span
+									class="figcaption"><?php echo $productArr[$i+2]->product_name;?>
+								</span>
+							</a>
+							<em class="figure-detail">
+								<?php if (!isset($productArr[$i+2]->web_link)){?>
+									<span class="price"><?php echo $currencySymbol;?> <?php echo $productArr[$i+2]->sale_price;?>
+										<small><?php echo $currencyType;?> </small>
+									</span>
+								<?php }?>
+								<span
+									class="username">
+									<em style="padding-left: 0;">
+										<i>
+											<?php if($this->lang->line('user_by') != '') { echo stripslashes($this->lang->line('user_by')); } else echo "by"; ?>
+										</i>
+										<a class="<?php echo $force_login;?>"
+											href="<?php if ($productArr[$i+2]->user_id != '0'){echo base_url().'user/'.$productArr[$i+2]->user_name;}else {echo base_url().'user/administrator';}?>">
+														<?php if ($productArr[$i+2]->user_id != '0'){echo $productArr[$i+2]->full_name;}else {echo 'administrator';}?>
+										</a> +
+										<?php echo $productArr[$i+2]->likes;?>
+									</em>
+								</span>
+							</em>
 							<ul class="function">
 								<li class="list"><a href="#">Add to List</a></li>
 								<li class="cmt"><a href="#">Comment</a></li>
@@ -438,8 +523,12 @@
 							<a href="#" item_img_url="images/product/<?php echo $img;?>"
 								tid="<?php echo $productArr[$i+2]->seller_product_id;?>"
 								class="button <?php echo $fancyClass;?>"
-								<?php if ($loginCheck==''){?> require_login="true" <?php }?>><span><i></i>
-							</span> <?php echo $fancyText;?> </a>
+								<?php if ($loginCheck==''){?> require_login="true" <?php }?>>
+								<span>
+									<i></i>
+								</span>
+								<?php echo $fancyText;?>
+							</a>
 						</div>
 					</li>
 					<?php
@@ -459,6 +548,7 @@
 			<?php
 		}else {
 			?>
+			<!-- no products exist, display "No products available" -->
 			<div id="content">
 				<p class="noproducts">
 				<?php if($this->lang->line('product_not_avail') != '') { echo stripslashes($this->lang->line('product_not_avail')); } else echo "No products available"; ?>
@@ -608,6 +698,7 @@ jQuery(function($){
 	});
 
 	function setView(mode, force){
+		alert('here landing.php');
 		if(!force && $container.hasClass(mode)) return;
 		var $items = $stream.find('>li');
 

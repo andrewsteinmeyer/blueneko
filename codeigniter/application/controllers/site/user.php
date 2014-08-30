@@ -27,12 +27,13 @@ class User extends MY_Controller {
 		}
 		$this->data['mainColorLists'] = $_SESSION['sColorLists'];
 
-		// if logged in
-		// then grab the products that the user has liked
-		// from the fc_liked_products table
+		//check if logged in
 		$this->data['loginCheck'] = $this->checkLogin('U');
 		$this->data['likedProducts'] = array();
 
+		// if logged in
+		// then grab the products that the user has liked
+		// from the fc_liked_products table
 		if ($this->data['loginCheck'] != ''){
 			$this->data['likedProducts'] = $this->user_model->get_all_details(PRODUCT_LIKES,array('user_id'=>$this->checkLogin('U')));
 		}
