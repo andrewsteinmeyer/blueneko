@@ -17,6 +17,8 @@ jQuery(function($) {
 
 	$.infiniteshow({itemSelector:'#content .stream > li'});
 
+	//fired off when user navigates with browser buttons
+	//see line 409
 	function loadPage(url, skipSaveHistory){
 		var $win     = $(window),
 			$stream  = $('#content ol.stream'),
@@ -88,9 +90,8 @@ jQuery(function($) {
 			$stream.height(Math.max.apply(Math, bottoms));
 
 		};
-		//not sure if this is ever called?!
-		//landing_category.js is loaded at the top of landing.php
-		//setView is defined in landing.php AFTER this setView
+
+		//called when user browses with back button
 		function setView(mode, force){
 			if(!force && $container.hasClass(mode)) return;
 			var $items = $stream.find('>li');

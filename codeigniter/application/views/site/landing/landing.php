@@ -101,10 +101,12 @@
 		<!-- populate landing timeline if products exist -->
 		<div class="wrapper-content landing_page">
 		<?php
-		//$productDetails loaded in landing controller in index()
+		//$productDetails loaded in landing controller in index() line 106
 		if (count($productDetails)>0){
 			?>
+			<!-- top menu bar -->
 			<div class="top-menu">
+				<!-- sort button in top menu bar -->
 				<ul class="sorting">
 				<?php if ($mainCategories->num_rows()>0){?>
 					<li>
@@ -141,10 +143,10 @@
 				<?php } ?>
 				</ul>
 
-				<!-- build the viewer icons list so user can select Classic, Grid, or Compact view mode -->
+				<!-- build the viewer icons list in top menu bar so user can select Classic, Grid, or Compact view mode -->
 				<!-- do not think that these "onclic" events do anything, took them out and "current" was still appended to class of button that gets clicked -->
 				<!-- also when "onclic" was removed, the correct class "vertical", "classic", or "normal" was still added to the div class "container timeline" -->
-				<!-- jquery handles the click of these btns on line 541 below -->
+				<!-- jquery handles the click of these btns on line 699 below -->
 				<div class="viewer">
 					<ul>
 						<li class="classic"><a href="#"
@@ -179,9 +181,12 @@
 				<!-- stream loads the pictures of the products -->
 				<ol class="stream">
 				<?php
-				//stream pictures in blocks of 3
+				//load the stream pictures in blocks of 3
+				//not sure why he does 3 exactly
 				for ($i=0;$i<count($productArr);$i=$i+3){
 					if (isset($productArr[$i]->id)){
+						//grab the first image for the product
+						//use dummyImage if no image exists
 						$imgArr = explode(',', $productArr[$i]->image);
 						$img = 'dummyProductImage.jpg';
 						foreach ($imgArr as $imgVal){
@@ -216,6 +221,7 @@
 						tuserid="<?php echo $productArr[$i]->user_id;?>">
 						<div class="figure-item">
 							<!-- span class="pre"></span -->
+							<!-- load user picture for classic view, not displayed in grid and vertical view -->
 							<a
 								href="<?php if ($productArr[$i]->user_id != '0'){echo base_url().'user/'.$productArr[$i]->user_name;}else {echo base_url().'user/administrator';}?>"
 								class="vcard <?php echo $force_login;?>">
@@ -225,6 +231,7 @@
 										<img src="images/users/<?php echo $productArr[$i]->thumbnail;?>">
 									<?php }?>
 							</a>
+							<!-- load link to product and setup product image settings for each possible view -->
 							<a href="<?php echo $prodLink;?>"
 								class="figure-img <?php echo $force_login;?>">
 								<span
@@ -248,10 +255,13 @@
 										data-width="310"
 										data-height="310">
 								</span>
+								<!-- load product name for classic and grid view, not displayed in vertical -->
 								<span
 									class="figcaption"><?php echo $productArr[$i]->product_name;?>
 								</span>
 							</a>
+							<!-- load price and seller detail for product -->
+							<!-- displayed differently for each view -->
 							<em class="figure-detail">
 								<?php if (!isset($productArr[$i]->web_link)){?>
 									<span class="price"><?php echo $currencySymbol;?> <?php echo $productArr[$i]->sale_price;?>
@@ -272,6 +282,8 @@
 									</em>
 								</span>
 							</em>
+							<!-- load list of functions including "Add to List", "Comment", "Share", and "View Comment" -->
+							<!-- each view displays different combinations of the four groups -->
 							<ul class="function">
 								<li class="list"><a href="#">Add to List</a></li>
 								<li class="cmt"><a href="#">Comment</a></li>
@@ -289,6 +301,7 @@
 								</li>
 								<li class="view-cmt"><a href="#">5 comments</a></li>
 							</ul>
+							<!-- load button to like the product -->
 							<a href="#" item_img_url="images/product/<?php echo $img;?>"
 								tid="<?php echo $productArr[$i]->seller_product_id;?>"
 								class="button <?php echo $fancyClass;?>"
@@ -536,10 +549,13 @@
 				}
 				?>
 				</ol>
+				<!-- load the infinate scrolling div -->
 				<div id="infscr-loading" style="display: none;">
 					<!--img alt='Loading...' src="/_ui/images/site/common/ajax-loader.gif"-->
 					<span class="loading">Loading...</span>
 				</div>
+				<!-- load the pagination div -->
+				<!-- $paginationDisplay set in landing controller line 81 -->
 				<div class="pagination" style="display: none">
 				<?php if ($force_login != 'force_login'){echo $paginationDisplay;} ?>
 				</div>
@@ -550,33 +566,38 @@
 			?>
 			<!-- no products exist, display "No products available" -->
 			<div id="content">
+				<!-- noproducts style set in line 5 -->
 				<p class="noproducts">
 				<?php if($this->lang->line('product_not_avail') != '') { echo stripslashes($this->lang->line('product_not_avail')); } else echo "No products available"; ?>
 				</p>
 				<?php }?>
-				<!-- / content -->
+				<!-- load footer -->
 				<?php
 				$this->load->view('site/templates/footer_menu');
 				?>
 				<style>
-<!--
-.timeline #footer {
-	position: relative;
-	width: 98%;
-	bottom: 0;
-	padding: 0 10px;
-}
+				<!--
+		    .timeline #footer {
+			    position: relative;
+			    width: 98%;
+			    bottom: 0;
+			    padding: 0 10px;
+		    }
 
-.timeline #footer ul.footer-nav {
-	text-align: left;
-	line-height: 1.6;
-	padding: 0;
-}
--->
-</style>
+		    .timeline #footer ul.footer-nav {
+			    text-align: left;
+			    line-height: 1.6;
+			    padding: 0;
+		    }
+		    -->
+        </style>
 			</div>
-			<a href="#header" id="scroll-to-top"><span><?php if($this->lang->line('signup_jump_top') != '') { echo stripslashes($this->lang->line('signup_jump_top')); } else echo "Jump to top"; ?>
-			</span> </a>
+			<!-- scroll to top button -->
+			<a href="#header" id="scroll-to-top">
+				<span>
+					<?php if($this->lang->line('signup_jump_top') != '') { echo stripslashes($this->lang->line('signup_jump_top')); } else echo "Jump to top"; ?>
+				</span>
+			</a>
 		</div>
 		<!-- / container -->
 	</div>
@@ -608,7 +629,10 @@ jQuery(function($){
 		var $latest = $stream.find('>#'+latest_id).removeAttr('id'),
 	 	    $first = $stream.find('>#'+first_id).removeAttr('id'),
 		    $target=$(), viewMode;
+
 		// merge sameuser thing
+		// see if any adjacent products are from same seller
+		// remove "clear" class from the same seller's next products??
 		var userid = $latest.attr('tuserid');
 		var $currents = $latest.prevUntil('li[tuserid!='+userid+"]");
 		var $nexts = $latest.nextUntil('li[tuserid!='+userid+"]");
@@ -628,26 +652,38 @@ jQuery(function($){
 //				$group.removeClass("big").addClass("mid");
 		}
 
+		//start $forceRefresh as "false"
 		var forceRefresh = false;
 
+		//target the new items
+		//if first time, all items are new
 		if(!$first.length || !$latest.length) {
 			$target = $stream.children('li');
 		} else {
+			//newThings are all li elements
+			//before the stream-first-item_ and after stream-latest-item_
 			var newThings = $first.prevAll('li');
 			if(newThings.length) forceRefresh = true;
 			$target = newThings.add($latest.nextAll('li'));
 		}
 
+		//set modifiers on first and last list elements in stream
 		$stream.find('>li:first-child').attr('id', first_id);
 		$stream.find('>li:last-child').attr('id', latest_id);
 
+		//container view is set at top of file line 42
+		//pulled from fc_control table
 	  viewMode = $container.hasClass('vertical') ? 'vertical' : ($container.hasClass('normal') ? 'grid':'classic');
 
+	  //setup grid view
+	  //set grid span's background image url using css
+	  //image url dependant on height of grid span
 		if(viewMode=='grid'){
 			$target.each(function(i,v,a){
 				var $li = $(this), src_g;
 				var $grid_img = $li.find(".figure.grid");
 
+				//set background image for products in grid mode
 				if($grid_img.height()>400){
 					$grid_img.css("background-image", "url("+$grid_img.attr("data-ori-url")+")");
 				}else{
@@ -656,6 +692,8 @@ jQuery(function($){
 			});
 		}
 
+		//setup vertical view
+		//show the infinite scrolling
 		if(viewMode == 'vertical'){
 			$('#infscr-loading').show();
 			setTimeout(function(){
@@ -665,13 +703,22 @@ jQuery(function($){
 		}
 
 	});
+
+	//trigger 'itemloaded' on stream to load products
+	//event listener starts above on line 628
 	$stream.trigger('itemloaded');
 
+	//set css on "tip" buttons
+	//bts are the list elements in the viewer div
+	//viewer is in top menu bar where user selects view mode "Classic, Vertical, or Grid"
 	$btns.each(function(){
 		var $tip = $(this).find('span');
 		$tip.css('margin-left', -$tip.width()/2 - 8 + 'px');
 	});
 
+	//clicking the view buttons adds "curent" class
+	//button triggers "setView" and passes "normal, vertical, or classic"
+	//setView defined below around line 744
 	$btns.click(function(event){
 		event.preventDefault();
 		if($wrapper.hasClass('anim')) return;
@@ -697,8 +744,10 @@ jQuery(function($){
 		if(curMode) setView(curMode, true);
 	});
 
+	//called when user clicks button in viewer div in top menu
+	//mode is "vertical, normal, or classic"
+	//force appears to always be true in this case
 	function setView(mode, force){
-		alert('here landing.php');
 		if(!force && $container.hasClass(mode)) return;
 		var $items = $stream.find('>li');
 
@@ -881,6 +930,8 @@ jQuery(function($){
 
 	};
 	var bottoms = [0,0,0,0];
+
+	//force_refresh is passed but overridden as "true" anyway line 942
 	function arrange(force_refresh){
 		var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH;
 
@@ -888,6 +939,9 @@ jQuery(function($){
 
 		$marker = $stream.find('li.page_marker_');
 		force_refresh = true;
+
+		//force_refresh is always true here
+		//he sets it true above, so $marker.length is never checked?
 		if(force_refresh || !$marker.length) {
 			force_refresh = true;
 			bottoms = [0,0,0,0];
@@ -906,6 +960,8 @@ jQuery(function($){
 		ITEM_WIDTH = 230;
 		COL_COUNT = 4;
 
+		//iterate over the list elements in the stream
+		//each list item is a product
 		for(i=0,c=$target.length; i < c; i++){
 			min = Math.min.apply(Math, bottoms);
 

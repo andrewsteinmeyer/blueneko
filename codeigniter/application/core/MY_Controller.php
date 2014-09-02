@@ -157,6 +157,7 @@ class MY_Controller extends CI_Controller {
 			$this->privStatus = '0';
 		}
 
+		// Load the pricing model
 		$this->load->model('pricing_model');
 		$condition_price_full = '';
 		$this->data['pricefulllist'] = $this->pricing_model->get_all_details(PRICING,array());
@@ -170,6 +171,8 @@ class MY_Controller extends CI_Controller {
 				}
 			}
 		}
+
+		// Load settings into $data for view variables
 		$this->data['title'] = $this->config->item('meta_title');;
 		$this->data['heading'] = '';
 		$this->data['flash_data'] = $this->session->flashdata('sErrMSG');
