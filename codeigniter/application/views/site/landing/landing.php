@@ -17,6 +17,7 @@
 	type="text/javascript" src="js/site/landing_category.js">
 </script>
 
+<!-- toggle category dropdown box to show/hide when you click it in the top-menu bar -->
 <script type="text/javascript">
 	function everythingView(val){
 		if($('#everythinglist'+val).css('display')=='block'){
@@ -102,6 +103,7 @@
 		<div class="wrapper-content landing_page">
 		<?php
 		//$productDetails loaded in landing controller in index() line 106
+		//if products exist then load the top-menu bar with dropdown category list and viewer
 		if (count($productDetails)>0){
 			?>
 			<!-- top menu bar -->
@@ -619,13 +621,17 @@ jQuery(function($){
 	$('.sns-minor').mouseover(function(){if ($(this).hasClass('toggle')==false) $(this).hide();});
 });
 </script>
+
 <script>
 (function(){
 	var $btns = $('.viewer li'), $stream = $('ol.stream'), $container=$('.container'), $wrapper = $('.wrapper-content'), first_id = 'stream-first-item_', latest_id = 'stream-latest-item_';
 	$stream.data('feed-url', '/user-stream-updates?new-timeline&feed=featured');
 
 	// show images as each image is loaded
+	//initially triggered below in line 711
 	$stream.on('itemloaded', function(){
+		alert('loaded');
+
 		var $latest = $stream.find('>#'+latest_id).removeAttr('id'),
 	 	    $first = $stream.find('>#'+first_id).removeAttr('id'),
 		    $target=$(), viewMode;
@@ -660,8 +666,8 @@ jQuery(function($){
 		if(!$first.length || !$latest.length) {
 			$target = $stream.children('li');
 		} else {
-			//newThings are all li elements
-			//before the stream-first-item_ and after stream-latest-item_
+			//newThings are all li elements before the stream-first-item_ and after stream-latest-item_
+			//if items before stream-first-item_ then forceRefresh
 			var newThings = $first.prevAll('li');
 			if(newThings.length) forceRefresh = true;
 			$target = newThings.add($latest.nextAll('li'));
@@ -684,6 +690,8 @@ jQuery(function($){
 				var $grid_img = $li.find(".figure.grid");
 
 				//set background image for products in grid mode
+				//if the "figure grid" span is greather than 400, use the data-ori-url
+				//else, use the data-310-url
 				if($grid_img.height()>400){
 					$grid_img.css("background-image", "url("+$grid_img.attr("data-ori-url")+")");
 				}else{
@@ -694,10 +702,14 @@ jQuery(function($){
 
 		//setup vertical view
 		//show the infinite scrolling
+		//arrange the products in the stream
 		if(viewMode == 'vertical'){
+			//shows "Loading.." while arranging
 			$('#infscr-loading').show();
 			setTimeout(function(){
+				alert('view vertical going to arrange 710 in landing.php');
 				arrange(forceRefresh);
+				//hide "Loading.." after arranging
 				$('#infscr-loading').hide();
 			},10);
 		}
@@ -705,7 +717,7 @@ jQuery(function($){
 	});
 
 	//trigger 'itemloaded' on stream to load products
-	//event listener starts above on line 628
+	//'itemloaded' event listener starts above on line 628
 	$stream.trigger('itemloaded');
 
 	//set css on "tip" buttons
@@ -716,9 +728,9 @@ jQuery(function($){
 		$tip.css('margin-left', -$tip.width()/2 - 8 + 'px');
 	});
 
-	//clicking the view buttons adds "curent" class
+	//clicking the view buttons adds "current" class
 	//button triggers "setView" and passes "normal, vertical, or classic"
-	//setView defined below around line 744
+	//setView defined below around line 753
 	$btns.click(function(event){
 		event.preventDefault();
 		if($wrapper.hasClass('anim')) return;
@@ -731,13 +743,14 @@ jQuery(function($){
 		$btns.find('a.current').removeClass('current');
 		$btn.find('a').addClass('current');
 
-		//grab the class on the button and set the view
-		//to that particular class
+		//grab the class on the button that is clicked
+		//set the view to that particular class
 		if(/\b(normal|vertical|classic)\b/.test($btn.attr('class'))){
 			setView(RegExp.$1);
 		}
 	});
 
+	//register redraw event
 	$wrapper.on('redraw', function(event){
 		var curMode = '';
 		if(/\b(normal|vertical|classic)\b/.test($container.attr('class'))) curMode = RegExp.$1;
@@ -746,22 +759,30 @@ jQuery(function($){
 
 	//called when user clicks button in viewer div in top menu
 	//mode is "vertical, normal, or classic"
-	//force appears to always be true in this case
 	function setView(mode, force){
+		//return if this view is alreay currently set
 		if(!force && $container.hasClass(mode)) return;
 		var $items = $stream.find('>li');
 
+		//only load 100
 		if($items.length>100){
 			$items.filter(":eq(100)").nextAll().detach();
 		}
 
+		//if window does not have Modernizr
+		//cannot do fancy fade so need to set opacity to 1 and trigger after-fadein
+		//after-fadein event calls done()
 		if(!window.Modernizr || !Modernizr.csstransitions ){
 			$stream.addClass('loading');
+			//not sure where before-fadeout event is registered
 			$wrapper.trigger('before-fadeout');
 			$stream.removeClass('loading');
+			//before-fadein is registered in line 1163, calls swapContent()
 			$wrapper.trigger('before-fadein');
 			switchTo(mode);
 
+			//set grid background image url
+			//image depends on height of listing element
 			if(mode=='normal'){
 				$items.each(function(i,v,a){
 					var $li = $(this);
@@ -775,11 +796,16 @@ jQuery(function($){
 				});
 			}
 
+			//set opacity to viewable and trigger after-fadein
+			//after-fadein is registered in line 1148
+			//after-fadein calls done()
 			$stream.find('>li').css('opacity',1);
 			$wrapper.trigger('after-fadein');
 			return;
 		}
 
+		//don't see before-fadeout registered anywhere yet
+		//add "anim" class to wrapper and "loading" class to stream
 		$wrapper.trigger('before-fadeout').addClass('anim');
 		$stream.addClass('loading');
 		var item,
@@ -794,12 +820,15 @@ jQuery(function($){
 		// get visible elements
 		for(i=0,c=$items.length; i < c; i++){
 			item = $items[i];
+			// think he is checking if item is within the view
+			// he tried hiding the out of view elements, but they are commented out?
 			if (offsetTop + item.offsetTop + item.offsetHeight < sc + hh) {
 				//item.style.visibility = 'hidden';
 			} else if (offsetTop + item.offsetTop > sc + wh) {
 				//item.style.visibility = 'hidden';
 				break;
 			} else {
+				//add visible items to array
 				visibles[visibles.length] = item;
 			}
 		}
@@ -809,19 +838,27 @@ jQuery(function($){
 		for(i=0,c=Math.min(visibles.length,10),thefirst=null; i < c; i++){
 			v = visibles[i];
 
+			//find top and leftmost item in the list
+			//that should be first element in stream
 			if( !thefirst || (thefirst.offsetLeft > v.offsetLeft) || (thefirst.offsetLeft == v.offsetLeft && thefirst.offsetTop > v.offsetTop) ) {
 				thefirst = v;
 			}
 		}
 
+		//skip fadeout and go ahead and fade in if no visible products
 		if(visibles.length==0) fadeIn();
+
 		// fade out elements using delay based on the distance between each element and the first element.
 		for(i=0,c=visibles.length; i < c; i++){
 			v = visibles[i];
 
+			//set timeout delay for opacity on the element
+			//setting opacity to 0 to fade out
 			d = Math.sqrt(Math.pow((v.offsetLeft - thefirst.offsetLeft),2) + Math.pow(Math.max(v.offsetTop-thefirst.offsetTop,0),2));
 			delayOpacity(v, 0, d/5);
 
+			//if we have reached the last product in list
+			//then setup fadeIn
 			if(i == c -1){
 				setTimeout(fadeIn,300+d/5);
 			}
@@ -855,6 +892,7 @@ jQuery(function($){
 				});
 			}
 
+			//remove "loading" class from stream and remove "anim" class from wrapper
 			$stream.removeClass('loading');
 			$wrapper.removeClass('anim');
 
@@ -933,6 +971,8 @@ jQuery(function($){
 
 	//force_refresh is passed but overridden as "true" anyway line 942
 	function arrange(force_refresh){
+		alert('arranging in landing.php');
+
 		var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH;
 
 		var ts = new Date().getTime();
@@ -962,6 +1002,7 @@ jQuery(function($){
 
 		//iterate over the list elements in the stream
 		//each list item is a product
+		//set the top and left css depending upon the item location in list
 		for(i=0,c=$target.length; i < c; i++){
 			min = Math.min.apply(Math, bottoms);
 
@@ -988,11 +1029,18 @@ jQuery(function($){
 			bottoms[x] = bottoms[x] + nh + 20;
 		}
 
+		//set the height of the stream
+		//depends on how many rows of products
 		$stream.height(Math.max.apply(Math, bottoms));
 
 	};
+
+	//register event listener for "arrange"
 	$wrapper.on('arrange', function(){ arrange(true); });
 
+	//set up click listener for notibar
+	//when clicked, delete info from jStorage and trigger 'itemloaded'
+	//then, set product image url if grid mode
 	$notibar = $('.new-content');
 	$notibar.off('click').on('click', function(){
 		setTimeout(function(){
@@ -1002,6 +1050,8 @@ jQuery(function($){
 		    $.jStorage.deleteKey("first-following");
 			$stream.trigger('itemloaded');
 
+			//if normal mode (aka grid mode)
+			//then set the background image url based upon the span height
 			if( $container.hasClass("normal") ){
 				$stream.find("li").each(function(i,v,a){
 					var $li = $(this), src_g;
@@ -1143,9 +1193,13 @@ jQuery(function($){
 		$stream.attr("loc", ($feedtabs.filter(".current").attr("data-feed")||"featured") );
 	})
 
+	//when would "vertical" ever equal string "classic" wtf
 	if("vertical"=="classic"){
 		$wrapper.trigger("arrange");
 	}
+
+	//this event is registered in site/main4.js around line 1578
+	//calls prefetch() in site/main4.js line 1444
 	$(window).trigger("prefetch.infiniteshow");
 
 	$stream.delegate('.figure-item',"mouseover",function(){

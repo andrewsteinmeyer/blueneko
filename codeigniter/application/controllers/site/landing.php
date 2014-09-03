@@ -90,6 +90,7 @@ class Landing extends MY_Controller {
 		$totalAffilProducts = $this->product_model->get_total_records(USER_PRODUCTS);
 		//the sum of the two groups
 		$this->data['totalProducts'] = $totalAffilProducts->row()->total+$totalSellingProducts->row()->total;
+
 		//product_control setting in fc_control table
 		if($layoutList->row()->product_control == 'affiliates'){
 			$sellingProductDetails = array();
@@ -105,6 +106,7 @@ class Landing extends MY_Controller {
 		//populate $productDetails for landing.php page
 		$this->data['productDetails'] = $this->product_model->get_sorted_array($sellingProductDetails,$affiliateProductDetails,'created','desc');
 
+		//route to landing view
 		$this->load->view('site/landing/landing',$this->data);
 	}
 

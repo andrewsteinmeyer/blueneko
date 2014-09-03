@@ -3,8 +3,9 @@ jQuery(function($) {
 	var $btns = $('.viewer li'), $stream = $('ol.stream'), $container=$('.container'), $wrapper = $('.wrapper-content'), first_id = 'stream-first-item_', latest_id = 'stream-latest-item_';
 
 	//called in landing.php line 125
-	//toggles this category in list as "active"
-	//updates dropdown button with current category
+	//toggles the selected category in the product dropdown list as "active"
+	//updates dropdown button in top-menu bar with current category
+	//clicking on the category calls loadPage() in line 23 and passes url that is set on data-category
 	$('.sorting .category a').click(function(){
 		var $this = $(this), url = $this.data('category'), text = $this.text();
 		if(url) loadPage(url,true);
@@ -14,12 +15,16 @@ jQuery(function($) {
 		$('.sorting .category').hide();
 	});
 
+	alert('landing_categoy');
+
 
 	$.infiniteshow({itemSelector:'#content .stream > li'});
 
 	//fired off when user navigates with browser buttons
 	//see line 409
 	function loadPage(url, skipSaveHistory){
+		alert('loadpage in landing_category');
+
 		var $win     = $(window),
 			$stream  = $('#content ol.stream'),
 			$lis     = $stream.find('>li'),
@@ -34,8 +39,9 @@ jQuery(function($) {
 		$('#infscr-loading').show();
 
 
-
 		function arrange(force_refresh){
+			alert('arrange in landing_category');
+
 			var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH;
 
 			var ts = new Date().getTime();
@@ -91,7 +97,7 @@ jQuery(function($) {
 
 		};
 
-		//called when user browses with back button
+		//called when user browses with history buttons
 		function setView(mode, force){
 			if(!force && $container.hasClass(mode)) return;
 			var $items = $stream.find('>li');
@@ -137,6 +143,7 @@ jQuery(function($) {
 				i, c, v, d, animated = 0;
 
 			// get visible elements
+			// items are each product in the list
 			for(i=0,c=$items.length; i < c; i++){
 				item = $items[i];
 				if (offsetTop + item.offsetTop + item.offsetHeight < sc + hh) {
@@ -154,12 +161,16 @@ jQuery(function($) {
 			for(i=0,c=Math.min(visibles.length,10),thefirst=null; i < c; i++){
 				v = visibles[i];
 
+				//find top and leftmost item in the list
+				//that should be first element in stream
 				if( !thefirst || (thefirst.offsetLeft > v.offsetLeft) || (thefirst.offsetLeft == v.offsetLeft && thefirst.offsetTop > v.offsetTop) ) {
 					thefirst = v;
 				}
 			}
 
+			//go ahead and fade in if no visible products
 			if(visibles.length==0) fadeIn();
+
 			// fade out elements using delay based on the distance between each element and the first element.
 			for(i=0,c=visibles.length; i < c; i++){
 				v = visibles[i];
@@ -182,6 +193,7 @@ jQuery(function($) {
 
 				var i, c, v, thefirst, COL_COUNT, visibles = [], item;
 
+				//find all of the elements again if the length of products does not equal the child nodes in stream
 				if($items.length !== $stream.get(0).childNodes.length || $items.get(0).parentNode !== $stream.get(0)) $items = $stream.find('>li');
 				$stream.height($stream.parent().height());
 
@@ -296,12 +308,15 @@ jQuery(function($) {
 			history.pushState({url:url}, document.title, url);
 		}
 		location.args = $.parseString(location.search.substr(1));
-*/		$.ajax({
+
+		//jas:  is this ever called?????
+
+*/		alert("before ajax");
+			$.ajax({
 			type : 'GET',
 			url  : url,
 			dataType : 'html',
 			success  : function(html){
-
 				var $html = $($.trim(html)),
 				    $more = $('.pagination > a'),
 				    $new_more = $html.find('.pagination > a');
@@ -402,6 +417,8 @@ jQuery(function($) {
 		}
 	})();
 
+	//set up event listener for when user clicks browser buttons
+	//call loadPage() in line 25 when user clicks browser buttons
 	$(window).on('popstate', function(event){
 		var e = event.originalEvent;
 		if(!e || !e.state) return;
@@ -409,6 +426,7 @@ jQuery(function($) {
 		loadPage(event.originalEvent.state.url, true);
 	});
 
+	//add url to history
 	if(window.history && history.pushState){
 		history.pushState({url:location.href}, document.title, location.href);
 	}

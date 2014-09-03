@@ -1379,6 +1379,7 @@ jQuery(function($){
 			ignorePrefecth = false;
 			lastFetchedUrl = null;
 
+		//setup keys for jStorage
 		var keys = {
 			timestamp : 'fancy.'+options.dataKey+'.timestamp.'+loc,
 			stream  : 'fancy.'+options.dataKey+'.stream.'+loc,
@@ -1388,7 +1389,7 @@ jQuery(function($){
 		};
 
 		(function(){
-			var data      = $.jStorage.get(keys.stream, ''),
+			var data    = $.jStorage.get(keys.stream, ''),
 				latest    = $.jStorage.get(keys.latest, ''),
 				nextURL   = $.jStorage.get(keys.nextURL, ''),
 				timestamp = $.jStorage.get(keys.timestamp, 0);
@@ -1471,10 +1472,13 @@ jQuery(function($){
 		}
 
 		function onScroll() {
-
 			url = $url.attr('href');
+
+			alert('onscroll');
+
 			if (calling || !url || options.disabled) return;
 
+			//set this to keep it from calling while already requesting
 			calling = true;
 
 			var rest = docHeight() - $doc.scrollTop();
@@ -1483,18 +1487,24 @@ jQuery(function($){
 				return;
 			}
 
+			//show the #infscrl-loading selector
+			//displays "Loading..."
 			var $loader = $(options.loaderSelector).show();
 
 			function appendThings(data){
-                if (options.disabled) {
-                    $.jStorage.deleteKey(keys.prefetch);
-                    return;
-                }
+        if (options.disabled) {
+          $.jStorage.deleteKey(keys.prefetch);
+          return;
+        }
 				var $sandbox = $('<div>'),
 				    $contentBox = $(options.itemSelector).parent(),
 					$next, $rows;
+
 //				$sandbox[0].innerHTML = data.replace(/^[\s\S]+<body.+?>|<((?:no)?script|header|nav)[\s\S]+?<\/\1>|<\/body>[\s\S]+$/ig, '');
 				$sandbox[0].innerHTML = data;
+
+				//nextSelector is next a.btn-more in paginationDisplay variable
+				//paginationDisplay is used at the bottom of the landing page
 				$next = $sandbox.find(options.nextSelector);
 //				$rows = $sandbox.find(options.itemSelector).parent().html();
 				$rows = $sandbox.find(options.itemSelector).parent().html();
