@@ -1,4 +1,5 @@
 jQuery(function($) {
+
 	var code = null;
 	var $btns = $('.viewer li'), $stream = $('ol.stream'), $container=$('.container'), $wrapper = $('.wrapper-content'), first_id = 'stream-first-item_', latest_id = 'stream-latest-item_';
 
@@ -8,14 +9,19 @@ jQuery(function($) {
 	//clicking on the category calls loadPage() in line 23 and passes url that is set on data-category
 	$('.sorting .category a').click(function(){
 		var $this = $(this), url = $this.data('category'), text = $this.text();
+
+		//loadPage called on the url for the category
+		//
 		if(url) loadPage(url,true);
+
+		//set button text to category and set clicked category class to 'active'
 		$('.top-menu-btn').text(text);
 		$('.top-menu .sorting a').removeClass('active');
 		$this.addClass('active');
 		$('.sorting .category').hide();
 	});
 
-	alert('landing_category load up');
+	if (DEBUG == true ) { alert('landing_category: loading up jquery'); }
 
 
 	$.infiniteshow({itemSelector:'#content .stream > li'});
@@ -23,7 +29,7 @@ jQuery(function($) {
 	//fired off when user navigates with browser buttons
 	//see line 409
 	function loadPage(url, skipSaveHistory){
-		alert('loadpage in landing_category');
+		if (DEBUG ==true) {alert('landing_category: loadPage'); }
 
 		var $win     = $(window),
 			$stream  = $('#content ol.stream'),
@@ -40,7 +46,7 @@ jQuery(function($) {
 
 
 		function arrange(force_refresh){
-			alert('arrange in landing_category');
+			if (DEBUG ==true ) {alert('landing category: arrange'); }
 
 			var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH;
 
@@ -100,7 +106,7 @@ jQuery(function($) {
 		//called when user browses with history buttons
 		function setView(mode, force){
 
-			alert('setView in landing_category');
+			if (DEBUG == true) {alert('landing_category: setView'); }
 			if(!force && $container.hasClass(mode)) return;
 			var $items = $stream.find('>li');
 
@@ -110,11 +116,13 @@ jQuery(function($) {
 
 			if(!window.Modernizr || !Modernizr.csstransitions ){
 				$stream.addClass('loading');
+				//not sure if before-fadeout event is registered anywhere?
 				$wrapper.trigger('before-fadeout');
 				$stream.removeClass('loading');
 				$wrapper.trigger('before-fadein');
 				switchTo(mode);
 
+				//set up correct picture for grid mode based upon height of span .figure.grid
 				if(mode=='normal'){
 					$items.each(function(i,v,a){
 						var $li = $(this);
@@ -128,13 +136,16 @@ jQuery(function($) {
 					});
 				}
 
+				//go ahead and set opacity to 1
 				$stream.find('>li').css('opacity',1);
 				$wrapper.trigger('after-fadein');
 				return;
 			}
 
+			//can't find anywhere that before-fadeout event is registered??
 			$wrapper.trigger('before-fadeout').addClass('anim');
 			$stream.addClass('loading');
+
 			var item,
 			    $visibles, visibles = [], prevVisibles, thefirst,
 			    offsetTop = $stream.offset().top,
@@ -186,6 +197,7 @@ jQuery(function($) {
 			}
 
 			function fadeIn(){
+				if (DEBUG == true) {alert('landing_category fadein(): called from setView'); }
 				$wrapper.trigger('before-fadein');
 
 				if($wrapper.hasClass("wait")){
@@ -312,7 +324,7 @@ jQuery(function($) {
 		}
 		location.args = $.parseString(location.search.substr(1));
 
-*/		alert("loadPage ajax called from browser button in landing_category line 316 " + url);
+*/		if (DEBUG == true) {alert("loadPage() ajax: about to call  " + url); }
 			//ajax call on loadPage() to find the pagination div on the requested page
 			//append the pagination div for the requested page and remove pagination div from current page
 			$.ajax({

@@ -13,6 +13,11 @@
 }
 </style>
 
+<script>
+	//toggle alert boxes for tracing spaghetti
+	var DEBUG = true;
+</script>
+
 <script
 	type="text/javascript" src="js/site/landing_category.js">
 </script>
@@ -630,7 +635,7 @@ jQuery(function($){
 	// show images as each image is loaded
 	//initially triggered below in line 711
 	$stream.on('itemloaded', function(){
-		alert('item loaded event called landing.php 633');
+		if (DEBUG == true) { alert('landing.php: itemloaded'); }
 
 		var $latest = $stream.find('>#'+latest_id).removeAttr('id'),
 	 	    $first = $stream.find('>#'+first_id).removeAttr('id'),
@@ -704,11 +709,11 @@ jQuery(function($){
 		//show the infinite scrolling
 		//arrange the products in the stream
 		if(viewMode == 'vertical'){
-			alert('landing.php loading set timeout to arrange');
+			if (DEBUG == true ) {alert('landing.php onitemloaded: if view is vertical, set timeout to arrange'); }
 			//shows "Loading.." while arranging
 			$('#infscr-loading').show();
 			setTimeout(function(){
-				alert('view vertical going to arrange 710 in landing.php');
+				if (DEBUG == true) { alert('landing.php onitemloaded: timeout expired, calling arrange in landing.php'); }
 				arrange(forceRefresh);
 				//hide "Loading.." after arranging
 				$('#infscr-loading').hide();
@@ -761,7 +766,7 @@ jQuery(function($){
 	//called when user clicks button in viewer div in top menu
 	//mode is "vertical, normal, or classic"
 	function setView(mode, force){
-		alert('setView in landing.php');
+		if (DEBUG ==true) { alert('setView in landing.php'); }
 		//return if this view is alreay currently set
 		if(!force && $container.hasClass(mode)) return;
 		var $items = $stream.find('>li');
@@ -973,7 +978,7 @@ jQuery(function($){
 
 	//force_refresh is passed but overridden as "true" anyway line 942
 	function arrange(force_refresh){
-		alert('arranging in landing.php');
+		if (DEBUG == true) { alert('landing.php: arrange'); }
 
 		var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH;
 

@@ -1363,7 +1363,7 @@ jQuery(function($){
 	};
 
 	$.infiniteshow = function(opt) {
-		alert('infinite show called, in main4.js now and about to call onScroll');
+		if (DEBUG == true) {alert('main.js infiniteshow: now and about to call onScroll'); }
 
 		options = $.extend({}, defaults, opt);
 
@@ -1477,7 +1477,7 @@ jQuery(function($){
 		function onScroll() {
 			url = $url.attr('href');
 
-			alert('onscroll in main4.js called in infinite show about to ajax call ' + url);
+			if (DEBUG == true) {alert('main4.js onScroll: called in infiniteshow, about to ajax call to ' + url); }
 
 			if (calling || !url || options.disabled) return;
 
@@ -1534,7 +1534,7 @@ jQuery(function($){
 						'title'   : ''
 					});
 				}
-				alert('appendThings in main4.js about to fire itemloaded again in landing.php');
+				if (DEBUG == true) {alert('main4.js appendThings: about to fire itemloaded again in landing.php'); }
 				$('ol.stream').trigger('itemloaded');
 				if(!options.newtimeline)
 					$win.trigger('savestream.infiniteshow');
@@ -1562,7 +1562,7 @@ jQuery(function($){
 				}
 				$.jStorage.deleteKey(keys.prefetch);
 
-				alert('onScroll in main4.js ajax call to ' + url);
+				if (DEBUG == true) {alert('main4.js onScroll: firing ajax call to ' + url); }
 
 					$.ajax({
 						url : url,
