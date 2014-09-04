@@ -1363,6 +1363,8 @@ jQuery(function($){
 	};
 
 	$.infiniteshow = function(opt) {
+		alert('infinite show called, in main4.js now and about to call onScroll');
+
 		options = $.extend({}, defaults, opt);
 
 		var $win = $(window),
@@ -1442,6 +1444,7 @@ jQuery(function($){
 		};
 
 		function prefetch(url){
+			alert('prefetch in mainjs line 1445');
 			prefetching = true;
 			if(!url || typeof url == 'object') url = $url.attr('href');
 			if(url==lastFetchedUrl){
@@ -1474,7 +1477,7 @@ jQuery(function($){
 		function onScroll() {
 			url = $url.attr('href');
 
-			alert('onscroll');
+			alert('onscroll in main4.js called in infinite show about to ajax call ' + url);
 
 			if (calling || !url || options.disabled) return;
 
@@ -1491,6 +1494,9 @@ jQuery(function($){
 			//displays "Loading..."
 			var $loader = $(options.loaderSelector).show();
 
+			//onScroll fires off ajax request to grab next page
+			//appendThings takes the data returned and appends it to the stream
+			//it then looks for the a.btn-more in the returned html and sets url to the next page
 			function appendThings(data){
         if (options.disabled) {
           $.jStorage.deleteKey(keys.prefetch);
@@ -1509,7 +1515,11 @@ jQuery(function($){
 //				$rows = $sandbox.find(options.itemSelector).parent().html();
 				$rows = $sandbox.find(options.itemSelector).parent().html();
 
+				//append the next page of products to the stream
 				$contentBox.append($rows);
+
+				//if another page is found in the returned html
+				//then set up that href to be queried next and call onScroll again
 				if ($next.length) {
 					url = $next.attr('href');
 					$url.attr({
@@ -1524,6 +1534,7 @@ jQuery(function($){
 						'title'   : ''
 					});
 				}
+				alert('appendThings in main4.js about to fire itemloaded again in landing.php');
 				$('ol.stream').trigger('itemloaded');
 				if(!options.newtimeline)
 					$win.trigger('savestream.infiniteshow');
@@ -1531,9 +1542,10 @@ jQuery(function($){
 				// Triggers scroll event again to get more data if the page doesn't have enough data still.
 				onScroll();
 
-                if (options.post_callback != null) {
-                    options.post_callback($rows);
-                }
+        if (options.post_callback != null) {
+          options.post_callback($rows);
+        }
+
 				$('<style></style>').appendTo($(document.body)).remove();
 			}
 
@@ -1549,6 +1561,9 @@ jQuery(function($){
 					return;
 				}
 				$.jStorage.deleteKey(keys.prefetch);
+
+				alert('onScroll in main4.js ajax call to ' + url);
+
 					$.ajax({
 						url : url,
 						dataType : options.dataType,

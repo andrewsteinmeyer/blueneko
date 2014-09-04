@@ -630,7 +630,7 @@ jQuery(function($){
 	// show images as each image is loaded
 	//initially triggered below in line 711
 	$stream.on('itemloaded', function(){
-		alert('loaded');
+		alert('item loaded event called landing.php 633');
 
 		var $latest = $stream.find('>#'+latest_id).removeAttr('id'),
 	 	    $first = $stream.find('>#'+first_id).removeAttr('id'),
@@ -704,6 +704,7 @@ jQuery(function($){
 		//show the infinite scrolling
 		//arrange the products in the stream
 		if(viewMode == 'vertical'){
+			alert('landing.php loading set timeout to arrange');
 			//shows "Loading.." while arranging
 			$('#infscr-loading').show();
 			setTimeout(function(){
@@ -760,6 +761,7 @@ jQuery(function($){
 	//called when user clicks button in viewer div in top menu
 	//mode is "vertical, normal, or classic"
 	function setView(mode, force){
+		alert('setView in landing.php');
 		//return if this view is alreay currently set
 		if(!force && $container.hasClass(mode)) return;
 		var $items = $stream.find('>li');
@@ -1114,10 +1116,12 @@ jQuery(function($){
 		}
 
 		var swapContent = function(){
+			alert('here swap before');
 			if(!result){
 				setTimeout(swapContent,50);
 				return;
 			}
+			alert('here swap after');
 
 			if($wrapper.hasClass("swapping")) return;
 			$wrapper.addClass("swapping");
@@ -1200,6 +1204,7 @@ jQuery(function($){
 
 	//this event is registered in site/main4.js around line 1578
 	//calls prefetch() in site/main4.js line 1444
+	//not sure if it ever picks it up properly
 	$(window).trigger("prefetch.infiniteshow");
 
 	$stream.delegate('.figure-item',"mouseover",function(){

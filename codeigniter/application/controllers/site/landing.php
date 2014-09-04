@@ -75,7 +75,7 @@ class Landing extends MY_Controller {
 			$qry_str = '?pg='.$newPage;
 		}
 
-		//set up pagination link and append query string that created above
+		//set up pagination link and append query string created above
 		//newPage is the next page number
 		$paginationDisplay  = '<a title="'.$newPage.'" class="btn-more" href="'.base_url().$qry_str.'" style="display: none;">See More Products</a>';
 		$this->data['paginationDisplay'] = $paginationDisplay;

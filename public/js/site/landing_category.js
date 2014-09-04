@@ -15,7 +15,7 @@ jQuery(function($) {
 		$('.sorting .category').hide();
 	});
 
-	alert('landing_categoy');
+	alert('landing_category load up');
 
 
 	$.infiniteshow({itemSelector:'#content .stream > li'});
@@ -99,6 +99,8 @@ jQuery(function($) {
 
 		//called when user browses with history buttons
 		function setView(mode, force){
+
+			alert('setView in landing_category');
 			if(!force && $container.hasClass(mode)) return;
 			var $items = $stream.find('>li');
 
@@ -231,6 +233,7 @@ jQuery(function($) {
 
 				$wrapper.addClass('anim');
 
+				//hide the visible elements
 				$(visibles).css({opacity:0,visibility:''});
 				COL_COUNT = Math.floor($stream.width()/$(visibles[0]).width());
 
@@ -309,16 +312,19 @@ jQuery(function($) {
 		}
 		location.args = $.parseString(location.search.substr(1));
 
-		//jas:  is this ever called?????
-
-*/		alert("before ajax");
+*/		alert("loadPage ajax called from browser button in landing_category line 316 " + url);
+			//ajax call on loadPage() to find the pagination div on the requested page
+			//append the pagination div for the requested page and remove pagination div from current page
 			$.ajax({
 			type : 'GET',
 			url  : url,
 			dataType : 'html',
 			success  : function(html){
 				var $html = $($.trim(html)),
+						//current page's pagination div
 				    $more = $('.pagination > a'),
+				    //the requested page's pagination div
+				    //the requested page is from the browser history buttons
 				    $new_more = $html.find('.pagination > a');
 
 				if($html.find('#content > ol.stream').text() == ''){
@@ -358,6 +364,7 @@ jQuery(function($) {
 					}*/
 
 					// reset infiniteshow
+					// infiniteshow will trigger onScroll()
 					$.infiniteshow({itemSelector:'#content .stream > li'});
 				//	$win.trigger('scroll');
 					viewMode = $container.hasClass('vertical') ? 'vertical' : ($container.hasClass('normal') ? 'grid':($container.hasClass('grid') ? 'grid':'classic'));
@@ -423,6 +430,7 @@ jQuery(function($) {
 		var e = event.originalEvent;
 		if(!e || !e.state) return;
 
+		//load the page that we are navigating back to with browser history
 		loadPage(event.originalEvent.state.url, true);
 	});
 
