@@ -46,7 +46,7 @@ jQuery(function($) {
 
 
 		function arrange(force_refresh){
-			if (DEBUG ==true ) {alert('landing category: arrange'); }
+			if (DEBUG ==true ) {alert('landing category: arrange()'); }
 
 			var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH;
 
@@ -106,7 +106,7 @@ jQuery(function($) {
 		//called when user browses with history buttons
 		function setView(mode, force){
 
-			if (DEBUG == true) {alert('landing_category: setView'); }
+			if (DEBUG == true) {alert('landing_category: setView()'); }
 			if(!force && $container.hasClass(mode)) return;
 			var $items = $stream.find('>li');
 
@@ -197,7 +197,7 @@ jQuery(function($) {
 			}
 
 			function fadeIn(){
-				if (DEBUG == true) {alert('landing_category fadein(): called from setView'); }
+				if (DEBUG == true) {alert('landing_category fadein(): called from landing_category setView'); }
 				$wrapper.trigger('before-fadein');
 
 				if($wrapper.hasClass("wait")){
@@ -271,6 +271,7 @@ jQuery(function($) {
 			};
 
 			function done(){
+			if (DEBUG == true) { alert("landing_category done(): called from landing_category fadein"); }
 				$wrapper.removeClass('anim');
 				/*if(prevVisibles && prevVisibles.length) {
 					for(var i=0,c=visibles.length; i < c; i++){
@@ -287,6 +288,7 @@ jQuery(function($) {
 
 
 			function switchTo(mode){
+				if (DEBUG == true) { alert("landing_category switchTo(): called from landing_category fadein"); }
 				var currentMode = $container.hasClass('vertical')?'vertical':($container.hasClass('classic')?'classic':'normal')
 				$container.removeClass('vertical normal classic').addClass(mode);
 				if(mode == 'vertical') {
@@ -324,9 +326,10 @@ jQuery(function($) {
 		}
 		location.args = $.parseString(location.search.substr(1));
 
-*/		if (DEBUG == true) {alert("loadPage() ajax: about to call  " + url); }
+*/		if (DEBUG == true) {alert("landing_page loadPage(): ajax call to  " + url); }
 			//ajax call on loadPage() to find the pagination div on the requested page
 			//append the pagination div for the requested page and remove pagination div from current page
+			//then call setView after
 			$.ajax({
 			type : 'GET',
 			url  : url,
@@ -379,6 +382,7 @@ jQuery(function($) {
 					// infiniteshow will trigger onScroll()
 					$.infiniteshow({itemSelector:'#content .stream > li'});
 				//	$win.trigger('scroll');
+					//set viewMode and call setView
 					viewMode = $container.hasClass('vertical') ? 'vertical' : ($container.hasClass('normal') ? 'grid':($container.hasClass('grid') ? 'grid':'classic'));
 					if(viewMode == 'vertical'){
 						setView(viewMode,true);

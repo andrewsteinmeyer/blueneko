@@ -15,7 +15,7 @@
 
 <script>
 	//toggle alert boxes for tracing spaghetti
-	var DEBUG = true;
+	var DEBUG = false;
 </script>
 
 <script
@@ -151,9 +151,11 @@
 				</ul>
 
 				<!-- build the viewer icons list in top menu bar so user can select Classic, Grid, or Compact view mode -->
-				<!-- do not think that these "onclic" events do anything, took them out and "current" was still appended to class of button that gets clicked -->
-				<!-- also when "onclic" was removed, the correct class "vertical", "classic", or "normal" was still added to the div class "container timeline" -->
-				<!-- jquery handles the click of these btns on line 699 below -->
+				<!-- current" class is appended to button current view mode -->
+				<!-- not sure what he is doing here with the onclic? adds class of 'classic' to timeline,
+						 removes wrapper-content class which initially is "wrapper-content landing_page", and then adds it back just "wrapper-content"
+						 I do not think onclic is working after inspecting elements -->
+				<!-- jquery handles the click of these btns around line 741 below -->
 				<div class="viewer">
 					<ul>
 						<li class="classic"><a href="#"
@@ -633,7 +635,7 @@ jQuery(function($){
 	$stream.data('feed-url', '/user-stream-updates?new-timeline&feed=featured');
 
 	// show images as each image is loaded
-	//initially triggered below in line 711
+	//initially triggered below in line 729
 	$stream.on('itemloaded', function(){
 		if (DEBUG == true) { alert('landing.php: itemloaded'); }
 
@@ -763,11 +765,11 @@ jQuery(function($){
 		if(curMode) setView(curMode, true);
 	});
 
-	//called when user clicks button in viewer div in top menu
+	//called when user clicks button in viewer div in top-menu
 	//mode is "vertical, normal, or classic"
 	function setView(mode, force){
-		if (DEBUG ==true) { alert('setView in landing.php'); }
-		//return if this view is alreay currently set
+		if (DEBUG ==true) { alert('landing.php: setView()'); }
+		//return if this view is already currently set
 		if(!force && $container.hasClass(mode)) return;
 		var $items = $stream.find('>li');
 
@@ -872,6 +874,7 @@ jQuery(function($){
 		}
 
 		function fadeIn(){
+			if (DEBUG == true) {alert('landing.php fadein(): called from landing.php setView'); }
 			$wrapper.trigger('before-fadein');
 
 			if($wrapper.hasClass("wait")){
@@ -944,6 +947,7 @@ jQuery(function($){
 		};
 
 		function done(){
+			if (DEBUG == true) { alert("landing.php done(): called from landing.php fadein"); }
 			$wrapper.removeClass('anim');
 			/*if(prevVisibles && prevVisibles.length) {
 				for(var i=0,c=visibles.length; i < c; i++){
@@ -958,8 +962,10 @@ jQuery(function($){
 			setTimeout(function(){ element.style.opacity = opacity }, Math.floor(interval));
 		};
 
-
+		//sets "vertical, normal, or classic" to "container timeline"
+		//calls arrange to organize product pictures
 		function switchTo(mode){
+			if (DEBUG == true) { alert("landing.php switchTo(): called from landing.php fadein"); }
 			var currentMode = $container.hasClass('vertical')?'vertical':($container.hasClass('classic')?'classic':'normal')
 			$container.removeClass('vertical normal classic').addClass(mode);
 			if(mode == 'vertical') {
@@ -978,7 +984,7 @@ jQuery(function($){
 
 	//force_refresh is passed but overridden as "true" anyway line 942
 	function arrange(force_refresh){
-		if (DEBUG == true) { alert('landing.php: arrange'); }
+		if (DEBUG == true) { alert('landing.php: arrange()'); }
 
 		var i, c, x, w, h, nh, min, $target, $marker, $first, $img, COL_COUNT, ITEM_WIDTH;
 
@@ -1207,7 +1213,7 @@ jQuery(function($){
 		$wrapper.trigger("arrange");
 	}
 
-	//this event is registered in site/main4.js around line 1578
+	//this event is registered in site/main4.js around line 1608
 	//calls prefetch() in site/main4.js line 1444
 	//not sure if it ever picks it up properly
 	$(window).trigger("prefetch.infiniteshow");

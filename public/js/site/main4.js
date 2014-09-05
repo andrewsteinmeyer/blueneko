@@ -1396,7 +1396,10 @@ jQuery(function($){
 				nextURL   = $.jStorage.get(keys.nextURL, ''),
 				timestamp = $.jStorage.get(keys.timestamp, 0);
 
+			//unset the prefetch key in jStorage
 			$.jStorage.deleteKey(keys.prefetch);
+
+			//clear out jStorage keys if values are empty
 			if(!data || !latest || !nextURL || (+new Date - timestamp > ttl)){
 				for(var name in keys) $.jStorage.deleteKey(keys[name]);
 				return;
@@ -1474,6 +1477,9 @@ jQuery(function($){
 			});
 		}
 
+		//ajax calls to next page and loads products if there are any
+		//recursively calls itself until all products are loaded
+		//loads in batch of 6 since limitPaging is set to 6 in controllers/site/landing.php
 		function onScroll() {
 			url = $url.attr('href');
 
@@ -1507,10 +1513,14 @@ jQuery(function($){
 					$next, $rows;
 
 //				$sandbox[0].innerHTML = data.replace(/^[\s\S]+<body.+?>|<((?:no)?script|header|nav)[\s\S]+?<\/\1>|<\/body>[\s\S]+$/ig, '');
+
+				//dump the data request returned into the sandbox
 				$sandbox[0].innerHTML = data;
 
 				//nextSelector is next a.btn-more in paginationDisplay variable
 				//paginationDisplay is used at the bottom of the landing page
+				//paginationDisplay only is visible if there are more products to display
+				//there will only be $next if paginationDisplay is visible
 				$next = $sandbox.find(options.nextSelector);
 //				$rows = $sandbox.find(options.itemSelector).parent().html();
 				$rows = $sandbox.find(options.itemSelector).parent().html();
@@ -1527,6 +1537,9 @@ jQuery(function($){
 						'title'   : $next.attr('title')
 					});
 					if(options.prefetch) prefetch($next.attr('href'));
+				//if another page is not found
+				//then there are no more products
+				//
 				} else {
 					url = '';
 					$url.attr({
@@ -1549,12 +1562,14 @@ jQuery(function($){
 				$('<style></style>').appendTo($(document.body)).remove();
 			}
 
+			//call to appendThings in prefetch mode
 			if( options.prefetch && !prefetching && (data=$.jStorage.get(keys.prefetch)) ){
 				$.jStorage.deleteKey(keys.prefetch);
 				appendThings(data);
 				calling = false;
 				$loader.hide();
 			}else{
+				//already prefetching, setTimeout and call onScroll
 				if(prefetching) {
 					calling = false;
 					setTimeout(onScroll,300);
@@ -1564,6 +1579,8 @@ jQuery(function($){
 
 				if (DEBUG == true) {alert('main4.js onScroll: firing ajax call to ' + url); }
 
+				//ajax call to url in the a.btn-more href attribute
+				//loads the retrieved products onto the stream
 					$.ajax({
 						url : url,
 						dataType : options.dataType,
