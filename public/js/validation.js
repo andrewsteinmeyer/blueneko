@@ -60,6 +60,7 @@ $(document).ready(function(){
 	 *
 	 */
 	$('.gnb-notification').mouseenter(function(){
+		//don't load if already loading
 		if($(this).hasClass('cntLoading'))return;
 		$(this).addClass('cntLoading');
 		$('.feed-notification').show();

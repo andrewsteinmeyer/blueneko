@@ -263,9 +263,9 @@ if($loginCheck != ''){
 		<a href="notifications" class="mn-notification">
 			<span class="hide"><?php if($this->lang->line('referrals_notification') != '') { echo stripslashes($this->lang->line('referrals_notification')); } else echo "Notifications"; ?></span>
 			<em class="ic-notification">
-<!-- 				<i class="count">5</i>
- -->			</em>
+      <!-- 	<i class="count">5</i>-->		</em>
 		</a>
+    <!-- notifications loaded onmouseenter in validation.js -->
 		<div class="feed-notification">
 			<i class="arrow"></i>
 			<h4><?php if($this->lang->line('referrals_notification') != '') { echo stripslashes($this->lang->line('referrals_notification')); } else echo "Notifications"; ?></h4>
@@ -288,9 +288,8 @@ if($loginCheck != ''){
 <!-- display MiniCartView -->
 <?php echo $MiniCartViewSet; ?>
 </div>
-<!-- display User dropdown -->
  <?php } ?>
-
+          <!-- display User dropdown -->
           <?php if ($loginCheck != ''){
           	if ($userDetails->row()->thumbnail == ''){
           		$thumbImg = 'user-thumb1.png';
@@ -314,7 +313,7 @@ if($loginCheck != ''){
              </li>
              </ul>
 		  <?php }?>
-
+          <!-- display search box -->
           <form action="<?php base_url();?>shopby/all" class="search">
             <fieldset>
             <input type="text" name="q" class="text" id="search-query" placeholder="<?php if($this->lang->line('header_search') != '') { echo stripslashes($this->lang->line('header_search')); } else echo "Search"; ?>" value="" autocomplete="off"/>

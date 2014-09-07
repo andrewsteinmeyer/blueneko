@@ -580,8 +580,11 @@ class User extends MY_Controller {
 							 */
 	}
 
+	//called when a user clicks on a product's like button
 	public function add_fancy_item(){
 		$returnStr['status_code'] = 0;
+		//check login status
+		//cannot like if not logged in
 		if ($this->checkLogin('U') == ''){
 			if($this->lang->line('u_must_login') != '')
 			$returnStr['message'] = $this->lang->line('u_must_login');
@@ -589,8 +592,10 @@ class User extends MY_Controller {
 			$returnStr['message'] = 'You must login';
 		}else {
 			$tid = $this->input->post('tid');
+			//see to see if user has already liked product
 			$checkProductLike = $this->user_model->get_all_details(PRODUCT_LIKES,array('product_id'=>$tid,'user_id'=>$this->checkLogin('U')));
 			if ($checkProductLike->num_rows() == 0){
+				//grab the product details
 				$productDetails = $this->user_model->get_all_details(PRODUCT,array('seller_product_id'=>$tid));
 				if ($productDetails->num_rows() == 0){
 					$productDetails = $this->user_model->get_all_details(USER_PRODUCTS,array('seller_product_id'=>$tid));
@@ -600,6 +605,7 @@ class User extends MY_Controller {
 				}
 				if ($productDetails->num_rows()==1){
 					$likes = $productDetails->row()->likes;
+					//insert the like for the product/user/ip into the fc_product_likes table
 					$dataArr = array('product_id'=>$tid,'user_id'=>$this->checkLogin('U'),'ip'=>$this->input->ip_address());
 					$this->user_model->simple_insert(PRODUCT_LIKES,$dataArr);
 					$actArr = array(
@@ -1211,6 +1217,7 @@ class User extends MY_Controller {
 		}
 	}
 
+	//called when user clicks on fancy button
 	public function add_list_when_fancyy(){
 		$returnStr['status_code'] = 0;
 		$returnStr['listCnt'] = '';
@@ -1228,26 +1235,36 @@ class User extends MY_Controller {
 			$count = 1;
 
 			//Adding lists which was not already created from product categories
+			//grab the details of the product that was "fancy'd"
 			$productDetails = $this->user_model->get_all_details(PRODUCT,array('seller_product_id'=>$tid));
 			if ($productDetails->num_rows()==0){
+				//try to find in list of products that the user is selling if not found above
 				$productDetails = $this->user_model->get_all_details(USER_PRODUCTS,array('seller_product_id'=>$tid));
 			}
 			if ($productDetails->num_rows()==1){
+				//grab the categories for the product
 				$productCatArr = explode(',', $productDetails->row()->category_id);
 				if (count($productCatArr)>0){
 					$productCatNameArr = array();
+					//iterate over all categories for the product
 					foreach ($productCatArr as $productCatID){
 						if ($productCatID != ''){
+							//get details for this category
 							$productCatDetails = $this->user_model->get_all_details(CATEGORY,array('id'=>$productCatID));
 							if ($productCatDetails->num_rows()==1){
+								//save the first category name to variable while iterating over categories
 								if ($count == 1){
 									$firstCatName = $productCatDetails->row()->cat_name;
 								}
+								//get the lists for this user for this category from fc_lists
 								$listConditionArr = array('name'=>$productCatDetails->row()->cat_name,'user_id'=>$this->checkLogin('U'));
 								$listCheck = $this->user_model->get_all_details(LISTS_DETAILS,$listConditionArr);
+								//save the list details for first category
 								if ($count == 1){
 									$firstCatDetails = $listCheck;
 								}
+								//if this list has not been created for this user for this category
+								//then add it to the fc_lists and increment the list count for the user in fc_users
 								if ($listCheck->num_rows()==0){
 									$this->user_model->simple_insert(LISTS_DETAILS,$listConditionArr);
 									$userDetails = $this->user_model->get_all_details(USERS,array('id'=>$this->checkLogin('U')));
@@ -1268,34 +1285,39 @@ class User extends MY_Controller {
 			//Check the product id in list table
 			$checkListsArr = $this->user_model->get_list_details($tid,$this->checkLogin('U'));
 
+			//if product is not currently in any lists
 			if ($checkListsArr->num_rows() == 0){
-
-				//Add the product id under the first category name
+				//if we have a category name for the product
 				if ($firstCatName!=''){
 					$listConditionArr = array('name'=>$firstCatName,'user_id'=>$this->checkLogin('U'));
+					//if we don't have a list already created for this user for this category
 					if ($firstCatDetails == '' || $firstCatDetails->num_rows() == 0){
 						$dataArr = array('product_id'=>$tid);
 					}else {
+					//add the product_id to the existing array of product_id's in the list
 						$productRowArr = explode(',', $firstCatDetails->row()->product_id);
 						$productRowArr[] = $tid;
 						$newProductRowArr = implode(',', $productRowArr);
 						$dataArr = array('product_id'=>$newProductRowArr);
 					}
+					//update the list's set of product_id's in the database
+					//the list is for this user, for this product's category
 					$this->user_model->update_details(LISTS_DETAILS,$dataArr,$listConditionArr);
 					$listCntDetails = $this->user_model->get_all_details(LISTS_DETAILS,$listConditionArr);
+					//append the name of this list as a list element to listCnt
 					if ($listCntDetails->num_rows()==1){
 						array_push($uniqueListNames, $listCntDetails->row()->id);
 						$returnStr['listCnt'] .= '<li class="selected"><label for="'.$listCntDetails->row()->id.'"><input type="checkbox" checked="checked" id="'.$listCntDetails->row()->id.'" name="'.$listCntDetails->row()->id.'">'.$listCntDetails->row()->name.'</label></li>';
 					}
 				}
 			}else {
-
 				//Get all the lists which contain this product
 				foreach ($checkListsArr->result() as $checkListsRow){
 					array_push($uniqueListNames, $checkListsRow->id);
 					$returnStr['listCnt'] .= '<li class="selected"><label for="'.$checkListsRow->id.'"><input type="checkbox" checked="checked" id="'.$checkListsRow->id.'" name="'.$checkListsRow->id.'">'.$checkListsRow->name.'</label></li>';
 				}
 			}
+			//get all of the lists for this user
 			$all_lists = $this->user_model->get_all_details(LISTS_DETAILS,array('user_id'=>$this->checkLogin('U')));
 			if ($all_lists->num_rows()>0){
 				foreach ($all_lists->result() as $all_lists_row){

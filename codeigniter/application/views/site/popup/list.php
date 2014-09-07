@@ -1,5 +1,6 @@
 <?php if ($loginCheck != ''){?>
 <!-- add_to_list overlay -->
+<!-- show_when_fancy is setting to true even when I change it in database to "No"?? -->
 <div style="display:none;" show_when_fancy="<?php if ($userDetails->row()->display_lists == 'Yes'){echo 'true';}else {echo 'false';}?>" class="popup ly-title update add-to-list animated" id="add-to-list-new" style="margin-top: 5px; margin-left: 750.5px; opacity: 1; display: block;" tid="">
 	<div class="default" style="display: block;">
 		<p class="ltit"><?php if($this->lang->line('header_add_list') != '') { echo stripslashes($this->lang->line('header_add_list')); } else echo "Add to List"; ?></p>
@@ -11,11 +12,10 @@
 			<div class="item-categories">
 				<form action="#">
 					<fieldset class="list-categories">
-					<div class="list-box">
-					<ul>
-
-
-</ul></div></fieldset>
+						<div class="list-box">
+							<ul></ul>
+						</div>
+					</fieldset>
 					<fieldset class="new-list">
 						<i class="ic-plus"></i>
 						<input type="text" placeholder="<?php if($this->lang->line('header_create_nwlist') != '') { echo stripslashes($this->lang->line('header_create_nwlist')); } else echo "Create New List"; ?>" id="quick-create-list" name="list_name">
@@ -47,7 +47,7 @@
 		<fieldset>
 			<div class="frm">
 				<p><b class="stit"><?php if($this->lang->line('header_title') != '') { echo stripslashes($this->lang->line('header_title')); } else echo "Title"; ?></b> <input type="text" placeholder="<?php if($this->lang->line('header_enter_title') != '') { echo stripslashes($this->lang->line('header_enter_title')); } else echo "Enter a title"; ?>" class="right" name="list_name"></p>
-				
+
 			</div>
 			<?php if ($mainCategories->num_rows()>0){?>
 			<div class="frm">
@@ -55,12 +55,12 @@
 					<b class="stit"><?php if($this->lang->line('header_category') != '') { echo stripslashes($this->lang->line('header_category')); } else echo "Category"; ?></b>
 					<select class="right" id="categories-for-new-list" name="category_id">
 					<option value="0"><?php if($this->lang->line('header_select_cate') != '') { echo stripslashes($this->lang->line('header_select_cate')); } else echo "Select category"; ?></option>
-					<?php 
+					<?php
                       foreach ($mainCategories->result() as $row){
                       	if ($row->cat_name != ''){
                       ?>
 					<option value="<?php echo $row->id;?>"><?php echo $row->cat_name;?></option>
-					<?php 
+					<?php
                       	}
                       }
 					?>
@@ -68,13 +68,13 @@
 				</p>
 			</div>
 			<?php }?>
- 			
+
 			<div class="frm">
 				<b class="stit"><?php if($this->lang->line('header_contributors') != '') { echo stripslashes($this->lang->line('header_contributors')); } else echo "Contributors"; ?></b>
 				<div class="right">
 			<ul class="user-list">
 						<li>
-						<?php 
+						<?php
 						$img = 'user-thumb1.png';
 						if ($userDetails->row()->thumbnail != ''){
 							$img = $userDetails->row()->thumbnail;

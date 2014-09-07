@@ -4287,6 +4287,7 @@ jQuery(function($) {
       $coltext.val($.trim($coltext.val()).replace(regex, ''));
     })
     .end()
+    //dlg_list.obj setup end
 
   $usertext = $('#create-list-find-user');
   $coltext = $('#create-list-collaborators');
@@ -4326,6 +4327,10 @@ jQuery(function($) {
 
       event.preventDefault();
       //			alert(available_dlg);
+
+      //route to base_url() + login if require_login attr is set
+      //fancy buttons have require_login set to true
+      //clicking fancy buttons on products will redirect to login.php if not logged in
       if (login_require && login_require == 'true') return require_login();
 
       $this.addClass('loading');
@@ -4348,6 +4353,9 @@ jQuery(function($) {
 				dlg_list.open();
 			}
 */
+			//show_when_fancy is set in popup/list.php
+			//set from fc_user_details->display_lists
+			//show_when_fancy is setting to true even when I set the display_lists to "No"????
       if ((dlg_list.$obj.attr('show_when_fancy') == 'true') || sl) {
         $this.removeAttr('show_add_to_list');
         $list_popup.find('.list-categories ul').html('Loading...');
@@ -4359,18 +4367,22 @@ jQuery(function($) {
           },
           dataType: 'json',
           success: function(response) {
+          	//dump category lists in the ul list
             if (response.status_code == 1) {
               $list_popup.find('.list-categories ul').html(response.listCnt);
+              //if the item is wanted, set the text to "Wanted"
               if (response.wanted == 1) {
                 $('.btn-want').addClass('wanted').find('b').text('Wanted');
               }
             }
           }
         });
+        //open the list popup and set the product id
         dlg_list.open();
         dlg_list.$obj.attr('tid', tid);
       }
 
+      //set the image for the list popup to the product image
       $list_popup
       //				.find('.list-categories ul').html(loading_txt).end()
       .find('.fig-caption span').text(obj_name).end()
