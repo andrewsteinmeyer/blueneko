@@ -326,7 +326,7 @@ jQuery(function($) {
 		}
 		location.args = $.parseString(location.search.substr(1));
 
-*/		if (DEBUG == true) {alert("landing_page loadPage(): ajax call to  " + url); }
+*/		if (DEBUG == true) {alert("landing_category loadPage(): ajax call to  " + url); }
 			//ajax call on loadPage() to find the pagination div on the requested page
 			//append the pagination div for the requested page and remove pagination div from current page
 			//then call setView after

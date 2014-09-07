@@ -545,6 +545,10 @@ function quickSignup2(){
         }
     });
 }
+
+//register user from information entered in view/signup.php
+//posts info to site/user/registerUser
+//redirect to send-confirm-email if success
 function register_user(){
 	var fullname = $('.fullname').val();
 	var username = $('.username').val();

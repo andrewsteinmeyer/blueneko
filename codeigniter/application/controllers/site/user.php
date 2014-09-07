@@ -128,7 +128,8 @@ class User extends MY_Controller {
 		echo json_encode($returnStr);
 	}
 
-	//called from quickSignup2() in validation.js.  called as send-confirm-email, which routes to this function
+	//called from quickSignup2() in validation.js and also in register_user() in validation.js
+	//called as send-confirm-email, which routes to this function
 	//send register email to user that is registering
 	//redirect the user to either onboarding or create-brand
 	//depending if user is a brand or not
@@ -282,6 +283,8 @@ class User extends MY_Controller {
 
 	//routes to this when /signup path is hit in browser
 	public function signup_form(){
+		//if no fc_session_user_id
+		//then route to base
 		if ($this->checkLogin('U') != ''){
 			redirect(base_url());
 		}else {

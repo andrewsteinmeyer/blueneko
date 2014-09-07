@@ -1,7 +1,7 @@
-<?php 
+<?php
 @session_start();
 unset($_SESSION['token']);
-$social_login_session_array = $this->session->all_userdata(); 
+$social_login_session_array = $this->session->all_userdata();
 ?>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -38,7 +38,7 @@ if ($heading == ''){?>
 <!--[if lt IE 9]>
 <script src="js/site/html5shiv/dist/html5shiv.js"></script>
 <![endif]-->
-<?php 
+<?php
 $this->load->view('site/templates/theme_settings');
 ?>
 </head>
@@ -73,52 +73,52 @@ $this->load->view('site/templates/theme_settings');
 <div id="container-wrapper" class="sign">
   <div class="container signup update2">
     <div class="wrapper-content">
-     <!-- <h2>Join <?php echo $siteTitle;?> today</h2>-->        
-      <h2>    <?php foreach($layoutfulllist->result() as $layoutListRow){ 
-      
+     <!-- <h2>Join <?php echo $siteTitle;?> today</h2>-->
+      <h2>    <?php foreach($layoutfulllist->result() as $layoutListRow){
+
        if($layoutListRow->place == 'signup title'  ){
 	  echo  $layoutListRow->text; ?></h2>
-	<?php 
-			
+	<?php
+
 	  } } ?>
-      
-      
-        <h3 class="stit">    <?php foreach($layoutfulllist->result() as $layoutListRow){ 
-      
+
+
+        <h3 class="stit">    <?php foreach($layoutfulllist->result() as $layoutListRow){
+
        if($layoutListRow->place == 'signup description'){
 	  echo  $layoutListRow->text; ?></h3>
-	<?php 
-			
+	<?php
+
 	  } } ?>
       <h2> <?php if($this->lang->line('signup_join_msg') != '') { echo $site_join_msg; } else echo "Join".$siteTitle."today"; ?></h2>
       <div class="sns-login" <?php if($social_login_session_array['social_login_name'] != ''){?>style="display:none;"<?php }?>>
         <h3 class="stit"><?php if($this->lang->line('signup_connect_network') != '') { echo stripslashes($this->lang->line('signup_connect_network')); } else echo "Connect with a social network"; ?></h3>
         <ul class="sns-major">
- <?php 
+ <?php
 if ($this->config->item('facebook_app_id') != '' && $this->config->item('facebook_app_secret') != ''){
-?>         
+?>
           <li>
             <button class="btn-f fb facebook" onclick="window.location.href='<?php echo base_url().'facebook/user.php'; ?>'"><span class="icon ic-fb"><i></i></span> <b><?php if($this->lang->line('signup_facebook') != '') { echo stripslashes($this->lang->line('signup_facebook')); } else echo "Facebook"; ?></b></button>
           </li>
-<?php 
+<?php
 }
-?>     
-<?php 
+?>
+<?php
 if ($this->config->item('google_client_secret') != '' && $this->config->item('google_client_id') != '' && $this->config->item('google_redirect_url') != '' && $this->config->item('google_developer_key') != '' && is_file('google-login-mats/index.php')){
-?> 	     
+?>
           <li>
             <button class="btn-g google" onClick="window.location.href='<?php echo $authUrl; ?>'" id="fancy-g-signin" next="/settings/shipping"><span class="icon ic-gg"><i></i></span> <b><?php if($this->lang->line('signup_google') != '') { echo stripslashes($this->lang->line('signup_google')); } else echo "Google"; ?></b></button>
           </li>
- <?php 
+ <?php
 }
-?>  
-<?php 
+?>
+<?php
 if ($this->config->item('consumer_key') != '' && $this->config->item('consumer_secret') != ''){
-?>          
+?>
           <li>
             <button class="btn-t tw twitter" onClick="window.location.href='<?php echo base_url();?>twtest/redirect'"><span class="icon ic-tw"><i></i></span> <b><?php if($this->lang->line('signup_twitter') != '') { echo stripslashes($this->lang->line('signup_twitter')); } else echo "Twitter"; ?></b></button>
           </li>
-<?php 
+<?php
 }
 ?>
         </ul>
@@ -139,7 +139,7 @@ if ($this->config->item('consumer_key') != '' && $this->config->item('consumer_s
 				<p><span><?php echo $flash_data;?></span></p>
 			</div>
 			<?php } ?>
-             <?php 
+             <?php
 	   		$yoursitepage = str_replace("{SITENAME}",$siteTitle,$this->lang->line('signup_sitepage'));
 			$siteaccswrld = str_replace("{SITENAME}",$siteTitle,$this->lang->line('signup_access_wrld'));
 	  		 ?>
@@ -147,11 +147,11 @@ if ($this->config->item('consumer_key') != '' && $this->config->item('consumer_s
                 <fieldset class="frm email-frm" style="display:<?php if($social_login_session_array['social_login_name'] == '') echo 'none'; else 'block'; ?>">
                     <?php if($social_login_session_array['social_email_name'] == '') { ?>
                     <h3 class="stit"><?php if($this->lang->line('signup_with_emailaddrs') != '') { echo stripslashes($this->lang->line('signup_with_emailaddrs')); } else echo "Sign up with your email address"; ?></h3><?php } ?>
-                    
+
                    <?php if($social_login_session_array['social_email_name'] != '') { ?> <h3 class="stit">Your email address : <?php echo $social_login_session_array['social_email_name'];?> </h3><?php } ?>
-                    
-                    
-                    
+
+
+
                     <p><label class="label"><?php if($this->lang->line('signup_full_name') != '') { echo stripslashes($this->lang->line('signup_full_name')); } else echo "Full Name"; ?><span class="error-label" id="error-fullname"></span></label>
                     <input type="text" autofocus="autofocus" id="fullname" class="fullname" name="full_name" placeholder="" value="<?php echo $social_login_session_array['social_login_name'];?>"/></p>
                     <p><label class="label"><?php if($this->lang->line('signup_user_name') != '') { echo stripslashes($this->lang->line('signup_user_name')); } else echo "Username"; ?><span class="error-label" id="error-username"></span></label>
@@ -160,25 +160,29 @@ if ($this->config->item('consumer_key') != '' && $this->config->item('consumer_s
                    	<?php if($social_login_session_array['loginUserType'] != 'google') { ?>
                     <p><label class="label"><?php if($this->lang->line('signup_emailaddrs') != '') { echo stripslashes($this->lang->line('signup_emailaddrs')); } else echo "Email Address"; ?><span class="error-label" id="error-email"></span></label><?php } ?>
                     <input type="<?php if($social_login_session_array['loginUserType'] != 'google') echo 'text'; else echo 'hidden'; ?>" id="email" class="email" name="email" value="<?php echo $social_login_session_array['social_email_name'];?>" /><?php if($social_login_session_array['loginUserType'] != 'google') { ?></p><?php } ?>
-                    
+
                    <?php if($social_login_session_array['social_login_name'] == '') {?> <p><label class="label"><?php if($this->lang->line('signup_password') != '') { echo stripslashes($this->lang->line('signup_password')); } else echo "Password"; ?><span class="error-label" id="error-user_password"></span></label><?php } ?>
                     <?php $pwdLength = 10;
 
-			$userNewPwd = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $pwdLength);?>
+			              $userNewPwd = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, $pwdLength);?>
+                    <!-- he is setting up temporary password here, terrible design -->
                     <input type="<?php if($social_login_session_array['social_login_name'] == '') echo 'password'; else echo 'hidden'; ?>" id="user_password" class="password" name="password" placeholder="<?php if($this->lang->line('signup_min_chars') != '') { echo stripslashes($this->lang->line('signup_min_chars')); } else echo "Minimum 6 characters"; ?>" value="<?php if($social_login_session_array['social_login_name'] != '') echo $userNewPwd; ?>" /> <?php if($social_login_session_array['social_login_name'] == '') {?></p><?php } ?>
-                    
+
                     <input name="referrer" type="hidden" class="referrer" value="" />
                     <input name="invitation_key" type="hidden" class="invitation_key" value="" />
+                    <!-- he is putting csrf token in html, isn't that terrible practice? -->
                     <input type='hidden' name='csrfmiddlewaretoken' value='UFLfIU881eyZJbm7Bq0kUFZ9sVaWGh54' />
                     <input type='hidden' name='api_id' id="api_id"  value='<?php echo $social_login_session_array['social_login_unique_id'];?>' />
                     <input type='hidden' name='thumbnail' id='thumbnail' value='<?php echo $social_login_session_array['social_image_name'];?>' />
                     <input type='hidden' name='loginUserType' id='loginUserType' value='<?php if($social_login_session_array['loginUserType'] != '') echo $social_login_session_array['loginUserType']; else echo "normal";?>' />
-                    
+
                     <p><input type="checkbox" name="brandSt" class="brandSt" id="brandSt" />
                     <label for="brand_store" onClick="$(this).parents('p').find('input').toggleClass('checked');" class="brand"><?php if($this->lang->line('signup_im_brndstre') != '') { echo stripslashes($this->lang->line('signup_im_brndstre')); } else echo "I'm a brand or store"; ?></label>
                     <span class="tooltip"><i class="ic-q"></i><small><strong><?php if($this->lang->line('signup_for_brandstre') != '') { echo stripslashes($this->lang->line('signup_for_brandstre')); } else echo "For brands or stores"; ?></strong><br />
                    <?php if($this->lang->line('signup_access_wrld') != '') { echo $siteaccswrld; } else echo "Brands and stores may sign up to ".$siteTitle." and make their products available to millions of users across the world."; ?> <b></b></small></span></p>
+                    <!-- create account button -->
                     <p class="btn-area"><button class="btns-blue-embo sign" ><?php if($this->lang->line('signup_creat_myacc') != '') { echo stripslashes($this->lang->line('signup_creat_myacc')); } else echo "Create my account"; ?></button></p>
+                    <!-- go back button. show default and hide the email form -->
                     <p class="otherway"><a href="#" onClick="$('.sign .default').show();$('.sign .email-frm').hide();return false;"><?php if($this->lang->line('signup_goback') != '') { echo stripslashes($this->lang->line('signup_goback')); } else echo "Go back"; ?></a></p>
                 </fieldset>
 		</form>
@@ -209,18 +213,19 @@ jQuery(function($){
 });
 </script>
 <script>
+        var DEBUG = false;
         $.infiniteshow({
             itemSelector:'#content ol.stream > li',
             streamSelector:'#content ol.stream',
             dataKey:'home-new',
             post_callback: function($items){ $('ol.stream').trigger('itemloaded') },
             prefetch:true,
-            
+
             newtimeline:true
         })
         if($.browser.msie) $.infiniteshow.option('prepare',1000);
     </script>
-    <?php 
+    <?php
 if($this->config->item('google_verification_code')){ echo stripslashes($this->config->item('google_verification_code'));}
 ?>
 </body>
