@@ -228,7 +228,7 @@ if($loginCheck != ''){
           </ul>
         </div>
         <div class="right">
-<!-- if not logged in, Sign in button, otherwise notification button -->
+<!-- if not logged in, Sign in button, otherwise notification button and cart button -->
 <?php if ($loginCheck == ''){?>
   <ul class="gnb-wrap">
 	<li class="gnb"><a href="login" class="mn-signin"><?php if($this->lang->line('signup_sign_in') != '') { echo stripslashes($this->lang->line('signup_sign_in')); } else echo "Sign in"; ?></a></li>
@@ -259,6 +259,7 @@ if($loginCheck != ''){
 <div id="MiniCartViewDisp" style="float:left;">
 <ul class="gnb-wrap">
 	<li class="gnb none gnb-notification">
+    <!-- link to notifications, routes to site/notify/display_notifications -->
 		<a href="notifications" class="mn-notification">
 			<span class="hide"><?php if($this->lang->line('referrals_notification') != '') { echo stripslashes($this->lang->line('referrals_notification')); } else echo "Notifications"; ?></span>
 			<em class="ic-notification">

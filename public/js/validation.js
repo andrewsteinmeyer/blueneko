@@ -498,7 +498,11 @@ function editPictureProductsUser(val,imgId){
 				}
 			});
 }
+
+//used when user clicks "Signup" button in header nav
 //called in register popup template register.php
+//insert user into database with temp password
+//moves on to open the register popup, register popup calls quickSignup2() below
 function quickSignup(){
 	var dlg_signin = $.dialog('signin-overlay'),
     	dlg_register = $.dialog('register');
@@ -523,7 +527,9 @@ function quickSignup(){
         }
     });
 }
+
 //called in register popup template register.php
+//insert user into database and route to send-confirm-email if success
 function quickSignup2(){
 	var username = $('.quickSignup2 .username').val();
 	var email = $('.quickSignup2 .email').val();
@@ -546,7 +552,7 @@ function quickSignup2(){
     });
 }
 
-//register user from information entered in view/signup.php
+//register user from information entered in view/signup.php email form
 //posts info to site/user/registerUser
 //redirect to send-confirm-email if success
 function register_user(){

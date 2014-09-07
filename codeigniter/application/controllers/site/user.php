@@ -43,8 +43,10 @@ class User extends MY_Controller {
 	 *
 	 * Function for quick signup
 	 */
+	// used when user clicks "Signup" button in header nav
 	// called in validation.js in quickSignup() after user clicks on javascript::quickSignup() in register.js popup
 	// queries database to see if email address is available and passes back registration to register.js popup
+	// user does not have option to register as a brand like in signup.php
 	public function quickSignup(){
 		$email = $this->input->post('email');
 		$returnStr['success'] = '0';
@@ -54,6 +56,8 @@ class User extends MY_Controller {
 			if ($duplicateMail->num_rows()>0){
 				$returnStr['msg'] = 'Email id already exists';
 			}else {
+				//check to see if fullname already exists
+				//if so, then append random string to end
 				$fullname = substr($email, 0,strpos($email, '@'));
 				$checkAvail = $this->user_model->get_all_details(USERS,array('user_name'=>$fullname));
 				if ($checkAvail->num_rows()>0){
@@ -64,7 +68,7 @@ class User extends MY_Controller {
 				}
 				while (!$avail){
 					//think this is so that multiple users could have same name
-					//appending random number on the end
+					//appending random number on the end of fullname
 					$username = $fullname.rand(1111, 999999);
 					$checkAvail = $this->user_model->get_all_details(USERS,array('user_name'=>$username));
 					if ($checkAvail->num_rows()>0){
@@ -74,8 +78,9 @@ class User extends MY_Controller {
 					}
 				}
 				if ($avail){
+					//create randomized temp password to put in database
 					$pwd = $this->get_rand_str('6');
-					//update into database
+					//insert user into database
 					$this->user_model->insertUserQuick($fullname,$username,$email,$pwd);
 					//set username on session
 					$this->session->set_userdata('quick_user_name',$username);
@@ -97,7 +102,7 @@ class User extends MY_Controller {
 	 *
 	 * Function for quick signup update
 	 */
-	//called from validation.js in quickSignup2() when clicked in register.js popup
+	// called from validation.js in quickSignup2() when clicked in register.js popup
 	// user picks a username and password and clicks in register.js signup
 	// this gets checked against database
 	// if successful, quickSignup2() redirects to send-confirm-email, which routes to send_quick_register_mail
@@ -118,8 +123,9 @@ class User extends MY_Controller {
 			}else {
 				$pwd = $this->input->post('password');
 				$fullname = $this->input->post('fullname');
-				//update in database
+				//update user in database
 				$this->user_model->updateUserQuick($fullname,$username,$email,$pwd);
+				//set username on session
 				$this->session->set_userdata('quick_user_name',$username);
 				$returnStr['msg'] = 'Successfully registered';
 				$returnStr['success'] = '1';
@@ -138,7 +144,8 @@ class User extends MY_Controller {
 		if ($this->checkLogin('U') != ''){
 			redirect(base_url());
 		}else {
-			//grab the quick_user_name off of the session that we set in quickSignup() above
+			//grab the quick_user_name off of the session
+			//set in quickSignup() above as well as registerUser() below
 			$quick_user_name = $this->session->userdata('quick_user_name');
 			if ($quick_user_name == ''){
 				redirect(base_url());
@@ -146,7 +153,9 @@ class User extends MY_Controller {
 				$condition = array('user_name'=>$quick_user_name);
 				$userDetails = $this->user_model->get_all_details(USERS,$condition);
 				if ($userDetails->num_rows() == 1){
+					//send confirm mail to user
 					$this->send_confirm_mail($userDetails);
+					//set session info and timestamp
 					$this->login_after_signup($userDetails);
 					//clear out quick_user_name on session
 					$this->session->set_userdata('quick_user_name','');
@@ -162,6 +171,10 @@ class User extends MY_Controller {
 		}
 	}
 
+	//called in register_user in validation.js
+	//register_user is called when the user submits form for signup in signup.php
+	//user can register as a brand or as individual user
+	//register_user in validation.js will call send-confirm-email
 	public function registerUser(){
 		$returnStr['success'] = '0';
 		$unameArr = $this->config->item('unameArr');
@@ -186,7 +199,9 @@ class User extends MY_Controller {
 					if ($duplicateMail->num_rows()>0){
 						$returnStr['msg'] = 'Email id already exists';
 					}else {
+						//insert username into database
 						$this->user_model->insertUserQuick($fullname,$username,$email,$pwd,$brand);
+						//set username on session
 						$this->session->set_userdata('quick_user_name',$username);
 						$returnStr['msg'] = 'Successfully registered';
 						$returnStr['success'] = '1';
@@ -283,8 +298,9 @@ class User extends MY_Controller {
 
 	//routes to this when /signup path is hit in browser
 	public function signup_form(){
-		//if no fc_session_user_id
+		//if fc_session_user_id
 		//then route to base
+		//otherwise signup.php
 		if ($this->checkLogin('U') != ''){
 			redirect(base_url());
 		}else {
@@ -372,6 +388,7 @@ class User extends MY_Controller {
 	}
 
 	//login with user and update timestamp details in database
+	//called by send_quick_register_mail
 	public function login_after_signup($userDetails=''){
 		if ($userDetails->num_rows() == '1'){
 			$userdata = array(
