@@ -59,6 +59,8 @@ $(document).ready(function(){
 	 * Menu notifications hover
 	 *
 	 */
+	//show notification dropdown on mouseenter
+	//hide notification dropdown on mouseleave
 	$('.gnb-notification').mouseenter(function(){
 		//don't load if already loading
 		if($(this).hasClass('cntLoading'))return;
@@ -71,9 +73,13 @@ $(document).ready(function(){
 			url	: baseURL+'site/notify/getlatest',
 			dataType: 'json',
 			success: function(json){
+				//if success:
+				//load notification dropdown list and show link for 'See all notifications'
 				if(json.status_code == 1){
 					$('.feed-notification').find('.loading').after(json.content);
 					$('.moreFeed').show();
+				//if no list:
+				//load empty notification list 'no notifications' and hide link for 'See all notifications'
 				}else if(json.status_code == 2){
 					$('.feed-notification').find('.loading').after(json.content);
 					$('.moreFeed').hide();
