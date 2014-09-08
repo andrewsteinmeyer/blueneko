@@ -46,7 +46,6 @@ class Landing extends MY_Controller {
 	public function index(){
 		$this->data['heading'] = '';
 
-
 		$cat = $this->input->get('c');
 		$whereCond = $qry_str = '';
 		//grab category from input in url if there is one

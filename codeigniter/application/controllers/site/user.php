@@ -594,8 +594,8 @@ class User extends MY_Controller {
 			$tid = $this->input->post('tid');
 			//see to see if user has already liked product
 			$checkProductLike = $this->user_model->get_all_details(PRODUCT_LIKES,array('product_id'=>$tid,'user_id'=>$this->checkLogin('U')));
+			//if user hasn't like, grab product details
 			if ($checkProductLike->num_rows() == 0){
-				//grab the product details
 				$productDetails = $this->user_model->get_all_details(PRODUCT,array('seller_product_id'=>$tid));
 				if ($productDetails->num_rows() == 0){
 					$productDetails = $this->user_model->get_all_details(USER_PRODUCTS,array('seller_product_id'=>$tid));
@@ -603,8 +603,10 @@ class User extends MY_Controller {
 				}else {
 					$productTable = PRODUCT;
 				}
+				//if product is found
 				if ($productDetails->num_rows()==1){
 					$likes = $productDetails->row()->likes;
+
 					//insert the like for the product/user/ip into the fc_product_likes table
 					$dataArr = array('product_id'=>$tid,'user_id'=>$this->checkLogin('U'),'ip'=>$this->input->ip_address());
 					$this->user_model->simple_insert(PRODUCT_LIKES,$dataArr);
@@ -614,6 +616,7 @@ class User extends MY_Controller {
 						'user_id'		=>	$this->checkLogin('U'),
 						'activity_ip'	=>	$this->input->ip_address()
 					);
+					//insert the activity into the user activity table
 					$this->user_model->simple_insert(USER_ACTIVITY,$actArr);
 					$datestring = "%Y-%m-%d %h:%i:%s";
 					$time = time();
@@ -625,35 +628,42 @@ class User extends MY_Controller {
 						'activity_ip'	=>	$this->input->ip_address(),
 						'created'		=>	$createdTime
 					);
+					//insert the activity into the notifications table
 					$this->user_model->simple_insert(NOTIFICATIONS,$actArr);
+
+					//increment like count for product
 					$likes++;
 					$dataArr = array('likes'=>$likes);
 					$condition = array('seller_product_id'=>$tid);
 					$this->user_model->update_details($productTable,$dataArr,$condition);
+
+					//increment the total like count for the user
 					$totalUserLikes = $this->data['userDetails']->row()->likes;
 					$totalUserLikes++;
 					$this->user_model->update_details(USERS,array('likes'=>$totalUserLikes),array('id'=>$this->checkLogin('U')));
+
 					/*************Send Message to TWITTER*************/
 					if($this->data['userDetails']->row()->twitter_id!=''){
-					     $TwitterId = $this->data['userDetails']->row()->twitter_id;
-						 if($productDetails->row()->image!=''){
+						$TwitterId = $this->data['userDetails']->row()->twitter_id;
+						if($productDetails->row()->image!=''){
 							$image = base_url()."images/product/".$productDetails->row()->image;
-						 }else{
-						   $image = base_url()."images/product/no_image.gif";
-						 }
-						 $short_url = $this->user_model->get_all_details(SHORTURL,array('id'=>$productDetails->row()->short_url_id));
-						 if($short_url->num_rows() ==1){
-						   $url = base_url().'t/'.$short_url->row()->id;
-						 }
-						    include_once './twittercard/twitter-card.php';
-							$card = new Twitter_Card();
-							$card->setURL( 'http://www.nytimes.com/2012/02/19/arts/music/amid-police-presence-fans-congregate-for-whitney-houstons-funeral-in-newark.html' );
-							$card->setTitle( 'Parade of Fans for Houston\'s Funeral' );
-							$card->setDescription( 'NEWARK - The guest list and parade of limousines with celebrities emerging from them seemed more suited to a red carpet event in Hollywood or New York than than a gritty stretch of Sussex Avenue near the former site of the James M. Baxter Terrace public housing project here.' );
-							$card->setImage( 'http://graphics8.nytimes.com/images/2012/02/19/us/19whitney-span/19whitney-span-articleLarge.jpg', 600, 330 );
-	$send_tweets = $this->twconnect->tw_post('https://api.twitter.com/1.1/statuses/update.json',$card->asHTML());
-						    print_r($send_tweets);
+						} else {
+						  $image = base_url()."images/product/no_image.gif";
+						}
 
+						$short_url = $this->user_model->get_all_details(SHORTURL,array('id'=>$productDetails->row()->short_url_id));
+						if($short_url->num_rows() ==1){
+						  $url = base_url().'t/'.$short_url->row()->id;
+						}
+
+						include_once './twittercard/twitter-card.php';
+						$card = new Twitter_Card();
+						$card->setURL( 'http://www.nytimes.com/2012/02/19/arts/music/amid-police-presence-fans-congregate-for-whitney-houstons-funeral-in-newark.html' );
+						$card->setTitle( 'Parade of Fans for Houston\'s Funeral' );
+						$card->setDescription( 'NEWARK - The guest list and parade of limousines with celebrities emerging from them seemed more suited to a red carpet event in Hollywood or New York than than a gritty stretch of Sussex Avenue near the former site of the James M. Baxter Terrace public housing project here.' );
+						$card->setImage( 'http://graphics8.nytimes.com/images/2012/02/19/us/19whitney-span/19whitney-span-articleLarge.jpg', 600, 330 );
+						$send_tweets = $this->twconnect->tw_post('https://api.twitter.com/1.1/statuses/update.json',$card->asHTML());
+						print_r($send_tweets);
 					 }
 					 /*************************END*********************/
 
@@ -680,6 +690,8 @@ class User extends MY_Controller {
 						}
 						*/
 					$returnStr['status_code'] = 1;
+
+				// else no product found
 				}else {
 					if($this->lang->line('prod_not_avail') != '')
 					$returnStr['message'] = $this->lang->line('prod_not_avail');
