@@ -382,17 +382,21 @@ class Product extends MY_Controller {
 	}
 
 	public function display_product_detail(){
+		//product id passed in with url
 		$pid = $this->uri->segment(2,0);
 		$limit = 0;
 		$relatedArr = array();
 		$relatedProdArr = array();
 		//		$condition = " where p.id = '".$pid."' AND p.status = 'Publish'";
 		$condition = "  where p.status='Publish' and u.group='Seller' and u.status='Active' and p.id='".$pid."' or p.status='Publish' and p.user_id=0 and p.id='".$pid."'";
+		//grab details from fc_product and fc_users table for the product id in the url
 		$this->data['productDetails'] = $this->product_model->view_product_details($condition);
+		//get subproducts for the product id from fc_subproducts
 		$this->data['PrdAttrVal'] = $this->product_model->view_subproduct_details_join($pid);
 		if ($this->data['productDetails']->num_rows()==1){
 			$this->data['productComment'] = $this->product_model->view_product_comments_details('where c.product_id='.$this->data['productDetails']->row()->seller_product_id.' order by c.dateAdded desc');
 
+			//get categories for the product id
 			$catArr = explode(',', $this->data['productDetails']->row()->category_id);
 			if (count($catArr)>0){
 				foreach ($catArr as $cat){
@@ -401,6 +405,8 @@ class Product extends MY_Controller {
 						//						$condition = " where p.category_id like '".$cat.",%' AND p.status = 'Publish' AND p.id != '".$pid."' OR p.category_id like '%,".$cat."' AND p.status = 'Publish' AND p.id != '".$pid."' OR p.category_id like '%,".$cat.",%' AND p.status = 'Publish' AND p.id != '".$pid."' OR p.category_id='".$cat."' AND p.status = 'Publish' AND p.id != '".$pid."'";
 						$condition =' where FIND_IN_SET("'.$cat.'",p.category_id) and p.quantity>0 and p.status="Publish" and u.group="Seller" and u.status="Active" and p.id != "'.$pid.'" or p.status="Publish" and p.quantity > 0 and p.user_id=0 and FIND_IN_SET("'.$cat.'",p.category_id) and p.id != "'.$pid.'"';
 						$relatedProductDetails = $this->product_model->view_product_details($condition);
+						//find related products in the same category
+						//build $relatedProdArr with related product id's
 						if ($relatedProductDetails->num_rows()>0){
 							foreach ($relatedProductDetails->result() as $relatedProduct){
 								if (!in_array($relatedProduct->id, $relatedArr)){
@@ -414,26 +420,38 @@ class Product extends MY_Controller {
 				}
 			}
 		}
+		//related product list
 		$this->data['relatedProductsArr'] = $relatedProdArr;
+		//query users who have recently liked this product, limits to 10
 		$recentLikeArr = $this->product_model->get_recent_like_users($this->data['productDetails']->row()->seller_product_id);
 		$recentUserLikes = array();
 		if ($recentLikeArr->num_rows()>0){
+			//iterate over users
 			foreach ($recentLikeArr->result() as $recentLikeRow){
 				if ($recentLikeRow->user_id != ''){
+					//query products that the specified user recently liked
 					$recentUserLikes[$recentLikeRow->user_id] = $this->product_model->get_recent_user_likes($recentLikeRow->user_id,$this->data['productDetails']->row()->seller_product_id);
 				}
 			}
 		}
+		//list of users who recently liked this product
 		$this->data['recentLikeArr'] = $recentLikeArr;
+		//list of products liked by each user who liked this product
 		$this->data['recentUserLikes'] = $recentUserLikes;
+
+		//get user details if logged in
 		if ($this->checkLogin('U') != ''){
 			$this->data['userDetails'] = $this->product_model->get_all_details(USERS,array('id'=>$this->checkLogin('U')));
 		}else {
 			$this->data['userDetails'] = array();
 		}
+
+		//get products that this user is selling
+		//omit the product that was passed in with url
 		$this->data['seller_product_details'] = $this->product_model->get_all_details(PRODUCT,array('user_id'=>$this->data['productDetails']->row()->user_id,'id !='=>$pid,'status'=>'Publish'));
 		$this->data['seller_affiliate_products'] = $this->product_model->get_all_details(USER_PRODUCTS,array('user_id'=>$this->data['productDetails']->row()->user_id));
 
+		//set meta_title, meta_keyword and meta_description for product passed in url
 		if ($this->data['productDetails']->row()->meta_title != ''){
 			$this->data['meta_title'] = $this->data['productDetails']->row()->meta_title;
 			$this->data['heading'] = $this->data['productDetails']->row()->meta_title;
@@ -451,6 +469,8 @@ class Product extends MY_Controller {
 		}else {
 			$this->data['meta_description'] = $this->data['productDetails']->row()->product_name;
 		}
+
+		//build the feedback view
 		$this->data['product_feedback'] = $this->product_model->product_feedback_view($this->data['productDetails']->row()->user_id);
 
 		$this->load->view('site/product/product_detail',$this->data);

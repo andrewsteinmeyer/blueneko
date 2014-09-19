@@ -290,7 +290,7 @@ class Product_model extends My_Model
 		return $this->db->get(CATEGORY);
 	}
 
-	//return user seller list sorted by number of products
+	//return seller list sorted by number of products
 	//ordered by how many products they are selling in the category
 	public function get_top_users_in_category($cat=''){
 		$productArr = array();
@@ -317,6 +317,7 @@ class Product_model extends My_Model
 		return $userCountArr;
 	}
 
+	//return the recent likes on this product
 	public function get_recent_like_users($pid='',$limit='10',$sort='desc'){
 		$Query = 'select pl.*, p.product_name, p.likes, u.full_name, u.user_name,u.thumbnail from '.PRODUCT_LIKES.' pl
 					JOIN '.PRODUCT.' p on p.seller_product_id=pl.product_id
@@ -325,6 +326,8 @@ class Product_model extends My_Model
 		return $this->ExecuteQuery($Query);
 	}
 
+	//return the recent likes for a specified user
+	//omit the product that is passed in, already know that the user likes it
 	public function get_recent_user_likes($uid='',$pid='',$limit='3',$sort='desc'){
 		$condition = '';
 		if ($pid!=''){

@@ -1,5 +1,5 @@
 <?php if ($loginCheck != ''){?>
-<!-- add_to_list overlay -->
+<!-- add_to_list overlay used when product is fancy'd -->
 <!-- show_when_fancy is setting to true even when I change it in database to "No"?? -->
 <div style="display:none;" show_when_fancy="<?php if ($userDetails->row()->display_lists == 'Yes'){echo 'true';}else {echo 'false';}?>" class="popup ly-title update add-to-list animated" id="add-to-list-new" style="margin-top: 5px; margin-left: 750.5px; opacity: 1; display: block;" tid="">
 	<div class="default" style="display: block;">

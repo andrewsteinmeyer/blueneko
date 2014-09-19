@@ -35,6 +35,7 @@ $(document).ready(function(){
         }
     });
 
+    //something to do with google login when signup button is clicked??
 	$(".popup-signup-ajax").click(function()
    {
    		//debugger;

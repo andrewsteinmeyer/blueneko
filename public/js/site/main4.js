@@ -2587,9 +2587,9 @@ jQuery(function($) {
   //define_dialog
   //used to open popup dialog boxes for signup, registering, etc
   $.dialog = function(popup_name) {
-    //container is the #popup_container found above from JQuery
+    //container is the #popup_container that is the wrapper for the popups
     //the popup_container is declared in popup_templates.php
-    //which is loaded in header.php
+    //popup_templates.php is loaded in header.php
     var $popup = $container.find('>.' + popup_name);
     return {
       name: popup_name,
@@ -2607,6 +2607,7 @@ jQuery(function($) {
       },
       open: function() {
         var $c, h, mt, sc = $win.scrollTop();
+        //research addClass 'fixed' more
         $('body').addClass('fixed');
         if (!container_h) container_h = $container.height();
         if (prev_dialog) prev_dialog.close(true);
@@ -3225,6 +3226,8 @@ jQuery(function($) {
 });
 
 // Share dialogs and buttons
+// #fancy-share id in popup/share.php
+// .share-new class in popup/share.php
 jQuery(function($) {
   var $fancy_share = $('#fancy-share'),
     dlg_share = $.dialog('share-new');
@@ -3512,6 +3515,8 @@ jQuery(function($) {
         tuser, uname = $this.attr('uname'),
         ref = '',
         url, tname, img, iframe_h, thing_path, price, reacts;
+      //comes from share button attr
+      //require_login=true if user is not logged in ($loginCheck == '')
       var login_require = $btn.attr('require_login');
       if (login_require && login_require == 'true') {
         $.dialog('signin-overlay').open();
@@ -3558,6 +3563,7 @@ jQuery(function($) {
         if (reacts) reacts = reacts[1];
       }
 
+      //hide all of the tabs in the list and then click the first one to open it
       $this.find('>ul.tab').nextUntil('button.ly-close').hide().end().find('li > a:first').click();
 
       thing_path = $btn.closest('a').attr('href');
@@ -4053,6 +4059,7 @@ jQuery(function($) {
 });
 
 // fancy/fancyd button and add-to-list popup
+// popup/list.php triggered when product gets fancy'd
 jQuery(function($) {
   var dlg_list = $.dialog('add-to-list'),
     $list_popup = dlg_list.$obj,
@@ -4329,7 +4336,7 @@ jQuery(function($) {
       //			alert(available_dlg);
 
       //route to base_url() + login if require_login attr is set
-      //fancy buttons have require_login set to true
+      //fancy buttons have attribute require_login=true
       //clicking fancy buttons on products will redirect to login.php if not logged in
       if (login_require && login_require == 'true') return require_login();
 
@@ -4367,7 +4374,7 @@ jQuery(function($) {
           },
           dataType: 'json',
           success: function(response) {
-          	//dump category lists in the ul list
+          	//dump category lists in the popup's ul list
             if (response.status_code == 1) {
               $list_popup.find('.list-categories ul').html(response.listCnt);
               //if the item is wanted, set the text to "Wanted"
