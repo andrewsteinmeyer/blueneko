@@ -27,10 +27,12 @@ class User_settings extends MY_Controller {
 		}
 		$this->data['mainColorLists'] = $_SESSION['sColorLists'];
 
+		//check login
 		$this->data['loginCheck'] = $this->checkLogin('U');
 	}
 
 	public function index(){
+		//check login
 		if ($this->checkLogin('U')==''){
 			redirect(base_url().'login');
 		}else {
@@ -39,16 +41,21 @@ class User_settings extends MY_Controller {
 		}
 	}
 
+	//called in validation.js when profileUpdate() is called by onSubmit in user/settings.php
+	//updates the user's settings in the database
 	public function update_profile(){
 		$inputArr = array();
 		$response['success'] = '0';
+		//check login
 		if ($this->checkLogin('U') == ''){
 			$response['msg'] = 'You must login';
-		}else {
+		} else {
 			$update = '0';
 			$email = $this->input->post('email');
+			//if there is an email value
 			if ($email!=''){
 				if (valid_email($email)){
+					//check to see if email already exists
 					$condition = array('email'=>$email,'id !='=>$this->checkLogin('U'));
 					$duplicateMail = $this->user_model->get_all_details(USERS,$condition);
 					if ($duplicateMail->num_rows()>0){
@@ -60,7 +67,9 @@ class User_settings extends MY_Controller {
 				}else {
 					$response['msg'] = 'Invalid email';
 				}
-			}else {
+			//otherwise there is no email value
+			//why do we update when there is no email value?
+			} else {
 				$update = '1';
 			}
 			if ($update == '1'){
@@ -68,11 +77,13 @@ class User_settings extends MY_Controller {
 				$excludeArr = array('b_year','b_month','b_day','email');
 				$inputArr['birthday'] = $birthday;
 				$condition = array('id'=>$this->checkLogin('U'));
+				//update the settings in the form for the user
+				//exclude b_year, b_month and b_day and instead insert birthday
 				$this->user_model->commonInsertUpdate(USERS,'update',$excludeArr,$inputArr,$condition);
 				if($this->lang->line('prof_looks_better') != '')
-				$lg_err_msg = $this->lang->line('prof_looks_better');
+					$lg_err_msg = $this->lang->line('prof_looks_better');
 				else
-				$lg_err_msg = 'Done ! Your profile looks even better now';
+					$lg_err_msg = 'Done ! Your profile looks even better now';
 				$this->setErrorMessage('success',$lg_err_msg);
 				$response['success'] = '1';
 			}
@@ -81,6 +92,7 @@ class User_settings extends MY_Controller {
 	}
 
 	public function changePhoto(){
+		//redirect if not logged in
 		if ($this->checkLogin('U')==''){
 			redirect(base_url().'login');
 		}else {

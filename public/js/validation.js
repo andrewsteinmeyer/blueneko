@@ -628,8 +628,12 @@ function resendConfirmation(mail){
 	    });
 	}
 }
+//used to validate settings on User Settings page
+//called in site/user/settings.php in the form onSubmit
+//returns false so form does not submit onaction
 function profileUpdate(){
 	$('#save_account').disable();
+	//grab all of the settings to use in ajax call
 	var full_name=$('.setting_fullname').val();
 	var web_url=$('.setting_website').val();
 	var location=$('.setting_location').val();
@@ -646,6 +650,7 @@ function profileUpdate(){
 	$.ajax({
 		type: 'POST',
 		url: baseURL+'site/user_settings/update_profile',
+		//passes a lot of settings that are not used in update_profile such as twitter, facebook, location
 		data: {"full_name":full_name,"web_url":web_url,"location":location,"twitter":twitter,"facebook":facebook,"google":google,"b_year":b_year,"b_month":b_month,"b_day":b_day,"about":setting_bio,"email":email,"age":age,"gender":gender},
 		dataType: 'json',
 		success: function(response){
@@ -654,12 +659,17 @@ function profileUpdate(){
 				$('#save_account').removeAttr('disabled');
 				return false;
 			}else{
+				//reload settings page if update was succesful
 				window.location.href = baseURL+'settings';
 			}
 		}
 	});
 	return false;
 }
+//used to upload user photo on User Settings page
+//called in site/user/settings.php
+//removes the onSubmit from the form so that profileUpdate is no longer called
+//instead form will now user action site/user_settings/changePhoto
 function updateUserPhoto(){
 	$('#save_profile_image').disable();
 	if($('.uploadavatar').val()==''){

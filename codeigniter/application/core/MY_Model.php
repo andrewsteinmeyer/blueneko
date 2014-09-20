@@ -72,6 +72,7 @@ class My_Model extends CI_Model {
 	 */
 	public function commonInsertUpdate($table='',$mode='',$excludeArr='',$dataArr='',$condition=''){
 		$inputArr = array();
+		//grab all of the inputs that are posted
 		foreach ($this->input->post() as $key => $val){
 			if (!in_array($key, $excludeArr)){
 				$inputArr[$key] = $val;
