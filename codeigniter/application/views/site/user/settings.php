@@ -10,6 +10,7 @@ ol.stream.use-css3.fadein li {opacity:0;}
 ol.stream.use-css3.fadein li.anim.fadein {opacity:1;}
 </style>
 <!-- Section_start -->
+<!-- javascript in fancyy-profile.js -->
 
 <div class="lang-en no-subnav wider winOS">
 
@@ -25,7 +26,7 @@ ol.stream.use-css3.fadein li.anim.fadein {opacity:1;}
 		<h2 class="ptit"><?php if($this->lang->line('settings_edit_prof') != '') { echo stripslashes($this->lang->line('settings_edit_prof')); } else echo "Edit Profile Settings"; ?></h2>
 		<div class="notification-bar" style="display:none"></div>
 		<?php
-    //if user is not verified then display notice
+    //if user is not verified then display notice to resend email
 		if ($userDetails->row()->is_verified == 'No'){
 		?>
       <div class="confirm-email">

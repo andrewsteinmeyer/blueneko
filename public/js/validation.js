@@ -669,7 +669,7 @@ function profileUpdate(){
 //used to upload user photo on User Settings page
 //called in site/user/settings.php
 //removes the onSubmit from the form so that profileUpdate is no longer called
-//instead form will now user action site/user_settings/changePhoto
+//form will direct to form action site/user_settings/changePhoto
 function updateUserPhoto(){
 	$('#save_profile_image').disable();
 	if($('.uploadavatar').val()==''){

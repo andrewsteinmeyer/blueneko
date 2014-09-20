@@ -78,6 +78,7 @@ class User_settings extends MY_Controller {
 				$inputArr['birthday'] = $birthday;
 				$condition = array('id'=>$this->checkLogin('U'));
 				//update the settings in the form for the user
+				//commonInsertUpdate iterates over all of the inputs in the form post
 				//exclude b_year, b_month and b_day and instead insert birthday
 				$this->user_model->commonInsertUpdate(USERS,'update',$excludeArr,$inputArr,$condition);
 				if($this->lang->line('prof_looks_better') != '')
