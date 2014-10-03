@@ -145,12 +145,9 @@ $(document).ready(function(){
 		});
 	});
 
-
 });
 
-
 function checkBoxValidationAdmin(req,AdmEmail) {
-
 	var tot=0;
 	var chkVal = 'on';
 	var frm = $('#display_form input');
@@ -170,12 +167,11 @@ function checkBoxValidationAdmin(req,AdmEmail) {
 	}else if(chkVal == 'on') {
 			alert("No records found ");
 			return false;
-
 	} else {
 		confirm_global_status(req,AdmEmail);
 	}
-
 }
+
 function checkBoxWithSelectValidationAdmin(req,AdmEmail) {
 	var templat = $('#mail_contents').val();
 	if(templat==''){
@@ -205,8 +201,8 @@ function checkBoxWithSelectValidationAdmin(req,AdmEmail) {
 	} else {
 		confirm_global_status(req,AdmEmail);
 	}
-
 }
+
 function SelectValidationAdmin(req,AdmEmail) {
 	var templat = $('#mail_contents').val();
 	if(templat==''){
@@ -215,9 +211,8 @@ function SelectValidationAdmin(req,AdmEmail) {
 	}
 
 	confirm_global_status(req,AdmEmail);
-
-
 }
+
 function confirm_global_status(req,AdmEmail){
  	$.confirm({
  		'title'		: 'Confirmation',
@@ -243,8 +238,6 @@ function confirm_global_status(req,AdmEmail){
 
 //Bulk Active, Inactive, Delete Logs created by siva
 function bulk_logs_action(req,AdmEmail){
-
-
 	var perms=prompt("For Security Purpose, Please Enter Email Id");
 	if(perms==''){
 			alert("Please Enter The Email ID");
@@ -261,11 +254,7 @@ function bulk_logs_action(req,AdmEmail){
 				return false;
 		}
 	}
-
-
-
 }
-
 
 //confirm status change
 function confirm_status(path){
@@ -287,7 +276,8 @@ function confirm_status(path){
  			}
  		}
  	});
- }
+}
+
 function confirm_set_theme(path){
 	$.confirm({
 		'title'		: 'Confirmation',
@@ -329,6 +319,7 @@ function confirm_mode(path){
 		}
 	});
 }
+
 function confirm_delete(path){
  	$.confirm({
  		'title'		: 'Delete Confirmation',
@@ -349,7 +340,6 @@ function confirm_delete(path){
  		}
  	});
  }
-
 
 //Category Add Function By Siva
 function checkBoxCategory() {
@@ -522,17 +512,18 @@ function quickSignup(){
         dataType: 'json',
         success: function(response)
         {
-        	if(response.success == '0') {
-				alert(response.msg);
-				return false;
-			 } else {
-			 	$('.quickSignup2 .username').val(response.user_name);
-			 	$('.quickSignup2 .url b').text(response.user_name);
-			 	$('.quickSignup2 .email').val(response.email);
-			 	$('.quickSignup2 .fullname').val(response.full_name);
-                dlg_register.open();
-			 }
-        }
+        if(response.success == '0') {
+					alert(response.msg);
+					return false;
+			 	} else {
+			 		$('.quickSignup2 .username').val(response.user_name);
+			 		$('.quickSignup2 .url b').text(response.user_name);
+			 		$('.quickSignup2 .email').val(response.email);
+			 		$('.quickSignup2 .fullname').val(response.full_name);
+
+        	dlg_register.open();
+			 	}
+      }
     });
 }
 
@@ -628,8 +619,12 @@ function resendConfirmation(mail){
 	    });
 	}
 }
+//used to validate settings on User Settings page
+//called in site/user/settings.php in the form onSubmit
+//returns false so form does not submit onaction
 function profileUpdate(){
 	$('#save_account').disable();
+	//grab all of the settings to use in ajax call
 	var full_name=$('.setting_fullname').val();
 	var web_url=$('.setting_website').val();
 	var location=$('.setting_location').val();
@@ -654,12 +649,17 @@ function profileUpdate(){
 				$('#save_account').removeAttr('disabled');
 				return false;
 			}else{
+				//reload settings page if update was successful
 				window.location.href = baseURL+'settings';
 			}
 		}
 	});
 	return false;
 }
+//used to upload user photo on User Settings page
+//called in site/user/settings.php
+//removes the onSubmit from the form so that profileUpdate is no longer called
+//form will direct to form action site/user_settings/changePhoto
 function updateUserPhoto(){
 	$('#save_profile_image').disable();
 	if($('.uploadavatar').val()==''){
@@ -1045,6 +1045,8 @@ function ajax_add_cart(AttrCountVal){
 		$('.quantity').val(mqty);
 		return false;
 	}
+	//if product attributes
+	//then load options to choose
 	if(AttrCountVal > 0){
 		$('#AttrErr').html(' ');
 		var AttrVal=$('#attr_name_id').val();
@@ -1054,8 +1056,6 @@ function ajax_add_cart(AttrCountVal){
 		}
 	}
 
-
-
 	//alert(AttrVal); return false;
 	var product_id=$('#product_id').val();
 	var sell_id=$('#sell_id').val();
@@ -1064,7 +1064,6 @@ function ajax_add_cart(AttrCountVal){
 	var product_tax_cost=$('#product_tax_cost').val();
 	var cate_id=$('#cateory_id').val();
 	var attribute_values=$('#attr_name_id').val();
-
 
 	//alert(product_id+''+sell_id+''+price+''+product_shipping_cost+''+product_tax_cost+''+attribute_values);
 	$.ajax({
@@ -1597,7 +1596,8 @@ function changeCmsPos(evt,catID){
 		});
 	}
 }
-
+//approve comment on the product detail page
+//this calls approve_comment in product controller
 function approveCmt(evt){
 	if($(evt).hasClass('approving'))return;
 	$(evt).addClass('approving');
