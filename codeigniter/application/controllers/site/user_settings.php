@@ -56,6 +56,7 @@ class User_settings extends MY_Controller {
 			if ($email!=''){
 				if (valid_email($email)){
 					//check to see if email already exists
+					//does this a lot, should be extracted to helper function
 					$condition = array('email'=>$email,'id !='=>$this->checkLogin('U'));
 					$duplicateMail = $this->user_model->get_all_details(USERS,$condition);
 					if ($duplicateMail->num_rows()>0){
@@ -65,6 +66,8 @@ class User_settings extends MY_Controller {
 						$update = '1';
 					}
 				}else {
+					//don't update if there is an email and it is bad
+					//instead, respond with "Invalid email"
 					$response['msg'] = 'Invalid email';
 				}
 			//otherwise there is no email value

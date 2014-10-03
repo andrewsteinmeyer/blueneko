@@ -2,6 +2,7 @@ jQuery(function($){
 	// select text range
 	$.fn.selectRange=function(e,t){return this.each(function(){if(this.setSelectionRange)this.focus(),this.setSelectionRange(e,t);else if(this.createTextRange){var n=this.createTextRange();n.collapse(!0),n.moveEnd("character",t),n.moveStart("character",e),n.select()}})};
 
+	//check url for trigger words
 	if(location.args){
 		var action = location.args['action'] || '';
 		if('fancy' in location.args || action == 'fancy'){
@@ -117,7 +118,7 @@ jQuery(function($){
 					hotelId       : window.options.hotel_id,
 					arrivalDate   : $('#check-in').val(),
 					departureDate : $('#check-out').val(),
-					csrfmiddlewaretoken : window.options.csrfmiddlewaretoken 
+					csrfmiddlewaretoken : window.options.csrfmiddlewaretoken
 				};
 
 				var adult = $('#adult-people').val();
@@ -364,6 +365,7 @@ jQuery(function($){
 	(function(){
 		if(is_hotel) return;
 
+		//thing-detail is defined in popup_templates/product.php
 		var $section=$('#sidebar > .thing-section'), dlg_detail = $.dialog('thing-detail'), $zoom, $crop, $zc, li_width, $c_codes, $currency, str_currency, price;
 
 		$codes    = dlg_detail.$obj.find('.thing-info > .currency_codes');
@@ -449,20 +451,25 @@ jQuery(function($){
 			});
 		}
 
+		//triggers popup for product pictures
+		//called in product_detail when user clicks 'more' <a> link
 		$section
 			.find('.thing-description a,.figure-list a').click(function(event){ event.preventDefault(); dlg_detail.open() });
 
+		//.dialog('thing-detail') popup html in popup/product.php
 		dlg_detail.$obj
 			.on('open', function(){
 				var $this = $(this), $ul_fig = $this.find('ul.figure-list'), $li_fig = $ul_fig.find('>li');
 
+				//flag used to initialize values
+				//sets to true after values are saved
 				if(!dlg_detail.init){
 					$this.data('images-count', $li_fig.length);
 
 					$('#popup-sale-option_id').addClass('select-white').selectBox();
 					$('#popup-sale-quantity').addClass('number').inputNumber();
 
-					li_width = $li_fig.eq(0).outerWidth(true) 
+					li_width = $li_fig.eq(0).outerWidth(true)
 					$ul_fig.width(li_width * $li_fig.length);
 
 					dlg_detail.init = true;
@@ -472,23 +479,30 @@ jQuery(function($){
 				$crop = $this.find('.crop');
 				$zc   = $this.find('.zoom-container');
 
+				//click on the first image in the list of thumbnails
+				//loads the first picture into the viewer
 				$this.find('ul.figure-list > li:first > a').click();
 
 				$ul_fig.css('margin-left', 0);
+
+				//disable arrows initially
 				$this.find('a.move').addClass('disabled');
+				//if more than 5 images, allow the next arrow to be clicked
 				if($li_fig.length > 5) $this.find('a.move.next').removeClass('disabled');
 
-				// currency codes
+				// hide currency codes initially
 				$this.find('.currency_codes').hide().end();
 			})
 			.on('click', '.ly-close', function(){ dlg_detail.close(); return false })
+			//when clicking the arrows in the thumbnail box
+			//handles moving the product thumbnails when arrows are clicked
 			.on('click', 'a.move', function(event){
 				var $this = $(this), is_next = $this.hasClass('next'), size = 5, idx, count, last_idx;
 
 				event.preventDefault();
 
 				if($this.hasClass('disabled')) return;
-				
+
 				idx      = dlg_detail.$obj.data('index') || 0;
 				count    = dlg_detail.$obj.data('images-count') || 0;
 				last_idx = Math.max(count - size, 0);
@@ -507,10 +521,13 @@ jQuery(function($){
 			})
 			.on(
 				{
+					//code to handle zooming in on product
 					mouseenter : function(){
 						$(this).addClass('hover');
 						dlg_detail.$obj.find('.zoom-container').show();
 					},
+					//handle moving mouse over product
+					//zoom into the respective area
 					mousemove : function(event){
 						var $this = $(this), ratio, boundary, viewport, offset, left, top, ox, oy;
 
@@ -544,6 +561,7 @@ jQuery(function($){
 				},
 				'.frame-zoom'
 			)
+			//code to load picture into viewer when thumbnail is clicked
 			.find('ul.figure-list > li > a')
 				.each(function(){
 					var $this = $(this), img;
@@ -552,14 +570,15 @@ jQuery(function($){
 					img.onload = function(){ $this.data('size', this.width+','+this.height) };
 					img.src = $this.attr('href');
 				})
+				//set thumbnail picture into viewer when thumbnail is clicked
 				.click(function(event){
 					if(event) event.preventDefault();
 
 					var $this = $(this), img = $this.attr('href'), size = [0,0], ratio, boundary={}, $zoom, w, h;
 
-				    try {
-   					    size = $this.data('size').split(',')    
-					}catch(err) { }
+				  try {
+   					size = $this.data('size').split(',')
+					} catch(err) { }
 
 					$zoom = dlg_detail.$obj.find('span.frame-zoom');
 					dlg_detail.$obj.find('span.frame-zoom, .crop > em, .zoom-container').css('background-image', 'url('+img+')').end();
@@ -583,7 +602,9 @@ jQuery(function($){
 						.find('>.crop').width(w-6).height(h-6);
 				})
 			.end()
+			//close product popup when product is "Added to Cart"
 			.on('click', '.add_to_cart', function(){ dlg_detail.close() })
+			//close product popup when escape key is pressed
 			.on('keypress', function(){
 				if(event.keyCode == 27){ dlg_detail.close() }
 			});
@@ -810,7 +831,7 @@ jQuery(function($){
 			}
 		});
 	});
-	
+
 	// report this thing
 	$('#report-thing').click(function() {
 		var $this = $(this);
@@ -830,7 +851,7 @@ jQuery(function($){
 				// to do something?
 			}
 		});
-			
+
 		return false;
 	});
 

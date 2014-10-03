@@ -67,7 +67,7 @@ class Product_model extends My_Model
 		return $productList;
 
 	}
-
+	//build product feedback view for display_product_detail in product controller
 	public function product_feedback_view($seller_id){
 		if ($seller_id == '')$seller_id=0;
 		/*$select_qry = "select * from ".PRODUCT." where user_id='".$userid."'";

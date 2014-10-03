@@ -221,7 +221,7 @@ if($loginCheck != ''){
             }
             ?>
             <?php if ($loginCheck == ''){?>
-            <!-- popup signup ajax is checked with jquery in validation.js line 38, checks googlelogin -->
+            <!-- popup-signup-ajax is checked with jquery in validation.js line 38, checks googlelogin -->
             <!-- mn-signup is class that jquery uses for onclick event to open the dialog, see main4.js line 3644 -->
             <li class="gnb"><a class="mn-signup popup-signup-ajax" href="#"><i class="ic-sign"></i> <?php if($this->lang->line('login_signup') != '') { echo stripslashes($this->lang->line('login_signup')); } else echo "Sign up"; ?></a></li>
             <?php }?>

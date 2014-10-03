@@ -381,6 +381,7 @@ class Product extends MY_Controller {
 
 	}
 
+	//called when product link is clicked
 	public function display_product_detail(){
 		//product id passed in with url
 		$pid = $this->uri->segment(2,0);
@@ -422,14 +423,14 @@ class Product extends MY_Controller {
 		}
 		//related product list
 		$this->data['relatedProductsArr'] = $relatedProdArr;
-		//query users who have recently liked this product, limits to 10
+		//query users who have recently liked this product, limits to 10 users
 		$recentLikeArr = $this->product_model->get_recent_like_users($this->data['productDetails']->row()->seller_product_id);
 		$recentUserLikes = array();
 		if ($recentLikeArr->num_rows()>0){
-			//iterate over users
+			//iterate over users that recently liked the product
 			foreach ($recentLikeArr->result() as $recentLikeRow){
 				if ($recentLikeRow->user_id != ''){
-					//query products that the specified user recently liked
+					//query products that the specified user recently liked, omit this product from list
 					$recentUserLikes[$recentLikeRow->user_id] = $this->product_model->get_recent_user_likes($recentLikeRow->user_id,$this->data['productDetails']->row()->seller_product_id);
 				}
 			}
@@ -473,6 +474,7 @@ class Product extends MY_Controller {
 		//build the feedback view
 		$this->data['product_feedback'] = $this->product_model->product_feedback_view($this->data['productDetails']->row()->user_id);
 
+		//load the view
 		$this->load->view('site/product/product_detail',$this->data);
 	}
 
@@ -518,6 +520,7 @@ class Product extends MY_Controller {
 		}
 	}
 
+	//called when the share button is clicked
 	public function share_with_someone(){
 		$returnStr['status_code'] = 0;
 		$thing = array();
@@ -542,10 +545,13 @@ class Product extends MY_Controller {
 		echo json_encode($returnStr);
 	}
 
+	//called in send_thing_share_mail above
 	public function send_thing_share_mail($thing='',$email=''){
 
 		$newsid='2';
 		$template_values=$this->product_model->get_newsletter_template_details($newsid);
+
+
 		$adminnewstemplateArr=array(
 			'meta_title'=> $this->config->item('meta_title'),
 			'logo'=> $this->data['logo'],
@@ -556,6 +562,7 @@ class Product extends MY_Controller {
 			'timage'=>$thing['timage'],
 			'email_title'=>$this->config->item('email_title')
 		);
+		//make all of the above into local variables
 		extract($adminnewstemplateArr);
 		if ($this->data['userDetails']->row()->full_name != ''){
 			$uname = $this->data['userDetails']->row()->full_name;
@@ -568,6 +575,9 @@ class Product extends MY_Controller {
 								<meta name="viewport" content="width=device-width"/>
 								<title>'.$adminnewstemplateArr['meta_title'].' - Share Things</title>
 								<body>';
+
+		//include the email template
+		//the template is also in the $template_values queried from database.  why is it loaded from both places???
 		include('./newsletter/registeration'.$newsid.'.php');
 
 		$message .= '</body>
@@ -1228,7 +1238,7 @@ echo curl_error($ch) . '<br/>';*/
 	}
 
 	//called in views/site/user/onboarding
-	//after user clicks on the button fancy for a product that the "Like"
+	//after user clicks on the button fancy for a product that they "Like"
 	public function add_reaction_tag(){
 		$returnStr['status_code'] = 0;
 		//check user login

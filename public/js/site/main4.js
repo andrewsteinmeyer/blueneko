@@ -691,6 +691,7 @@ if (document.forms.length && !('placeholder' in document.createElement('input'))
  */
 var Fancy = {
   // Init function
+  // init'd in cart popup layer
   init: function() {
     Fancy.scrollToTop();
     Fancy.buttons();
@@ -773,6 +774,7 @@ var Fancy = {
 
           $this.addClass('loading');
 
+          //follow or unfollow
           if (following = $this.hasClass('following')) {
             url = baseURL + 'site/user/delete_follow';
           } else {
@@ -2042,6 +2044,7 @@ jQuery(function($) {
           $.jStorage.deleteKey(keys.prefetch);
           return;
         }
+        //create a sandbox div
         var $sandbox = $('<div>'),
           $contentBox = $(options.itemSelector).parent(),
           $next, $rows;
@@ -2617,6 +2620,8 @@ jQuery(function($) {
         $container.find('.loader').hide();
         $c = $container.addClass(popup_name).show().data('scroll-top', sc);
 
+        //trigger open event
+        //popups use this to prepare content before showing
         this.center().$obj.trigger('open').show();
 
         if ($c.length) {
@@ -3228,11 +3233,13 @@ jQuery(function($) {
 // Share dialogs and buttons
 // #fancy-share id in popup/share.php
 // .share-new class in popup/share.php
+// fancy_share popup dialog is for sharing a product, comment, list, gift or user
 jQuery(function($) {
   var $fancy_share = $('#fancy-share'),
     dlg_share = $.dialog('share-new');
 
   $('#content,#sidebar,#summary')
+    //show-someone is used in product_detail.php, opens the share popup
     .delegate('.timeline .btn-share,.figure-item .btn-share, #show-someone', 'click', function(event) {
       event.preventDefault();
       $fancy_share.trigger('open_thing', this);
@@ -3265,6 +3272,7 @@ jQuery(function($) {
 
   $add.text(txt_add[0]);
   $frm.click(function(event) {
+    //hide helper text in form field when user clicks in form area
     if ($(event.target).is('span.add,dd.email-frm')) {
       $add.hide();
       $inp.show().val('').focus();
@@ -3339,7 +3347,7 @@ jQuery(function($) {
     }
   };
 
-
+  //text input area on form
   $inp
   /*		.on('changed', function(){
 			var v = $.trim($inp.val());
@@ -3348,6 +3356,9 @@ jQuery(function($) {
 			request_username(v);
 		})
 */
+  //what is this doing?
+  //looks like it is taking input and setting an email attribute before the 'add' element
+  //can't find the purpose of this, $name.clone() is empty [] because b.name was not found above
   .blur(function() {
     var v = $.trim($inp.val());
     if (v.indexOf('@') >= 0) {
@@ -3362,16 +3373,21 @@ jQuery(function($) {
     $list.hide();
     //			$inp.hide().val('');
   })
+    //changed is commented out above and not used
+    //this keydown does not need to be used either, i think we can comment it out
     .keydown(function(event) {
       setTimeout(function() {
         var val = $.trim($inp.val());
         if (val == prev_val) return;
         prev_val = val;
+        //changed is commented out above, not used
         $inp.trigger('changed')
       }, 10);
 
       switch (event.keyCode) {
         case 8: // backspace
+          //this would be removing the email that is added above in blur
+          //however, the email above doesn't seem to get added anywhere???
           if ($inp.val().length != 0) return true;
           var $names = $frm.find('b.name');
           if ($names.length > 0) $names.eq(-1).remove();
@@ -3402,6 +3418,7 @@ jQuery(function($) {
       }
     });
 
+  //when is list not hidden in the share popup dialog?
   $list
     .on('key.up key.down', function(event) {
       if ($list.is(':hidden')) return false;
@@ -3447,6 +3464,9 @@ jQuery(function($) {
       return false;
     });
 
+  //clear out the data stored on the fancy_share popup box
+  //remove the previous type of class that was used, ie. comment-share or thing-share
+  //hide link, embed, anywhere, etc to start with clean slate
   $fancy_share
     .on('reset', function() {
       var $this = $(this);
@@ -3508,7 +3528,9 @@ jQuery(function($) {
 
       dlg_share.open();
     })
+    //called when share button is clicked on product
     .on('open_thing', function(event, btn) {
+      //for sharing a product
       var $this = $(this).trigger('reset').addClass('thing-share'),
         $btn = $(btn),
         tid = $btn.attr('tid'),
@@ -3517,12 +3539,15 @@ jQuery(function($) {
         url, tname, img, iframe_h, thing_path, price, reacts;
       //comes from share button attr
       //require_login=true if user is not logged in ($loginCheck == '')
+      //popup login from register.php if not logged in
       var login_require = $btn.attr('require_login');
       if (login_require && login_require == 'true') {
         $.dialog('signin-overlay').open();
         return false;
       }
 
+      //set product info on shared product
+      //includes product name, price, and seller and count of likes
       function setInfo() {
         var str = '';
         if (tname) $this.find('span.figcaption').text(tname);
@@ -3532,6 +3557,7 @@ jQuery(function($) {
         if (str) $this.find('.fig-info > .username').html(str);
       };
 
+      //set anywhere link
       function setAnywhere(img) {
         $('#share-anywhere').val('<a href="' + $this.data('url') + '"><img src="' + baseURL + timage + '" width="' + img.width + '" height="' + img.height + '" alt="' + tname + '"></a>');
       };
@@ -3545,32 +3571,39 @@ jQuery(function($) {
           .trigger('update');
       };
 
+      //get img from parent or nearby img
       img = $btn.parent().prev('img').get(0);
       if (!img) img = $btn.closest('.figure-item').find('.figure > img').get(0);
       if (!img) img = $('.fig-image > img').get(0);
       if (!img) img = $btn.closest('.figure-item').find('.figure').get(0);
 
+      //get tuser from btn or closest figure-item
       tuser = $btn.attr('tuser');
       if (!tuser) tuser = $btn.closest('.figure-item').find('.username a').text();
 
+      //get price from btn price or closest figure-item
       price = $btn.attr('price');
       if (!price) price = $btn.closest('.figure-item').find('.price').text().replace(/[^\d\., ]+/g, '');
       price = $.trim(price);
 
+      //get reacts, the number of times the product has been liked
       reacts = $btn.attr('reacts');
       if (!reacts) {
         reacts = $btn.closest('.figure-item').find('.figure-detail em').text().match(/\+ (\d+)/);
         if (reacts) reacts = reacts[1];
       }
 
-      //hide all of the tabs in the list and then click the first one to open it
+      //hide everything from tab up until close button, then click first tab to open it
       $this.find('>ul.tab').nextUntil('button.ly-close').hide().end().find('li > a:first').click();
 
+      //product path
       thing_path = $btn.closest('a').attr('href');
       if (!thing_path) thing_path = $btn.closest('div.figure-item').find('a.figure-img').attr('href');
 
+      //set referrer
       if (uname) ref = '?ref=' + uname;
 
+      //save info in data, set attributes on
       $this
         .data({
           //					url : url='http://'+location.host+thing_path+ref,
@@ -3592,6 +3625,8 @@ jQuery(function($) {
       $this.find('.thum>img').attr('src', '/_ui/images/common/blank.gif').attr('src', $btn.data('timage'));
       $this.data('prev', 'thing-' + tid);
 
+      //set info for shared product
+      //picture, seller and like count
       setInfo();
 
       // embed
@@ -3601,6 +3636,7 @@ jQuery(function($) {
       // fancy anywhere
       setAnywhere(img);
 
+      //is this used for anything?
       $('<img style="position:absolute;left:-9999px;top:-9999px">')
         .load(function() {
           setEmbed(img);
@@ -3644,6 +3680,8 @@ jQuery(function($) {
 				}
 			});
 */
+      //start the share popup dialog box animation
+      //triggers the 'open' event that is listened to below
       dlg_share.open();
     })
     .on('open_list', function(event, btn) {
@@ -3725,6 +3763,8 @@ jQuery(function($) {
 
       dlg_share.open();
     })
+    //triggered to prepare share dialog box before showing it
+    //sets share icon links for the different social media venues
     .on('open', function() {
       var $this = $(this),
         url = $this.data('url'),
@@ -3739,6 +3779,7 @@ jQuery(function($) {
 
       if (amex) $this.data('amex', '');
 
+      //set the url's for the sharing buttons
       $this
         .find('.section').css({
           marginTop: '',
@@ -3909,6 +3950,7 @@ jQuery(function($) {
         endpoint, otype = $fancy_share.attr('otype');
       $this.disable();
 
+      //otype gc appears to be gift card?
       if (otype == "gc") {
         params = {
           type: 'gc',
@@ -3920,6 +3962,7 @@ jQuery(function($) {
         endpoint = "/share-with-someone-gift.json"
       } else {
         params = {
+          //i think nt is 'new thing'
           type: 'nt',
           url: $fancy_share.attr('turl'),
           name: $fancy_share.attr('tname'),
@@ -3931,6 +3974,8 @@ jQuery(function($) {
         };
         endpoint = baseURL + "site/product/share_with_someone";
       }
+      //this b.name thing does not seem to work
+      //the email is extracted form the .email-frm input below instead
       $frm.find('>b.name').each(function() {
         var $b = $(this);
         if ($b.attr('email')) {
@@ -3939,6 +3984,8 @@ jQuery(function($) {
           users.push($b.attr('uid'));
         }
       });
+
+      //grab the email in the input
       var mailID = $('.email-frm').find('input').val();
       if (mailID != '') {
         emails.push(mailID);
@@ -3952,6 +3999,7 @@ jQuery(function($) {
       params.emails = emails.join(',');
       params.users = users.join(',');
 
+      //share with email list
       $.ajax({
         type: 'post',
         url: endpoint,
@@ -4315,6 +4363,9 @@ jQuery(function($) {
 
   loading_txt = $list_popup.find('.list-box ul').html();
 
+  //add show_add_to_list to fancy button and click the button
+  //this is used in site/product/product_detail.php for "Add to List" button
+  //also used on landing.php in fancy buttons
   $('#show-add-to-list,#show-add-to-list-left').click(function(event) {
     event.preventDefault();
     $('.button.fancy, .button.fancyd').eq(0).attr('show_add_to_list', 'true').click();
@@ -4340,6 +4391,7 @@ jQuery(function($) {
       //clicking fancy buttons on products will redirect to login.php if not logged in
       if (login_require && login_require == 'true') return require_login();
 
+      //add class of 'loading'
       $this.addClass('loading');
 
       if (tid != null) checkbox_url += '&tid=' + tid;
@@ -4362,7 +4414,8 @@ jQuery(function($) {
 */
 			//show_when_fancy is set in popup/list.php
 			//set from fc_user_details->display_lists
-			//show_when_fancy is setting to true even when I set the display_lists to "No"????
+      //sl is show_add_to_list, which is set when an 'add to list' button is clicked
+      //add to list button triggers the fancy button with show_add_to_list added on (seems hacky)
       if ((dlg_list.$obj.attr('show_when_fancy') == 'true') || sl) {
         $this.removeAttr('show_add_to_list');
         $list_popup.find('.list-categories ul').html('Loading...');
@@ -4437,6 +4490,9 @@ jQuery(function($) {
       if ($this.hasClass('fancyd')) {
         fancyy_url = baseURL + 'site/user/remove_fancy_item';
       }
+      //if show_add_to_list was clicked, remove 'loading' and return
+      //do not need to add or remove fancy item
+      //hacky, using action of clicking the fancy button to also popup 'add to list'
       if (sl) {
         $this.removeClass('loading');
         return false;
@@ -4459,10 +4515,12 @@ jQuery(function($) {
           }
         }
       });
+      //remove loading class
       $this.removeClass('loading');
     })
     .delegate('.button.fancyd,.button.fancy', 'mouseenter mouseleave', function(event) {
       var $this = $(this);
+      //if we are not loading from above
       if (!$this.hasClass('loading')) {
         if ($this.hasClass('fancyd')) {
           if (event.type == 'mouseenter') {
@@ -4472,12 +4530,17 @@ jQuery(function($) {
             if ($this.hasClass('noedit')) {
               $this.append(gettext('Unfancyy'));
             } else {
+              //if fancyd, make button display 'edit'
+              //append 'show_add_to_list' to enable list popup when clicked
               $this.append(gettext('Edit'));
               $this.attr('show_add_to_list', 'true');
             }
+          //if fancyd on mouseleave
+          //put text back to 'fancyd'
           } else {
             $this.html("<span><i></i></span>" + gettext(likedTXT));
           }
+        //if not fancyd, text will be 'fancy'
         } else {
           $this.html("<span><i></i></span>" + gettext(likeTXT));
         }
@@ -4527,6 +4590,8 @@ jQuery(function($) {
   var dlg_signin = $.dialog('signin-overlay'),
     dlg_register = $.dialog('register');
   //he throw's force_login as css class to enforce login popups
+  //if Signup button on navbar .mn-signup, or anything with class of .force_login is clicked
+  //then prompt signin popup from register.js
   $('#navigation-test .mn-signup, .force_login').click(function(event) {
     event.preventDefault();
     dlg_signin.open();
@@ -4535,13 +4600,16 @@ jQuery(function($) {
 
   dlg_signin.$obj
     .on('open', function() {
+      //clear email val and disable signup button
       $('#signin-email').val('');
       dlg_signin.$obj.find('.btn-signup').disable();
     })
+    //enable signup button if email rules are valid
     .on('keypress', '#signin-email', function(event) {
       var valid = /^[\w\+\-\.]{2,64}@([\w-]+\.)+[a-z]{2,3}$/i.test($.trim(this.value));
       dlg_signin.$obj.find('.btn-signup').disable(!valid);
 
+      //click button if valid and 'enter' is pressed
       if (valid && event.which == 13) {
         dlg_signin.$obj.find('.btn-signup').click();
       }
@@ -4555,14 +4623,17 @@ jQuery(function($) {
 			}
 			$('#signin-email').focus();
 		})*/
+  //check email when user clicks out of box
   .on('blur', '#signin-email', function(event) {
     var valid = /^[\w\+\-\.]{2,64}@([\w-]+\.)+[a-z]{2,3}$/i.test($.trim(this.value));
     dlg_signin.$obj.find('.btn-signup').disable(!valid);
 
+    //click the button if valid and user presses 'enter'
     if (valid && event.which == 13) {
       dlg_signin.$obj.find('.btn-signup').click();
     }
   })
+    //same as top two scenarios, but for input
     .on('input', '#signin-email', function(event) {
       var valid = /^[\w\+\-\.]{2,64}@([\w-]+\.)+[a-z]{2,3}$/i.test($.trim(this.value));
       dlg_signin.$obj.find('.btn-signup').disable(!valid);
