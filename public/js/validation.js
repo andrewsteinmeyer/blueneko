@@ -1056,8 +1056,6 @@ function ajax_add_cart(AttrCountVal){
 		}
 	}
 
-
-
 	//alert(AttrVal); return false;
 	var product_id=$('#product_id').val();
 	var sell_id=$('#sell_id').val();
@@ -1066,7 +1064,6 @@ function ajax_add_cart(AttrCountVal){
 	var product_tax_cost=$('#product_tax_cost').val();
 	var cate_id=$('#cateory_id').val();
 	var attribute_values=$('#attr_name_id').val();
-
 
 	//alert(product_id+''+sell_id+''+price+''+product_shipping_cost+''+product_tax_cost+''+attribute_values);
 	$.ajax({
