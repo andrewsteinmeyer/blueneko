@@ -12,6 +12,7 @@ class Cart extends MY_Controller {
 		parent::__construct();
 		$this->load->helper(array('cookie','date','form','email'));
 		$this->load->library(array('encrypt','form_validation'));
+		//load cart model
 		$this->load->model('cart_model');
 		if($_SESSION['sMainCategories'] == ''){
 			$sortArr1 = array('field'=>'cat_position','type'=>'asc');
@@ -25,6 +26,7 @@ class Cart extends MY_Controller {
 		}
 		$this->data['mainColorLists'] = $_SESSION['sColorLists'];
 
+		//check login
 		$this->data['loginCheck'] = $this->checkLogin('U');
 		//$this->data['MiniCartViewSet'] = $this->cart_model->mini_cart_view($this->data['common_user_id']);
 	}
@@ -36,7 +38,7 @@ class Cart extends MY_Controller {
 	 */
 
 	public function index(){
-			
+		//check login before showing cart
 		if ($this->data['loginCheck'] != ''){
 			$this->data['heading'] = 'Cart';
 			$this->data['cartViewResults'] = $this->cart_model->mani_cart_view($this->data['common_user_id']);
@@ -74,7 +76,7 @@ class Cart extends MY_Controller {
 		if ($this->checkLogin('U') != ''){
 			if($this->lang->line('gift_add_success') != '')
 				$lg_err_msg = $this->lang->line('gift_add_success');
-			else 
+			else
 				$lg_err_msg = 'Giftcard Added You Cart successfully';
 			$this->setErrorMessage('success',$lg_err_msg);
 			redirect('gift-cards');
@@ -84,11 +86,14 @@ class Cart extends MY_Controller {
 	}
 
 
+	//called from ajax_add_to_cart in validation.js
 	public function cartadd(){
 
 		$excludeArr = array('addtocart','attr_color','mqty');
 		$dataArrVal = array();
 		$mqty = $this->input->post('mqty');
+		//retrieve all values from ajax post
+		//exclude addtocart, attr_color and mqty
 		foreach($this->input->post() as $key => $val){
 			if(!(in_array($key,$excludeArr))){
 				$dataArrVal[$key] = trim(addslashes($val));
@@ -96,22 +101,29 @@ class Cart extends MY_Controller {
 		}
 
 		$datestring = date('Y-m-d H:i:s',now());
+		//calculate price
+		//total product price, shipping cost and tax cost for the added quantity
 		$indTotal = ( $this->input->post('price') + $this->input->post('product_shipping_cost') + ($this->input->post('price') * 0.01 * $this->input->post('product_tax_cost')) ) * $this->input->post('quantity');
 
+		//add date, user, and total to data array
 		$dataArry_data = array('created' => $datestring, 'user_id' => $this->data['common_user_id'], 'indtotal' => $indTotal, 'total' => $indTotal);
 		$dataArr = array_merge($dataArrVal,$dataArry_data);
 
 		$condition ='';
 
+		//query database for this product in the user's cart
 		$this->data['productVal'] = $this->cart_model->get_all_details(SHOPPING_CART,array( 'user_id' => $this->data['common_user_id'],'product_id' => $this->input->post('product_id'),'attribute_values' => $this->input->post('attribute_values')));
 		$for_qty_check = $this->cart_model->get_all_details(SHOPPING_CART,array( 'user_id' => $this->data['common_user_id'],'product_id' => $this->input->post('product_id')));
 
+		//total the quantity for this product
+		//quantity already in the cart plus what user has added
 		if($for_qty_check->num_rows > 0){
 			$new_tot_qty = 0;
 			foreach ($for_qty_check->result() as $for_qty_check_row){
 				$new_tot_qty += $for_qty_check_row->quantity;
 			}
 			$new_tot_qty += $this->input->post('quantity');
+			//update product totals in database for the user's cart
 			if ($new_tot_qty <= $mqty){
 				if ($this->data['productVal']->num_rows > 0){
 					$newQty = $this->data['productVal']->row()->quantity + $this->input->post('quantity');
@@ -130,7 +142,8 @@ class Cart extends MY_Controller {
 			$this->cart_model->commonInsertUpdate(SHOPPING_CART,'insert',$excludeArr,$dataArr,$condition);
 		}
 
-
+		//if user is logged in
+		//then return the html for the mini cart view
 		if ( $this->checkLogin('U')!= ''){
 			/***Mini cart Lg****/
 
@@ -168,8 +181,10 @@ class Cart extends MY_Controller {
 
 			/***Mini cart Lg****/
 
+			//mini_cart_view in my_model.php
 			echo 'Success|'.$this->cart_model->mini_cart_view($this->data['common_user_id'],$mini_cart_lg);
 		}else{
+			//if not logged in, require login
 			echo 'login|lgoin';
 		}
 	}
@@ -182,7 +197,7 @@ class Cart extends MY_Controller {
 
 		$newQty = $this->input->post('qty');
 		$indTotal = ( $productVal->row()->price + $productVal->row()->product_shipping_cost + ($productVal->row()->price * 0.01 * $productVal->row()->product_tax_cost) ) * $newQty ;
-			
+
 		$dataArr = array('quantity' => $newQty, 'indtotal' => $indTotal, 'total' => $indTotal);
 		$condition =array('id' => $productVal->row()->id);
 		$this->cart_model->commonInsertUpdate(SHOPPING_CART,'update',$excludeArr,$dataArr,$condition);
@@ -314,7 +329,7 @@ class Cart extends MY_Controller {
 			$shipID = $this->cart_model->get_last_insert_id();
 			if($this->lang->line('ship_add_success') != '')
 				$lg_err_msg = $this->lang->line('ship_add_success');
-			else 
+			else
 				$lg_err_msg = 'Shipping address added successfully';
 			$this->setErrorMessage('success',$lg_err_msg);
 
@@ -360,7 +375,7 @@ class Cart extends MY_Controller {
 		}else{
 			if($this->lang->line('add_ship_addr_msg') != '')
 				$lg_err_msg = $this->lang->line('add_ship_addr_msg');
-			else 
+			else
 				$lg_err_msg = 'Please Add the Shipping address';
 			$this->setErrorMessage('error',$lg_err_msg);
 			redirect("cart");
@@ -397,7 +412,7 @@ class Cart extends MY_Controller {
 		}else{
 			if($this->lang->line('add_ship_addr_msg') != '')
 				$lg_err_msg = $this->lang->line('add_ship_addr_msg');
-			else 
+			else
 				$lg_err_msg = 'Please Add the Shipping address';
 			$this->setErrorMessage('error',$lg_err_msg);
 			redirect("cart");

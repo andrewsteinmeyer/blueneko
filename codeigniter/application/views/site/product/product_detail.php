@@ -449,6 +449,7 @@ $(function() {
         	<img src="images/users/<?php echo $user_img;?>" width="33px" height="33px"/>
         </div>
         <div >
+          <!-- comment area -->
           <form action="#" method="post">
               <input type="hidden" name="cproduct_id" id="cproduct_id" value="<?php echo $productDetails->row()->seller_product_id;?>"/>
               <input type="hidden" name="user_id" id="user_id" value="<?php echo $loginCheck ;?>"/>
@@ -456,7 +457,34 @@ $(function() {
               <input type="submit" <?php if($loginCheck==''){ ?>require-login='true'<?php }?> class="submit button" value=" <?php if($this->lang->line('header_post_comment') != '') { echo stripslashes($this->lang->line('header_post_comment')); } else echo "Post"; ?> " style="width: 10%;float: right;height: 35px;margin: 4px 0 0 0;" />
           </form>
           <?php if($loginCheck==''){ ?>
-          	<p><?php if($this->lang->line('product_please') != '') { echo stripslashes($this->lang->line('product_please')); } else echo "Please"; ?> <a href="login?next=things/<?php echo $productDetails->row()->id;?>/<?php echo url_title($productDetails->row()->product_name,'-');?>"><?php if($this->lang->line('product_login') != '') { echo stripslashes($this->lang->line('product_login')); } else echo "login"; ?></a> <?php if($this->lang->line('credit_or') != '') { echo stripslashes($this->lang->line('credit_or')); } else echo "or"; ?> <a href="signup?next=things/<?php echo $productDetails->row()->id;?>/<?php echo url_title($productDetails->row()->product_name,'-');?>"><?php if($this->lang->line('product_signup') != '') { echo stripslashes($this->lang->line('product_signup')); } else echo "signup"; ?></a> <?php if($this->lang->line('product_to_post') != '') { echo stripslashes($this->lang->line('product_to_post')); } else echo "to post comments"; ?></p>
+          	<p>
+                <?php
+                if($this->lang->line('product_please') != '') {
+                  echo stripslashes($this->lang->line('product_please'));
+                } else echo "Please";
+                ?>
+                <a href="login?next=things/<?php echo $productDetails->row()->id;?>/<?php echo url_title($productDetails->row()->product_name,'-');?>">
+                  <?php if($this->lang->line('product_login') != '') {
+                    echo stripslashes($this->lang->line('product_login'));
+                  } else echo "login";
+                  ?>
+                </a>
+                <?php if($this->lang->line('credit_or') != '') {
+                  echo stripslashes($this->lang->line('credit_or'));
+                } else echo "or";
+                ?>
+                <a href="signup?next=things/<?php echo $productDetails->row()->id;?>/<?php echo url_title($productDetails->row()->product_name,'-');?>">
+                  <?php if($this->lang->line('product_signup') != '') {
+                    echo stripslashes($this->lang->line('product_signup'));
+                  } else echo "signup";
+                  ?>
+                </a>
+                <?php
+                if($this->lang->line('product_to_post') != '') {
+                  echo stripslashes($this->lang->line('product_to_post'));
+                } else echo "to post comments";
+                ?>
+            </p>
           <?php }?>
         </div>
       </div>
@@ -600,7 +628,7 @@ $(function() {
       </div>
 			<!-- / content -->
 
-      <!-- aside with pricing/quantity and checkout -->
+      <!-- aside with product description, pricing/quantity and checkout -->
 			<aside id="sidebar" style="padding:0px; width: 255px;">
 				<section class="thing-section gift-section">
           <!-- price/quantity selector and product description -->
@@ -608,9 +636,7 @@ $(function() {
             <p class="prices">
 						<strong class="price"><?php echo $currencySymbol;?><span id="SalePrice"><?php echo $productDetails->row()->sale_price;?></span></strong> <?php echo $currencyType;?><br>
             </p>
-
             <h3><?php echo $productDetails->row()->product_name;?></h3>
-
             <div class="thing-description">
               <?php
               //limit description to 25 words, try excerpt first, then description
@@ -658,7 +684,7 @@ $(function() {
   						}
   						?>
   					</ul>
-            <!-- product quantity selection / add to cart -->
+            <!-- product quantity selection and 'add to cart' -->
             <div class="option-area detail_option1">
               <div class="detail_option">
                 <input type="hidden" id="original_sale_price" value="<?php echo $productDetails->row()->sale_price;?>"/>
@@ -713,7 +739,7 @@ $(function() {
             </div>
           </div>
 					<div class="detail_sidebar_list">
-            <!-- Actions to select -->
+            <!-- Actions that user can select -->
             <h3 class="detail_link_list"><?php if($this->lang->line('actions') != '') { echo stripslashes($this->lang->line('actions')); } else echo "Actions"; ?></h3>
             <ul class="detail_thinginfo">
               <?php
@@ -799,6 +825,7 @@ $(function() {
                 <ul>
         					<?php
         					$limitProd = 0;
+                  //show seller product thumbnails if any
         					if ($seller_product_details->num_rows()>0){
         						foreach ($seller_product_details->result() as $seller_product_details_row){
         							if ($limitProd==6)break;
@@ -822,6 +849,7 @@ $(function() {
                     <?php
                     }
                   }
+                  //show seller affiliate product thumbnails if any
         					if ($limitProd<6 && $seller_affiliate_products->num_rows()>0){
         						foreach ($seller_affiliate_products->result() as $seller_affiliate_products_row){
         							if ($limitProd==6)break;

@@ -24,6 +24,7 @@ class MY_Controller extends CI_Controller {
 			define('SITE_COMMON_DEFINE', 'fancyy-');
 		}
 
+		//check to see if https enabled
 		if ($this->config->item('https_enabled') && $this->config->item('https_enabled')!=''){
 			define('HTTTPS_ENABLED', $this->config->item('https_enabled'));
 		}else {
@@ -48,6 +49,7 @@ class MY_Controller extends CI_Controller {
 		 */
 		$this->load->database();
 
+		//are we running on the demo server?
 		$this->data['demoserverChk'] = $demoserverChk = strpos($this->input->server('DOCUMENT_ROOT'),'kaviraj/');
 
 		/*
@@ -161,6 +163,7 @@ class MY_Controller extends CI_Controller {
 		$this->load->model('pricing_model');
 		$condition_price_full = '';
 		$this->data['pricefulllist'] = $this->pricing_model->get_all_details(PRICING,array());
+		// Load the layout model
 		$this->load->model('layout_model');
 		$this->data['layoutfulllist'] = $this->layout_model->get_all_details(LAYOUT,array());
 		$this->data['login_succ_msg'] = 'Login Success';
@@ -244,7 +247,6 @@ class MY_Controller extends CI_Controller {
 		/* Multilanguage start*/
 		if($this->uri->segment('1') != 'admin')
 		{
-
 			$selectedLanguage = $this->session->userdata('language_code');
 			$defaultLanguage = $this->data['defaultLg'][0]['lang_code'];
 			if ($defaultLanguage==''){
@@ -253,17 +255,14 @@ class MY_Controller extends CI_Controller {
 			$filePath = APPPATH."language/".$selectedLanguage."/".$selectedLanguage."_lang.php";
 			if($selectedLanguage != '')
 			{
-
 				if(!(is_file($filePath)))
 				{
-
 					$this->lang->load($defaultLanguage, $defaultLanguage);
 				}
 				else
 				{
 					$this->lang->load($selectedLanguage, $selectedLanguage);
 				}
-
 			}
 			else
 			{
@@ -309,6 +308,7 @@ class MY_Controller extends CI_Controller {
 		/***Mini cart Lg****/
 
 		//mini cart view used in navigation bar in header.php
+		//mini_cart_view in my_model.php
 		$this->data['MiniCartViewSet'] = $this->minicart_model->mini_cart_view($this->data['common_user_id'],$mini_cart_lg);
 
 	}

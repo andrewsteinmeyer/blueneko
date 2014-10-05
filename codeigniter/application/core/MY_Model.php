@@ -257,6 +257,7 @@ class My_Model extends CI_Model {
 
 	public function mini_cart_view($userid = '',$mini_cart_lg=array()){
 
+		//create local variables for the array keys that are passed in
 		extract($mini_cart_lg);
 
 		$minCartVal = ''; $GiftMiniValue = ''; $CartMiniValue = ''; $SubscribMiniValue = '';  $minCartValLast = ''; $giftMiniAmt = 0; $cartMiniAmt = 0; $SubcribMiniAmt = 0; $cartMiniQty = 0;
@@ -266,21 +267,23 @@ class My_Model extends CI_Model {
 		$shipMiniVal = $this->minicart_model->get_all_details(SHIPPING_ADDRESS,array( 'user_id' => $userid));
 		$SubcribeMiniRes = $this->minicart_model->get_all_details(FANCYYBOX_TEMP,array( 'user_id' => $userid));
 
-
+		//query all products in user's cart
 		$this->db->select('a.*,b.product_name,b.seourl,b.image,b.id as prdid,b.price as orgprice');
 		$this->db->from(SHOPPING_CART.' as a');
 		$this->db->join(PRODUCT.' as b' , 'b.id = a.product_id');
 		$this->db->where('a.user_id = '.$userid);
 		$cartMiniVal = $this->db->get();
 
-
+		//iterate over each product in the user's shopping cart
 		if($cartMiniVal -> num_rows() > 0 ){
 			$s=0;
+			//each row is a product in the user's cart
 			foreach ($cartMiniVal->result() as $CartRow){
-
+				//product picture and total
 				$newImg = @explode(',',$CartRow->image);
 				$cartMiniAmt = $cartMiniAmt + $CartRow->indtotal;
 
+				//create html for each cart item
 				$CartMiniValue.= '<div id="cartMindivId_'.$s.'"><table><tbody><tr>
 	       	<th class="info"><a href="things/'.$CartRow->prdid.'/'.$CartRow->seourl.'"><img src="images/site/blank.gif" style="background-image:url('.PRODUCTPATH.$newImg[0].')" alt="'.$CartRow->product_name.'"><strong>'.$CartRow->product_name.'</strong><br /></a></th>
 			<td class="qty">'.$CartRow->quantity.'</td>
@@ -291,11 +294,9 @@ class My_Model extends CI_Model {
 			}
 		}
 
-
 		if($SubcribeMiniRes -> num_rows() > 0 ){
 			$s=0;
 			foreach ($SubcribeMiniRes->result() as $SubCribRow){
-
 				$SubscribMiniValue.= '<div id="SubcribtMinidivId_'.$s.'"><table><tbody><tr>
         	<th class="info"><a href="fancybox/'.$SubCribRow->fancybox_id.'/'.$SubCribRow->seourl.'"><img src="images/site/blank.gif" style="background-image:url('.FANCYBOXPATH.$SubCribRow->image.')" alt="'.$SubCribRow->name.'"><strong>'.$SubCribRow->name.'</strong></a></th>
             <td class="qty">1</td>
@@ -304,14 +305,11 @@ class My_Model extends CI_Model {
 				$SubcribMiniAmt = $SubcribMiniAmt + $SubCribRow->price;
 				$s++;
 			}
-
-
 		}
 
 		if($giftMiniRes -> num_rows() > 0 ){
 			$k=0;
 			foreach ($giftMiniRes->result() as $giftRow){
-
 				$GiftMiniValue.= '<div id="GiftMindivId_'.$k.'"><table><tbody><tr>
         	<th class="info"><a href="gift-cards"><img src="images/site/blank.gif" style="background-image:url('.GIFTPATH.$giftMiniSet->row()->image.')" alt="'.$giftMiniSet->row()->title.'"><strong>'.$giftMiniSet->row()->title.'</strong><br>'.$giftRow->recipient_name.'</a></th>
             <td class="qty">1</td>
@@ -320,17 +318,19 @@ class My_Model extends CI_Model {
 				$giftMiniAmt = $giftMiniAmt + $giftRow->price_value;
 				$k++;
 			}
-
-
 		}
 
 		$countMiniVal = $giftMiniRes -> num_rows() + $cartMiniQty + $SubcribeMiniRes-> num_rows() ;
 
+		/**
+		 * Build MiniCart View
+		 */
+
+		//no products in mini cart
 		if($countMiniVal == 0){
 			$cartMiniDisp= '<ul class="gnb-wrap"><li class="gnb" id="cart-new"><a href="cart" class="mn-cart"><span class="hide">cart</span> <em class="ic-cart"></em> <span>0 items</span></a></li></ul>';
+		// products exist in mini cart
 		}else{
-
-
 			$minCartVal.= '<ul class="gnb-wrap"><li class="gnb" id="cart-new"><a href="cart" class="mn-cart"><span class="hide">cart</span> <em class="ic-cart"></em> <span id="Shop_MiniId_count">'.$countMiniVal.' '.$lg_items.'</span></a>
 		<div style="display: none;" class="menu-contain-cart after" id="cart_popup">
 		<table><thead><tr><th>'.$lg_description.'</th><td>'.$lg_qty.'</td><td class="price">'.$lg_price.'</td></tr></thead></table>';
@@ -344,13 +344,12 @@ class My_Model extends CI_Model {
 		<a href="cart/" class="more">'.$lg_proceed.'</a>
 		</div></li></ul>';
 
+			//create final cart
+			//append all other carts together
 			$cartMiniDisp = $minCartVal.$CartMiniValue.$SubscribMiniValue.$GiftMiniValue.$minCartValLast;
-
 		}
 
-
-
-
+		//return the built cart
 		return $cartMiniDisp;
 	}
 

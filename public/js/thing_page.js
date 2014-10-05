@@ -1,3 +1,5 @@
+//used for popup with product details
+//show details of product with product image viewer
 jQuery(function($){
 	// select text range
 	$.fn.selectRange=function(e,t){return this.each(function(){if(this.setSelectionRange)this.focus(),this.setSelectionRange(e,t);else if(this.createTextRange){var n=this.createTextRange();n.collapse(!0),n.moveEnd("character",t),n.moveStart("character",e),n.select()}})};

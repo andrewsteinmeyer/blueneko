@@ -1027,8 +1027,6 @@ function shipping_cart_address_delete(){
 	});
 }
 
-
-
 function ajax_add_cart(AttrCountVal){
 	$('#QtyErr').html('');
 	var login = $('.add_to_cart').attr('require_login');
@@ -1046,7 +1044,7 @@ function ajax_add_cart(AttrCountVal){
 		return false;
 	}
 	//if product attributes
-	//then load options to choose
+	//then check that option is chosen
 	if(AttrCountVal > 0){
 		$('#AttrErr').html(' ');
 		var AttrVal=$('#attr_name_id').val();
@@ -1079,6 +1077,7 @@ function ajax_add_cart(AttrCountVal){
 				//alert('siva');
 				$('#ADDCartErr').html('Maximum Quantity: '+mqty+'. Already in your cart: '+arr[1]+'.');
 			}else{
+				//flash minicart view if product is successfully added
 				$('#MiniCartViewDisp').html(arr[1]);
 				$('#cart_popup').show().delay('2000').fadeOut();
 			}
@@ -1086,7 +1085,6 @@ function ajax_add_cart(AttrCountVal){
 		}
 	});
 	return false;
-
 
 }
 
