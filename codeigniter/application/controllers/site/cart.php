@@ -41,6 +41,7 @@ class Cart extends MY_Controller {
 		//check login before showing cart
 		if ($this->data['loginCheck'] != ''){
 			$this->data['heading'] = 'Cart';
+			//build cart for cart.php
 			$this->data['cartViewResults'] = $this->cart_model->mani_cart_view($this->data['common_user_id']);
 			$this->data['countryList'] = $this->cart_model->get_all_details(COUNTRY_LIST,array(),array(array('field'=>'name','type'=>'asc')));
 			$this->load->view('site/cart/cart.php',$this->data);

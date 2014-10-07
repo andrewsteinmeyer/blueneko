@@ -1,4 +1,4 @@
-<?php 
+<?php
 $this->load->view('site/templates/header.php');
 ?>
 <link rel="stylesheet" media="all" type="text/css" href="css/site/<?php echo SITE_COMMON_DEFINE ?>setting.css">
@@ -19,36 +19,40 @@ ol.stream.use-css3.fadein li.anim.fadein {opacity:1;}
 <div class="lang-en no-subnav wider winOS">
 <div id="container-wrapper">
 	<div class="container ">
-		
+
 <?php if($flash_data != '') { ?>
+    <!-- cart flash errors -->
 		<div class="errorContainer" id="<?php echo $flash_data_type;?>">
 			<script>setTimeout("hideErrDiv('<?php echo $flash_data_type;?>')", 3000);</script>
 			<p><span><?php echo $flash_data;?></span></p>
 		</div>
 		<?php } ?>
-        
+
+  <!-- cart wrapper -->
 	<div class="wrapper-content order" >
 	  <div id="content" style="padding:0px 20px 20px 20px;">
+      <!-- cart depths -->
 	    <ol class="cart-order-depth">
 	      <li class="depth1 current"><span>1</span><?php if($this->lang->line('cart_shop_cart') != '') { echo stripslashes($this->lang->line('cart_shop_cart')); } else echo "Shopping Cart"; ?></li>
 	      <li class="depth2"><span>2</span><?php if($this->lang->line('cart_pay_mthd') != '') { echo stripslashes($this->lang->line('cart_pay_mthd')); } else echo "Payment Method"; ?></li>
 	      <li class="depth3"><span>3</span><?php if($this->lang->line('cart_ord_confirm') != '') { echo stripslashes($this->lang->line('cart_ord_confirm')); } else echo "Order Confirmation"; ?></li>
 	    </ol>
 
-	<div class="cart-list">
-        
+      <!-- dump cart results from cart_model/mani_cart_view -->
+      <div class="cart-list">
           <?php echo $cartViewResults; ?>
-	      
 	    </div>
 	  </div>
 	  <!-- / content -->
 	</div>
 	<!-- / wrapper-content -->
- 
-<?php 
-     $this->load->view('site/templates/footer_menu');
-     ?>
 
+<?php
+  //load footer
+  $this->load->view('site/templates/footer_menu');
+?>
+
+<!-- load javascript for cart -->
 <script type="text/javascript" src="js/site/jquery.validate.js"></script>
 <script type="text/javascript" src="js/site/<?php echo SITE_COMMON_DEFINE ?>selectbox.js"></script>
 <script type="text/javascript" src="js/site/<?php echo SITE_COMMON_DEFINE ?>shoplist.js"></script>
@@ -56,7 +60,7 @@ ol.stream.use-css3.fadein li.anim.fadein {opacity:1;}
 
 <script>
 	$("#shippingAddForm").validate();
-	
+
 	jQuery(function($) {
 		var $select = $('.gift-recommend select.select-round');
 		$select.selectBox();
@@ -81,8 +85,6 @@ ol.stream.use-css3.fadein li.anim.fadein {opacity:1;}
                 }
             }
             $('textarea[maxlength]').keypress(check_maxlength).change(check_maxlength);
-            
-            
         });
     });
 </script>

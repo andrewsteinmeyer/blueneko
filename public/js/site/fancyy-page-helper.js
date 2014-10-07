@@ -9,7 +9,7 @@ jQuery(function($){
 		var theform = $('#subscription_form');
 		theform.submit();
 	});
-	
+
 	$('#content,#sidebar,#popup_container').delegate('#add_to_cart,.add_to_cart','click',function(event){
 
 		event.preventDefault();
@@ -20,8 +20,8 @@ jQuery(function($){
 		    return true;
 		}
 
-		var $this = $(this), login_require = $this.attr('require_login'); 
-		
+		var $this = $(this), login_require = $this.attr('require_login');
+
 
 		var param = {}, i, c, q, prefix;
 		var is_fancybox = ($this.attr('stype') == 'fancybox');
@@ -34,7 +34,7 @@ jQuery(function($){
 		if(prefix) prefix += '-';
 
 		if (is_fancybox) {
-		        var has_categories = $this.attr('has_categories') == 'true';
+		  var has_categories = $this.attr('has_categories') == 'true';
 			var allow_multiple = $(this).attr('allow_multiple') == 'true';
 			var categories = [];
 			var note = $('textarea[id=note]').val();
@@ -65,9 +65,9 @@ jQuery(function($){
 
 			param['sale_item_id'] = $this.attr('sii');
 		}
-        
-        if (typeof(login_require) != undefined && login_require != null && login_require=='true'){ 
-            $.jStorage.set('fancy_add_to_cart', param);  
+
+        if (typeof(login_require) != undefined && login_require != null && login_require=='true'){
+            $.jStorage.set('fancy_add_to_cart', param);
             $.dialog('signin-overlay').open();
 			return;
 		}
@@ -113,9 +113,9 @@ jQuery(function($){
 	});
 
 	var $btnAddToCart = $('.add_to_cart');
-    var login_require = $btnAddToCart.attr('require_login'); 
+    var login_require = $btnAddToCart.attr('require_login');
 
-    if (typeof(login_require) == "undefined"){ 
+    if (typeof(login_require) == "undefined"){
         var param = $.jStorage.get('fancy_add_to_cart', null);
         if (param) {
             $.ajax({
@@ -164,7 +164,7 @@ jQuery(function($){
 		var param = {};
         if (zip.length>0){
             /*
-		    $.post("/",param, 
+		    $.post("/",param,
 		    function(response){
 			    if (response.status_code != undefined && response.status_code == 1) {
 			    }
